@@ -7,10 +7,14 @@
             $t("system.changeLanguage")
         }}</n-button>
     </div>
+    <DemoAsync />
 </template>
 <script setup lang="ts">
 import useSystemStore from "@/stores/system";
 import { useI18n } from "vue-i18n";
+import AsyncComp from "@/utils/AsyncComp";
+
+const DemoAsync = AsyncComp(() => import("./demo.vue"));
 
 const { locale } = useI18n();
 
