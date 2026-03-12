@@ -6,7 +6,7 @@ const AsyncComp = (component) => {
     return defineAsyncComponent({
         loader: component,
         loadingComponent: Loading,
-        delay: 2000,
+        delay: 0,
     });
 };
 
