@@ -24,9 +24,7 @@ const loadingDirective = {
         if (!instance) return;
         // instance.setTip(el.getAttribute("loading-tip"));
         if (binding.oldValue !== binding.value) {
-            if (binding.oldValue !== binding.value) {
-                instance.setLoading?.(binding.value);
-            }
+            instance.setLoading?.(binding.value);
         }
     },
 

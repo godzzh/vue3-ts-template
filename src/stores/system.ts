@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 const useSystemStore = defineStore('system', () => {
@@ -22,9 +22,7 @@ const useSystemStore = defineStore('system', () => {
         logo: "static/images/logo.jpg"
     })
 
-    onMounted(() => {
-        sysTheme.value = localStorage.getItem('darkTheme') === 'yes' ? true : false
-    })
+    sysTheme.value = localStorage.getItem('darkTheme') === 'yes' ? true : false
 
     const toggleTheme = () => {
         sysTheme.value = !sysTheme.value

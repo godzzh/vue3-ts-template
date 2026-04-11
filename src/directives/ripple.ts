@@ -43,8 +43,6 @@ const rippleDirective = {
             const rectHeight = rect.height;
             const rectWidth = rect.width;
 
-            console.log(rectWidth, rectHeight);
-
             //在鼠标位置增加一个span标签，将此标签插入当前元素内部
             let span = document.createElement("span");
             span.style.position = "absolute";
@@ -58,7 +56,6 @@ const rippleDirective = {
             let height = 0;
             let opacity = 0.6;
             let diameter = getMaxRadius(x, y, rectWidth, rectHeight) * 1;
-            console.log(diameter);
 
             // 通过定时器不断增大宽高，减小透明度
             let time = setInterval(() => {
