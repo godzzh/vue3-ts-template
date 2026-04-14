@@ -56,6 +56,91 @@ pnpm preview  # Preview production build
 ### Patches
 `patches/naive-ui+2.41.0.patch` - Modifies naive-ui internals (scrollbar, date-picker, empty, form, image). **Run `patch-package` after installing dependencies**.
 
+## Component Usage Conventions
+
+### 表单/详情优先使用子组件模式
+
+新增表单和详情页面**优先以子组件方式调用**，而非新建独立路由页面。
+
+**弹框组件**：优先使用 `@/common/VModal/index.vue`
+- 基于 `n-modal`，支持拖拽
+- Props：`show`（显示状态）、`title`（标题）
+- 事件：`update:show`、`close`
+- Slots：`default`（内容）、`footer`（底部按钮）
+
+**图表组件**：优先使用 `@/common/VEcharts/index.vue`
+- Props：`options`（ECharts 配置）、`autoPlay`（自动播放，默 false）
+- 事件：`itemClick`（点击图表数据项）
+- Features：自动响应容器大小变化、内置默认配色、支持自动播放动画
+
+**图片组件**：优先使用 `@/common/VImage/index.vue`
+- 基于 `n-image`
+- Props：`fallback`（兜底图，默认 `static/images/common/noImg.png`）
+- Slots：`placeholder`（加载中占位）
+- 继承 `$attrs` 透传 `width`、`object-fit` 等属性
+
+- 基于 `n-modal`，支持拖拽
+- Props：`show`（显示状态）、`title`（标题）
+- 事件：`update:show`、`close`
+- Slots：`default`（内容）、`footer`（底部按钮）
+
+**适用场景**：
+- 弹窗式新增/编辑表单
+- 抽屉式详情查看
+- 内嵌在列表页的快速编辑
+
+**组件组织**：
+```
+src/views/xxx/
+├── List.vue              # 列表页
+├── components/
+│   ├── FormDrawer.vue     # 新增/编辑抽屉组件
+│   └── DetailDrawer.vue   # 详情抽屉组件
+```
+
+**调用方式**：通过 `ref` 调用子组件暴露的方法来控制显示
+```vue
+<!-- List.vue -->
+<template>
+  <FormDrawer ref="formDrawerRef" />
+  <DetailDrawer ref="detailDrawerRef" />
+</template>
+
+<script setup>
+const formDrawerRef = ref()
+const detailDrawerRef = ref()
+
+// 打开新增
+const openAdd = () => formDrawerRef.value?.open()
+
+// 打开编辑
+const openEdit = (id) => formDrawerRef.value?.open(id)
+
+// 打开详情
+const openDetail = (id) => detailDrawerRef.value?.open(id)
+</script>
+```
+
+```vue
+<!-- components/FormDrawer.vue -->
+<script setup>
+const visible = ref(false)
+const currentId = ref(null)
+
+const open = (id) => {
+  currentId.value = id
+  visible.value = true
+}
+
+defineExpose({ open })
+</script>
+```
+
+**优点**：
+- 父组件完全掌控子组件的显示逻辑
+- 子组件内部状态独立，不依赖父组件的响应式变量
+- 交互清晰：`open(id)` 表示打开，`close()` 等方法由子组件定义
+
 ## Key Files
 
 | File | Purpose |
