@@ -44,6 +44,35 @@ pnpm preview  # Preview production build
 - Response interceptor handles errors (notification for API errors, auto-redirect for 401/5000)
 - Dev proxy: `/keer-api` → `http://192.168.0.73`
 
+### Global Object (app.global)
+
+全局对象通过 Vue provide/inject 注入，可在任意组件中使用：
+
+```ts
+const global: any = inject("global")
+```
+
+**可用属性：**
+
+| 属性 | 说明 |
+|------|------|
+| `global.$api` | API 请求方法 |
+| `global.$utils` | 工具函数集合 |
+| `global.$dayjs` | dayjs 日期处理实例 |
+| `global.$emitter` | 事件发射器 |
+
+**使用示例：**
+```ts
+// API 调用
+const res = await global.$api.getUserInfo()
+
+// 工具函数
+const formattedDate = global.$dayjs().format('YYYY-MM-DD')
+
+// 事件通信
+global.$emitter.emit('refresh-list')
+```
+
 ### Theme System (`src/layouts/theme.ts`)
 - CSS variables for light/dark themes
 - Naive UI theme overrides via `n-config-provider`
