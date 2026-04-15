@@ -3,10 +3,9 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import EnhanceLog from 'vite-plugin-enhance-log'
 import viteCompression from 'vite-plugin-compression'
 
-const proxyUrl = 'http://192.168.0.73'
+const proxyUrl = 'http://192.168.0.112:8857/duty-service-provider'
 
 export default defineConfig({
     build: {
@@ -80,9 +79,6 @@ export default defineConfig({
         vue(),
         vueJsx(),
         viteCompression(),
-        EnhanceLog({
-            splitBy: ';',
-        }),
     ],
     resolve: {
         alias: {
@@ -98,16 +94,11 @@ export default defineConfig({
             overlay: true,
         },
         proxy: {
-            '/keer-api': {
+            '/duty-service-provider': {
                 target: proxyUrl,
                 changeOrigin: true,
-                rewrite: (p) => p.replace(/^\/keer-api/, '')
+                rewrite: (p) => p.replace(/^\/duty-service-provider/, '')
             },
-            // springdoc proxy
-            '^/v3/api-docs/(.*)': {
-                target: proxyUrl,
-                changeOrigin: true,
-            }
         },
     },
 })

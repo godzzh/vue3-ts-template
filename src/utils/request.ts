@@ -1,7 +1,7 @@
-import { extend } from "umi-request";
+import { extend, RequestOptionsInit } from "umi-request";
 import router from "@/router";
 
-const codeMessage = {
+const codeMessage: Record<number, string> = {
     200: "服务器成功返回请求的数据。",
     201: "新建或修改数据成功。",
     202: "一个请求已经进入后台排队（异步任务）。",
@@ -19,19 +19,19 @@ const codeMessage = {
     504: "网关超时。",
 };
 
-//错误处理
-const errorHandler = (error) => {
+const errorHandler = (error: { response?: Response }): Response | undefined => {
     const { response } = error;
     if (response && response.status) {
-        const errorText = codeMessage[response.status] || response.statusText;
+        const errorText =
+            codeMessage[response.status] || response.statusText;
         const { status, url } = response;
-        window.$notification.error({
+        window.$notification?.error({
             content: `请求错误 ${status}: ${url}`,
             meta: errorText,
             duration: 2500,
         });
     } else if (!response) {
-        window.$notification.error({
+        window.$notification?.error({
             content: "网络异常",
             meta: "请检查您的网络",
             duration: 2500,
@@ -41,45 +41,55 @@ const errorHandler = (error) => {
 };
 
 const request = extend({
-    prefix: "", //url前缀
-    timeout: 1000 * 60, //超时时间
-    useCache: true, // 是否使用缓存
-    ttl: 5000, //缓存时间
-    errorHandler, //错误统一处理
+    prefix: "",
+    timeout: 1000 * 60,
+    useCache: true,
+    ttl: 5000,
+    errorHandler,
 });
 
-//请求拦截器
-request.interceptors.request.use((url, options) => {
-    const token = localStorage.getItem("Token");
-    if (token) {
-        options.headers["Authorization"] = `Basic ${token}`;
+request.interceptors.request.use(
+    (url: string, options: RequestOptionsInit) => {
+        const token = localStorage.getItem("Token");
+        if (token) {
+            const headers = (options.headers as Record<string, string>) || {};
+            headers["Authorization"] = `Basic ${token}`;
+            options.headers = headers;
+        }
+        return {
+            url,
+            options,
+        };
     }
-    return {
-        url,
-        options,
-    };
-});
+);
 
-const delay = (ms) => new Promise((resolve, reject) => setTimeout(resolve, ms));
+const delay = (ms: number): Promise<void> =>
+    new Promise((resolve) => setTimeout(resolve, ms));
 
-//响应拦截器
-request.interceptors.response.use(async (response) => {
+interface ResponseData {
+    code?: number;
+    message?: string;
+    msg?: string;
+    [key: string]: unknown;
+}
+
+// Use type assertion for response interceptor to avoid umi-request type issues
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const responseInterceptor = async (response: any) => {
     await delay(200);
-    //文件流，直接返回
-    if (request.responseType == "blob") {
+
+    if ((request as any).responseType === "blob") {
         return response;
     }
-    let data = await response.json();
+
+    const data: ResponseData = await response.json();
+
     if (data.code === 5000 || data.code === 401) {
-        window.$notification.error({
+        window.$notification?.error({
             content: "登录已过期",
             meta: "请返回重新登录了再进行操作",
             duration: 2500,
         });
-        // 重置store里的用户信息;
-        // const userStore = useUserStore();
-        // userStore.Logout();
-        // 重定向到登录页
         router
             .replace({
                 path: "/login",
@@ -87,7 +97,7 @@ request.interceptors.response.use(async (response) => {
                     redirect: encodeURIComponent(window.location.href),
                 },
             })
-            .catch((err) => {});
+            .catch(() => { });
     } else if (
         data.code !== 0 &&
         data.code !== 200 &&
@@ -95,9 +105,11 @@ request.interceptors.response.use(async (response) => {
         data.code !== 401 &&
         data.code !== 33
     ) {
-        window.$message.warning(data.message || data.msg);
+        window.$message?.warning(data?.message || data?.msg || '未知错误');
     }
     return data;
-});
+};
+
+request.interceptors.response.use(responseInterceptor as any);
 
 export default request;
