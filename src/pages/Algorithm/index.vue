@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 bg-gray-150 min-h-[calc(100vh-60px)]">
     <!-- 工具栏 -->
-    <div class="bg-gray-150 rounded-xl p-4 shadow-neu flex justify-between items-center mb-6">
+    <div class="bg-white rounded-xl p-4 shadow-neu flex justify-between items-center mb-6">
       <div class="flex gap-3 items-center">
         <n-input
           v-model:value="searchKeyword"
@@ -37,7 +37,7 @@
       <div
         v-for="i in 6"
         :key="i"
-        class="bg-gray-150 rounded-xl p-5 shadow-neu-sm animate-pulse"
+        class="bg-white rounded-xl p-5 shadow-neu-sm animate-pulse"
       >
         <div class="flex items-start">
           <div class="w-14 h-14 rounded-xl bg-gray-200 mr-4 flex-shrink-0"></div>

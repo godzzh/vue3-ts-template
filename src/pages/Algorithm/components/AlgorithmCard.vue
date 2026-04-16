@@ -1,5 +1,5 @@
 <template>
-  <div class="algorithm-card bg-gray-150 rounded-xl p-5 cursor-pointer shadow-neu-sm" @click="handleClick">
+  <div class="algorithm-card bg-white rounded-xl p-5 cursor-pointer shadow-neu-sm" @click="handleClick">
     <div class="flex items-start">
       <div
         class="w-14 h-14 rounded-xl flex items-center justify-center text-white mr-4 flex-shrink-0"

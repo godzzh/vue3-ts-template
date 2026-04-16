@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-150 rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
+  <div class="bg-white rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
     <div class="mb-4">
       <span class="text-base font-semibold text-gray-800">处置统计</span>
     </div>

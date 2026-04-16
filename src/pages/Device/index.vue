@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 bg-gray-150 h-[calc(100vh-60px)] flex flex-col">
     <!-- 工具栏 -->
-    <div class="flex-shrink-0 bg-gray-150 rounded-xl p-4 shadow-neu flex justify-between items-center mb-4">
+    <div class="flex-shrink-0 bg-white rounded-xl p-4 shadow-neu flex justify-between items-center mb-4">
       <div class="flex gap-3 items-center">
         <n-input
           v-model:value="searchKeyword"
@@ -46,7 +46,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-gray-150 rounded-xl mt-4 justify-end shadow-neu-sm">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end shadow-neu-sm">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

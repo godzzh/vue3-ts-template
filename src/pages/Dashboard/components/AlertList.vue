@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-150 rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
+  <div class="bg-white rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
     <div class="flex justify-between items-center mb-4">
       <span class="text-base font-semibold text-gray-800">最新告警</span>
       <n-button text type="primary" size="small">查看更多</n-button>

@@ -15,7 +15,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-gray-150 rounded-xl mt-4 justify-end shadow-neu-sm">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end shadow-neu-sm">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

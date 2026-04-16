@@ -7,7 +7,7 @@
         <div
           v-for="i in 4"
           :key="i"
-          class="bg-gray-150 rounded-xl p-6 shadow-neu-sm animate-pulse"
+          class="bg-white rounded-xl p-6 shadow-neu-sm animate-pulse"
         >
           <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-gray-200"></div>
@@ -20,7 +20,7 @@
       </div>
 
       <!-- 实时监控区 -->
-      <div class="bg-gray-150 rounded-xl p-5 mb-4 shadow-neu">
+      <div class="bg-white rounded-xl p-5 mb-4 shadow-neu">
         <div class="grid grid-cols-3 gap-3">
           <div v-for="i in 6" :key="i" class="aspect-video bg-gray-300 rounded-lg animate-pulse shadow-neu-sm"></div>
         </div>
@@ -28,8 +28,8 @@
 
       <!-- 告警列表 + 处置饼图 -->
       <div class="grid grid-cols-[1fr_300px] gap-4">
-        <div class="h-[320px] bg-gray-300 rounded-xl animate-pulse shadow-neu-sm"></div>
-        <div class="h-[320px] bg-gray-300 rounded-xl animate-pulse shadow-neu-sm"></div>
+        <div class="h-[320px] bg-gray-200 rounded-xl animate-pulse shadow-neu-sm"></div>
+        <div class="h-[320px] bg-gray-200 rounded-xl animate-pulse shadow-neu-sm"></div>
       </div>
     </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="stat-card bg-gray-150 rounded-2xl p-6 shadow-neu flex items-center gap-4 cursor-pointer">
+  <div class="stat-card bg-white rounded-2xl p-6 shadow-neu flex items-center gap-4 cursor-pointer">
     <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-neu-sm" :style="{ background: iconBgColor }">
       <slot name="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" :stroke="iconColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
