@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-gray-150">
     <TopNav />
     <main class="h-[calc(100vh-60px)]">
       <router-view v-slot="{ Component }">

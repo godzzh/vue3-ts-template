@@ -1,12 +1,12 @@
 <template>
-  <div class="p-6 bg-gray-50 h-[calc(100vh-60px)] flex flex-col">
+  <div class="p-6 bg-gray-150 h-[calc(100vh-60px)] flex flex-col">
     <!-- 筛选栏 -->
     <div class="flex-shrink-0 mb-4">
       <FilterBar @search="handleSearch" @reset="handleReset" />
     </div>
 
     <!-- 告警表格 -->
-    <div class="flex-1 min-h-0 overflow-auto shadow-card rounded-xl">
+    <div class="flex-1 min-h-0 overflow-auto shadow-neu rounded-xl">
       <AlarmTable
         :data="alarmList"
         :pagination="paginationConfig"
@@ -15,7 +15,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl border border-gray-200 mt-4 justify-end shadow-card">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-gray-150 rounded-xl mt-4 justify-end shadow-neu-sm">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

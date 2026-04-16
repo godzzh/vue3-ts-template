@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-card h-full flex flex-col overflow-hidden">
+  <div class="bg-gray-150 rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
     <div class="flex justify-between items-center mb-4">
       <span class="text-base font-semibold text-gray-800">最新告警</span>
       <n-button text type="primary" size="small">查看更多</n-button>
@@ -9,7 +9,7 @@
         <div
           v-for="alert in alerts"
           :key="alert.id"
-          class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-150"
+          class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-150 transition-colors duration-150"
         >
           <div class="flex-shrink-0">
             <n-tag :color="getAlertColor(alert.type)" size="small" round>

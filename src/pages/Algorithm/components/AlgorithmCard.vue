@@ -1,5 +1,5 @@
 <template>
-  <div class="algorithm-card bg-white border border-gray-200 rounded-xl p-5 cursor-pointer" @click="handleClick">
+  <div class="algorithm-card bg-gray-150 rounded-xl p-5 cursor-pointer shadow-neu-sm" @click="handleClick">
     <div class="flex items-start">
       <div
         class="w-14 h-14 rounded-xl flex items-center justify-center text-white mr-4 flex-shrink-0"
@@ -16,10 +16,10 @@
         </div>
         <div class="flex items-center mt-3">
           <div class="flex items-center gap-3">
-            <span class="text-xs font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded">v{{ algorithm.version }}</span>
+            <span class="text-xs font-mono text-gray-500 bg-gray-150 px-2 py-0.5 rounded">v{{ algorithm.version }}</span>
             <span
               class="text-xs px-2 py-0.5 rounded"
-              :class="algorithm.status === 'active' ? 'text-emerald-600 bg-emerald-50' : 'text-gray-500 bg-gray-100'"
+              :class="algorithm.status === 'active' ? 'text-emerald-600 bg-emerald-50' : 'text-gray-500 bg-gray-150'"
             >
               {{ algorithm.status === 'active' ? '已启用' : '已停用' }}
             </span>
@@ -194,8 +194,11 @@ const handleVersionManage = () => {
   transition: all 0.3s ease;
 }
 .algorithm-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
-  border-color: #2563EB;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px #d1d5db, -6px -6px 12px #ffffff;
+}
+.algorithm-card:active {
+  transform: translateY(0);
+  box-shadow: inset 3px 3px 6px #d1d5db, inset -3px -3px 6px #ffffff;
 }
 </style>

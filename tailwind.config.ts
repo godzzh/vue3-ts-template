@@ -24,6 +24,7 @@ export default {
                 gray: {
                     50: '#F8FAFC',
                     100: '#F1F5F9',
+                    150: '#EAEEF2',  // 拟态化专用浅灰蓝
                     200: '#E2E8F0',
                     300: '#CBD5E1',
                     400: '#94A3B8',
@@ -47,6 +48,13 @@ export default {
             boxShadow: {
                 'card': '0 1px 2px rgba(0, 0, 0, 0.05)',
                 'card-hover': '0 4px 12px rgba(37, 99, 235, 0.1)',
+                // 拟态化阴影 - 凸起效果
+                'neu': '6px 6px 14px #bec5cc, -6px -6px 14px #ffffff',
+                'neu-sm': '3px 3px 8px #bec5cc, -3px -3px 8px #ffffff',
+                'neu-lg': '10px 10px 24px #bec5cc, -10px -10px 24px #ffffff',
+                // 拟态化阴影 - 按下效果
+                'neu-inset': 'inset 4px 4px 10px #bec5cc, inset -4px -4px 10px #ffffff',
+                'neu-inset-sm': 'inset 2px 2px 5px #bec5cc, inset -2px -2px 5px #ffffff',
             },
             spacing: {
                 '18': '4.5rem',

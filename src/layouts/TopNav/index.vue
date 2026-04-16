@@ -1,5 +1,5 @@
 <template>
-  <header class="h-[60px] bg-white border-b border-gray-200 flex items-center sticky top-0 z-50">
+  <header class="h-[60px] bg-gray-150 flex items-center sticky top-0 z-50 shadow-neu-sm">
     <div class="w-[200px] px-6 flex items-center flex-shrink-0">
       <span class="text-base font-semibold text-gray-800">AI视频推理平台</span>
     </div>

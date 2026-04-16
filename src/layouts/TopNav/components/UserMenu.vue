@@ -4,7 +4,7 @@
     :options="menuOptions"
     @select="handleSelect"
   >
-    <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer hover:bg-gray-100 transition-all duration-150">
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer hover:bg-gray-150 transition-all duration-150">
       <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-blue-400 flex items-center justify-center text-white text-sm font-medium">
         张
       </div>

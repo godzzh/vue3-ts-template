@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-card">
+  <div class="bg-gray-150 rounded-xl p-5 shadow-neu">
     <div class="flex justify-between items-center mb-4">
       <span class="text-base font-semibold text-gray-800">实时监控</span>
       <span class="text-xs text-gray-500">{{ videos.length }}路摄像头</span>
