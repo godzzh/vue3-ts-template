@@ -22,7 +22,7 @@ const useSystemStore = defineStore('system', () => {
         logo: "static/images/logo.jpg"
     })
 
-    sysTheme.value = localStorage.getItem('darkTheme') === 'yes' ? true : false
+    // sysTheme.value = localStorage.getItem('darkTheme') === 'yes' ? true : false
 
     const toggleTheme = () => {
         sysTheme.value = !sysTheme.value

@@ -2,9 +2,88 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 项目参考文档
+
+**⚠️ 重要**: 开发前必须阅读并遵循以下设计规范文档：
+
+| 文档 | 路径 | 说明 |
+|------|------|------|
+| AI视频推理平台原型图分析 | `D:\zzh\AI视频推理平台原型图分析.md` | 完整的设计系统规范，包括色彩、字体、间距、组件样式等 |
+
+### 设计系统要点（详见上方文档）
+
+- **设计风格**: Minimalism & Swiss Style / 浅色简约风格 / Light Theme
+- **主色调**: `#2563EB` (蓝色)
+- **字体**: Fira Sans (正文) + Fira Code (代码/数字)
+- **间距系统**: 8px 网格
+- **圆角**: 6-12px
+- **阴影**: 轻量白色阴影
+- **动效时长**: 150-300ms
+
+### 页面开发优先级
+
+1. **高优先级**: 首页、告警中心、任务中心
+2. **中优先级**: 新增任务、算法中心、告警详情
+3. **低优先级**: 设备管理、算法分类、告警处置
+
+### 样式开发规范
+
+**优先使用 Tailwind CSS** 进行页面样式开发。
+
+#### Tailwind CSS 配置
+
+项目已配置 Tailwind CSS，包含以下设计令牌：
+
+```js
+// 颜色
+primary-500: #2563EB (主色)
+success: #059669
+warning: #D97706
+error: #DC2626
+gray-50 ~ gray-900
+
+// 字体
+font-sans: Fira Sans
+font-mono: Fira Code
+
+// 圆角
+rounded-sm: 6px
+rounded: 8px
+rounded-lg: 12px
+
+// 阴影
+shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05)
+shadow-card-hover: 0 4px 12px rgba(37, 99, 235, 0.1)
+```
+
+#### Tailwind 使用示例
+
+```vue
+<!-- 页面容器 -->
+<div class="min-h-screen bg-gray-50 p-6">
+
+<!-- 卡片 -->
+<div class="bg-white rounded-lg border border-gray-200 shadow-card p-6">
+
+<!-- 按钮 -->
+<n-button class="bg-primary-500 text-white hover:bg-primary-600">
+
+<!-- 文字 -->
+<span class="text-gray-500 font-mono text-sm">代码</span>
+
+<!-- Flex 布局 -->
+<div class="flex items-center justify-between gap-4">
+```
+
+#### 组件开发规范
+
+- 优先使用 Naive UI 组件，参照文档中的样式规范
+- 页面布局和自定义样式**优先使用 Tailwind CSS**
+- 使用子组件模式开发表单和详情页面（见下方组件使用约定）
+
 ## Project Overview
 
-Vue 3 + TypeScript + Vite admin template with Naive UI component library, Pinia state management, and dynamic routing from backend API.
+Vue 3 + TypeScript + Vite admin template with Naive UI component library, Tailwind CSS, Pinia state management, and dynamic routing from backend API.
 
 ## Commands
 
@@ -30,7 +109,7 @@ pnpm preview  # Preview production build
 ### State Management (Pinia)
 - `src/stores/system.ts` - Theme (dark/light), language, system info
 - TagsView store (`@/store/tagsView`) - Tab navigation state (expected but not yet created)
-- User store (`@/store/user`) - User/auth state (expected but not yet created)
+- User store (`@/store/user` - User store for auth (expected but not yet created)
 
 ### Custom Directives (`src/directives/`)
 - `v-loading` - Loading state
@@ -108,11 +187,6 @@ global.$emitter.emit('refresh-list')
 - Slots：`placeholder`（加载中占位）
 - 继承 `$attrs` 透传 `width`、`object-fit` 等属性
 
-- 基于 `n-modal`，支持拖拽
-- Props：`show`（显示状态）、`title`（标题）
-- 事件：`update:show`、`close`
-- Slots：`default`（内容）、`footer`（底部按钮）
-
 **适用场景**：
 - 弹窗式新增/编辑表单
 - 抽屉式详情查看
@@ -189,6 +263,7 @@ The codebase references modules that don't exist yet:
 ## Dependencies
 
 - **UI**: naive-ui 2.41.0 (patched)
+- **CSS**: Tailwind CSS 3.x (已配置项目设计令牌)
 - **State**: pinia 3.x
 - **Router**: vue-router 4.x
 - **i18n**: vue-i18n 9.x
