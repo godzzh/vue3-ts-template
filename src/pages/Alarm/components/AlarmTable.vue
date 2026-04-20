@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl overflow-hidden h-full flex flex-col border border-gray-100" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
+  <div class="bg-white rounded-xl overflow-hidden h-full flex flex-col border border-[#E2E8F0]" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
     <n-data-table
       :columns="columns"
       :data="data"
@@ -84,8 +84,8 @@ const columns: DataTableColumns<Alarm> = [
     render: (row) => {
       return h(VImage, {
         src: row.image,
-        width: 60,
-        height: 40,
+        width: 100,
+        height: 100,
         style: { borderRadius: '6px' }
       })
     }

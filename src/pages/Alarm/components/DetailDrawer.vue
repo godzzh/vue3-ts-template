@@ -5,7 +5,7 @@
     @update:show="visible = $event"
     @close="handleClose"
   >
-    <div v-if="alarm" class="flex flex-col gap-4">
+    <div v-if="alarm" class="flex flex-col gap-4 w-[400px]">
       <div class="flex items-center gap-3">
         <span class="w-20 text-sm text-gray-500 flex-shrink-0">告警位置</span>
         <span class="text-sm text-gray-800">{{ alarm.location }}</span>
@@ -26,10 +26,10 @@
           {{ alarm.statusText }}
         </n-tag>
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-sm text-gray-500">告警图片</span>
-        <div class="rounded-lg overflow-hidden bg-gray-50">
-          <VImage :src="alarm.image" :alt="alarm.typeName" width="100%" />
+      <div class="flex gap-3">
+        <span class="w-20 text-sm text-gray-500">告警图片</span>
+        <div class="flex flex-wrap gap-1">
+            <VImage :src="alarm.image" :alt="alarm.typeName" width="100" height="100" />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="algorithm-card bg-white rounded-xl p-5 cursor-pointer group border border-gray-100 hover:border-primary-100 transition-all duration-300" @click="handleClick">
+  <div class="algorithm-card bg-white rounded-xl p-5 cursor-pointer group border border-[#E2E8F0] hover:border-primary-100 transition-all duration-300" @click="handleClick">
     <div class="flex items-start">
       <div
         class="w-14 h-14 rounded-xl flex items-center justify-center text-white mr-4 flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg"

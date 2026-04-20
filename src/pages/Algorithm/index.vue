@@ -18,7 +18,7 @@
     </div>
 
     <!-- 工具栏 -->
-    <div class="bg-white rounded-xl p-4 flex justify-between items-center mb-6 border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+    <div class="bg-white rounded-xl p-4 flex justify-between items-center mb-6 border border-[#E2E8F0]" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <div class="flex gap-3 items-center">
         <n-input
           v-model:value="searchKeyword"

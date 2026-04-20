@@ -30,12 +30,12 @@
         <!-- 激活指示器 - 高级感滑块效果 -->
         <span
           v-if="isActive(item.path)"
-          class="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-primary rounded-full"
+          class="absolute bottom-0 left-3 right-3 h-[3px] bg-gradient-primary rounded-full"
         ></span>
         <!-- 悬停下划线 -->
         <span
           v-else
-          class="absolute bottom-0 left-3 right-3 h-[2px] bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 rounded-full"
+          class="absolute bottom-0 left-3 right-3 h-[3px] bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 rounded-full"
         ></span>
       </router-link>
     </nav>

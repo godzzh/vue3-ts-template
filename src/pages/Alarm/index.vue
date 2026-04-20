@@ -31,7 +31,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-[#E2E8F0]" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl p-5 border border-gray-100" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
+  <div class="bg-white rounded-xl p-5 border border-[#E2E8F0]" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
     <div class="flex justify-between items-center mb-4">
       <div class="flex items-center gap-2">
         <span class="text-base font-semibold text-gray-800">实时监控</span>

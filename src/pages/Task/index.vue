@@ -18,7 +18,7 @@
 
     <!-- 工具栏 -->
     <div class="flex-shrink-0 mb-4">
-      <div class="bg-white rounded-xl p-4 flex gap-3 border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+      <div class="bg-white rounded-xl p-4 flex gap-3 border border-[#E2E8F0]" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
         <n-button type="primary" class="bg-gradient-primary hover:opacity-90 transition-opacity" @click="handleAdd">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -48,7 +48,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-[#E2E8F0]" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-4 items-end p-5 bg-white rounded-xl border border-gray-100 flex-wrap" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+  <div class="flex gap-4 items-end p-5 bg-white rounded-xl border border-[#E2E8F0] flex-wrap" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
     <div class="flex items-center gap-3">
       <span class="text-xs font-medium text-gray-500 whitespace-nowrap">告警时间</span>
       <n-date-picker

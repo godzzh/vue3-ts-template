@@ -11,6 +11,7 @@
             :rules="rules"
             label-placement="top"
             require-mark-placement="right-hanging"
+            class="w-[800px]"
         >
             <n-grid :cols="2" :x-gap="16">
                 <n-gi>
@@ -39,7 +40,7 @@
                             multiple
                             :options="deviceOptions"
                             placeholder="选择关联设备"
-                            :max-tag-count="2"
+                            max-tag-count="responsive"
                         />
                     </n-form-item>
                 </n-gi>

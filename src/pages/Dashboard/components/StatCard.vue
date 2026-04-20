@@ -1,5 +1,5 @@
 <template>
-  <div class="stat-card bg-white p-5 flex items-center gap-4 cursor-pointer group border border-gray-100">
+  <div class="stat-card bg-white p-5 flex items-center gap-4 cursor-pointer group border border-[#E2E8F0]">
     <div
       class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md"
       :style="{ backgroundColor: iconBgColor }"
@@ -12,7 +12,7 @@
     </div>
     <div class="min-w-0 flex-1">
       <div class="flex items-baseline gap-2">
-        <div class="text-2xl font-semibold text-gray-800 font-mono leading-tight tracking-tight">{{ displayValue }}</div>
+        <div class="text-4xl font-semibold text-gray-800 font-mono leading-tight tracking-tight">{{ displayValue }}</div>
         <!-- 增长率 -->
         <div
           v-if="growth !== 0"

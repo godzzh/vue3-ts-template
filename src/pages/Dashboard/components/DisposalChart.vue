@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl p-5 h-full flex flex-col overflow-hidden border border-gray-100" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
+  <div class="bg-white rounded-xl p-5 h-full flex flex-col overflow-hidden border border-[#E2E8F0]" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
     <div class="mb-4 flex items-center justify-between">
       <span class="text-base font-semibold text-gray-800">处置统计</span>
       <span class="text-xs text-gray-400">本周</span>
