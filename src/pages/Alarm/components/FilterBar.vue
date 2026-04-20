@@ -8,6 +8,7 @@
         clearable
         placeholder="选择日期范围"
         style="width: 240px;"
+        :shortcuts="shortcuts"
       />
     </div>
 
@@ -51,8 +52,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, inject } from 'vue'
 import { NDatePicker, NInput, NSelect, NButton } from 'naive-ui'
+
+const global: any = inject('global')
 
 export interface FilterParams {
   dateRange: [number, number] | null
@@ -72,6 +75,12 @@ const filters = reactive<FilterParams>({
   type: null,
   status: null
 })
+
+const shortcuts: Record<string, () => [number, number]> = {
+  '近三天': () => [global.$dayjs().subtract(3, 'day').toDate().getTime(), global.$dayjs().toDate().getTime()],
+  '近一周': () => [global.$dayjs().subtract(1, 'week').toDate().getTime(), global.$dayjs().toDate().getTime()],
+  '近一个月': () => [global.$dayjs().subtract(1, 'month').toDate().getTime(), global.$dayjs().toDate().getTime()]
+}
 
 const typeOptions = [
   { label: '打架斗殴', value: 'fighting' },
