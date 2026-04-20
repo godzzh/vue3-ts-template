@@ -3,9 +3,12 @@
     <!-- 页面标题 -->
     <div class="flex-shrink-0 mb-5">
       <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">告警中心</h1>
-          <p class="text-sm text-gray-500 mt-1">管理和处理所有告警信息</p>
+        <div class="flex items-center gap-4">
+          <div class="w-1 h-8 bg-gradient-to-b from-red-500 to-red-400 rounded-full"></div>
+          <div>
+            <h1 class="text-[24px] font-semibold text-slate-800 tracking-tight font-sans">告警中心</h1>
+            <p class="text-sm text-slate-500 mt-0.5 tracking-wide">管理和处理所有告警信息</p>
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <span class="px-3 py-1 bg-red-50 text-red-500 text-xs font-medium rounded-full">{{ pagination.total }} 条告警</span>

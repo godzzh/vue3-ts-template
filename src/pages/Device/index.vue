@@ -3,9 +3,12 @@
     <!-- 页面标题 -->
     <div class="flex-shrink-0 mb-5">
       <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">设备中心</h1>
-          <p class="text-sm text-gray-500 mt-1">管理所有监控设备</p>
+        <div class="flex items-center gap-4">
+          <div class="w-1 h-8 bg-gradient-to-b from-emerald-600 to-emerald-500 rounded-full"></div>
+          <div>
+            <h1 class="text-[24px] font-semibold text-slate-800 tracking-tight font-sans">设备中心</h1>
+            <p class="text-sm text-slate-500 mt-0.5 tracking-wide">管理所有监控设备</p>
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-medium rounded-full">{{ deviceList.filter(d => d.status === 'online').length }} 在线</span>

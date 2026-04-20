@@ -1,8 +1,19 @@
 <template>
   <header class="h-[60px] bg-white/95 backdrop-blur-md flex items-center sticky top-0 z-50 border-b border-gray-200/60" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03);">
     <!-- Logo 区域 -->
-    <div class="w-[200px] px-6 flex items-center flex-shrink-0">
-      <span class="text-lg font-semibold gradient-text">AI视频推理平台</span>
+    <div class="w-[220px] px-5 flex items-center flex-shrink-0 gap-3">
+      <!-- AI 图标 -->
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md shadow-primary-500/20">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+          <circle cx="7.5" cy="14.5" r="1.5"/>
+          <circle cx="16.5" cy="14.5" r="1.5"/>
+        </svg>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-base font-semibold text-slate-800 tracking-tight leading-tight">AI视频推理平台</span>
+        <span class="text-[10px] text-primary-500 font-medium tracking-widest uppercase tracking-wider">AI Video Inference</span>
+      </div>
     </div>
 
     <!-- 导航菜单 -->

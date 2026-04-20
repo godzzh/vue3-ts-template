@@ -1,9 +1,12 @@
 <template>
   <div class="p-6 min-h-[calc(100vh-60px)]" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e8edf4 100%);">
     <!-- 页面标题区 -->
-    <div class="mb-6">
-      <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">仪表盘</h1>
-      <p class="text-sm text-gray-500 mt-1">实时监控系统运行状态</p>
+    <div class="mb-6 flex items-center gap-4">
+      <div class="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-400 rounded-full"></div>
+      <div>
+        <h1 class="text-[24px] font-semibold text-slate-800 tracking-tight font-sans">仪表盘</h1>
+        <p class="text-sm text-slate-500 mt-0.5 tracking-wide">实时监控系统运行状态</p>
+      </div>
     </div>
 
     <!-- 骨架屏加载 -->
@@ -49,6 +52,7 @@
           :title="card.title"
           :value="card.value"
           :icon-color="card.iconColor"
+          :growth="card.growth"
           :style="{ animationDelay: `${index * 80}ms` }"
           class="animate-fade-in-up opacity-0"
         >
@@ -92,6 +96,7 @@ const statCards = [
     title: '接入设备',
     value: 999,
     iconColor: '#2563EB',
+    growth: 12,
     icon: () => h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
       width: '24',
@@ -113,6 +118,7 @@ const statCards = [
     title: '告警总数',
     value: 100,
     iconColor: '#F59E0B',
+    growth: -5,
     icon: () => h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
       width: '24',
@@ -133,6 +139,7 @@ const statCards = [
     title: '预警场景',
     value: 99,
     iconColor: '#EF4444',
+    growth: 8,
     icon: () => h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
       width: '24',
@@ -153,6 +160,7 @@ const statCards = [
     title: '算法总数',
     value: 12,
     iconColor: '#10B981',
+    growth: 0,
     icon: () => h('svg', {
       xmlns: 'http://www.w3.org/2000/svg',
       width: '24',

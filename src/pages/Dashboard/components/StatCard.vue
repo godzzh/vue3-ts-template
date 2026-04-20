@@ -10,8 +10,48 @@
         </svg>
       </slot>
     </div>
-    <div class="min-w-0">
-      <div class="text-2xl font-semibold text-gray-800 font-mono leading-tight tracking-tight">{{ displayValue }}</div>
+    <div class="min-w-0 flex-1">
+      <div class="flex items-baseline gap-2">
+        <div class="text-2xl font-semibold text-gray-800 font-mono leading-tight tracking-tight">{{ displayValue }}</div>
+        <!-- 增长率 -->
+        <div
+          v-if="growth !== 0"
+          class="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-xs font-medium"
+          :style="{ color: trendColor, backgroundColor: trendBgColor }"
+        >
+          <svg
+            v-if="trend === 'positive'"
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            :stroke="trendColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="12" y1="19" x2="12" y2="5" />
+            <polyline points="5 12 12 5 19 12" />
+          </svg>
+          <svg
+            v-else-if="trend === 'negative'"
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            :stroke="trendColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19 12 12 19 5 12" />
+          </svg>
+          <span>{{ growthText }}</span>
+        </div>
+      </div>
       <div class="text-sm text-gray-500 mt-0.5 font-medium">{{ title }}</div>
     </div>
     <!-- 右侧装饰 -->
@@ -24,29 +64,97 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 
 interface Props {
   title: string
   value: number | string
   iconColor?: string
   hoverable?: boolean
+  growth?: number // 增长率，正数表示上升，负数表示下降
 }
 
 const props = withDefaults(defineProps<Props>(), {
   iconColor: '#2563EB',
-  hoverable: true
+  hoverable: true,
+  growth: 0
+})
+
+const animatingValue = ref(0)
+const animationDuration = 1500
+
+const targetValue = computed(() => {
+  if (typeof props.value === 'number') {
+    return props.value
+  }
+  return parseInt(props.value) || 0
 })
 
 const displayValue = computed(() => {
-  if (typeof props.value === 'number') {
-    return props.value.toLocaleString()
+  return animatingValue.value.toLocaleString()
+})
+
+// 数字动画
+const animateValue = () => {
+  const startTime = performance.now()
+  const startValue = 0
+  const endValue = targetValue.value
+
+  const animate = (currentTime: number) => {
+    const elapsed = currentTime - startTime
+    const progress = Math.min(elapsed / animationDuration, 1)
+    // 使用 easeOutExpo 缓动
+    const easeProgress = 1 - Math.pow(1 - progress, 6)
+    animatingValue.value = Math.round(startValue + (endValue - startValue) * easeProgress)
+
+    if (progress < 1) {
+      requestAnimationFrame(animate)
+    }
   }
-  return props.value
+
+  requestAnimationFrame(animate)
+}
+
+onMounted(() => {
+  if (typeof props.value === 'number') {
+    animateValue()
+  }
+})
+
+watch(() => props.value, () => {
+  if (typeof props.value === 'number') {
+    animatingValue.value = 0
+    animateValue()
+  }
 })
 
 const iconBgColor = computed(() => {
   return props.iconColor + '12'
+})
+
+// 判断趋势：positive（上升）、negative（下降）、neutral（无变化）
+const trend = computed(() => {
+  if (props.growth > 0) return 'positive'
+  if (props.growth < 0) return 'negative'
+  return 'neutral'
+})
+
+const growthText = computed(() => {
+  if (props.growth === 0) return '持平'
+  const sign = props.growth > 0 ? '+' : ''
+  return `${sign}${props.growth}%`
+})
+
+const trendColor = computed(() => {
+  if (trend.value === 'positive') return '#10B981'
+  if (trend.value === 'negative') return '#EF4444'
+  return '#6B7280'
+})
+
+const trendBgColor = computed(() => {
+  if (trend.value === 'positive') return 'rgba(16, 185, 129, 0.1)'
+  if (trend.value === 'negative') return 'rgba(239, 68, 68, 0.1)'
+  return 'rgba(107, 114, 128, 0.1)'
 })
 </script>
 
