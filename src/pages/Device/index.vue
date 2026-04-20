@@ -1,7 +1,21 @@
 <template>
-  <div class="p-6 bg-gray-150 h-[calc(100vh-60px)] flex flex-col">
+  <div class="p-6 h-[calc(100vh-60px)] flex flex-col" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e8edf4 100%);">
+    <!-- 页面标题 -->
+    <div class="flex-shrink-0 mb-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">设备中心</h1>
+          <p class="text-sm text-gray-500 mt-1">管理所有监控设备</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-medium rounded-full">{{ deviceList.filter(d => d.status === 'online').length }} 在线</span>
+          <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded-full">{{ pagination.total }} 个设备</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 工具栏 -->
-    <div class="flex-shrink-0 bg-white rounded-xl p-4 shadow-neu flex justify-between items-center mb-4">
+    <div class="flex-shrink-0 bg-white rounded-xl p-4 flex justify-between items-center mb-4 border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <div class="flex gap-3 items-center">
         <n-input
           v-model:value="searchKeyword"
@@ -17,13 +31,13 @@
             </svg>
           </template>
         </n-input>
-        <n-button type="primary" @click="handleSearch">搜索</n-button>
+        <n-button type="primary" @click="handleSearch" class="bg-gradient-primary hover:opacity-90 transition-opacity">搜索</n-button>
       </div>
       <div class="flex gap-2">
-        <n-button @click="handleBatchDelete">
+        <n-button @click="handleBatchDelete" class="hover:bg-gray-50 transition-colors duration-200">
           批量删除
         </n-button>
-        <n-button type="primary" @click="handleAdd">
+        <n-button type="primary" @click="handleAdd" class="bg-gradient-primary hover:opacity-90 transition-opacity">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"/>
@@ -36,7 +50,7 @@
     </div>
 
     <!-- 设备表格 -->
-    <div class="flex-1 min-h-0 overflow-auto shadow-neu rounded-xl">
+    <div class="flex-1 min-h-0 overflow-auto">
       <DeviceTable
         :data="filteredList"
         @edit="handleEdit"
@@ -46,7 +60,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end shadow-neu-sm">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

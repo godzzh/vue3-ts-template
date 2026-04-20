@@ -1,9 +1,22 @@
 <template>
-  <div class="p-6 bg-gray-150 h-[calc(100vh-60px)] flex flex-col">
+  <div class="p-6 h-[calc(100vh-60px)] flex flex-col" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e8edf4 100%);">
+    <!-- 页面标题 -->
+    <div class="flex-shrink-0 mb-5">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">任务中心</h1>
+          <p class="text-sm text-gray-500 mt-1">管理和配置视频分析任务</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 bg-primary-50 text-primary-500 text-xs font-medium rounded-full">{{ pagination.total }} 个任务</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 工具栏 -->
     <div class="flex-shrink-0 mb-4">
-      <div class="bg-white rounded-xl p-4 shadow-neu flex gap-2">
-        <n-button type="primary" @click="handleAdd">
+      <div class="bg-white rounded-xl p-4 flex gap-3 border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+        <n-button type="primary" class="bg-gradient-primary hover:opacity-90 transition-opacity" @click="handleAdd">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"/>
@@ -12,17 +25,17 @@
           </template>
           新增任务
         </n-button>
-        <n-button @click="handleBatchStart">
+        <n-button @click="handleBatchStart" class="hover:bg-gray-50 transition-colors duration-200">
           批量启用
         </n-button>
-        <n-button @click="handleBatchStop">
+        <n-button @click="handleBatchStop" class="hover:bg-gray-50 transition-colors duration-200">
           批量停用
         </n-button>
       </div>
     </div>
 
     <!-- 任务表格 -->
-    <div class="flex-1 min-h-0 overflow-auto shadow-neu rounded-xl">
+    <div class="flex-1 min-h-0 overflow-auto">
       <TaskTable
         :data="taskList"
         @edit="handleEdit"
@@ -32,7 +45,7 @@
     </div>
 
     <!-- 分页器 -->
-    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end shadow-neu-sm">
+    <div class="flex-shrink-0 flex items-center gap-4 px-5 py-4 bg-white rounded-xl mt-4 justify-end border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <span class="text-sm text-gray-500">
         共 {{ pagination.total }} 条
       </span>

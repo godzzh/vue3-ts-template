@@ -31,16 +31,6 @@ const toggleTheme = () => {
     systemStore.toggleTheme();
 };
 
-const getList = async () => {
-    const res = await global.$api.getPlanDetailList({
-        departId: "845497d2405042f9a1ca3dbef9f3861a",
-        policeId: "1292642020484976642",
-        planStatus: "0",
-    });
-};
-
-getList();
-
 const changeLanguage = () => {
     locale.value = locale.value === "en-US" ? "zh-CN" : "en-US";
 };

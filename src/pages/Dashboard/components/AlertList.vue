@@ -1,15 +1,18 @@
 <template>
-  <div class="bg-white rounded-xl p-5 shadow-neu h-full flex flex-col overflow-hidden">
+  <div class="bg-white rounded-xl p-5 h-full flex flex-col overflow-hidden border border-gray-100" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
     <div class="flex justify-between items-center mb-4">
-      <span class="text-base font-semibold text-gray-800">最新告警</span>
-      <n-button text type="primary" size="small">查看更多</n-button>
+      <div class="flex items-center gap-2">
+        <span class="text-base font-semibold text-gray-800">最新告警</span>
+        <span class="px-2 py-0.5 bg-red-50 text-red-500 text-xs font-medium rounded-full">{{ alerts.length }}条</span>
+      </div>
+      <n-button text type="primary" size="small" class="hover:bg-primary-50 transition-colors duration-200">查看更多</n-button>
     </div>
     <n-scrollbar>
-      <div class="flex flex-col gap-3 pr-2">
+      <div class="flex flex-col gap-2 pr-2">
         <div
           v-for="alert in alerts"
           :key="alert.id"
-          class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-150 transition-colors duration-150"
+          class="flex items-center gap-3 p-3 rounded-lg border border-gray-50 hover:border-gray-100 hover:bg-gray-50/50 transition-all duration-200 cursor-pointer group"
         >
           <div class="flex-shrink-0">
             <n-tag :color="getAlertColor(alert.type)" size="small" round>
@@ -17,8 +20,8 @@
             </n-tag>
           </div>
           <div class="flex-1 min-w-0 flex flex-col gap-0.5">
-            <span class="text-sm text-gray-800 font-medium truncate">{{ alert.location }}</span>
-            <span class="text-xs text-gray-500">{{ alert.time }}</span>
+            <span class="text-sm text-gray-800 font-medium truncate group-hover:text-primary-500 transition-colors duration-200">{{ alert.location }}</span>
+            <span class="text-xs text-gray-400">{{ alert.time }}</span>
           </div>
           <div class="flex-shrink-0">
             <n-tag :color="getStatusColor(alert.status)" size="small">

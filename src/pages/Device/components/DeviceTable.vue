@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl overflow-hidden h-full flex flex-col">
+  <div class="bg-white rounded-xl overflow-hidden h-full flex flex-col border border-gray-100" style="box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);">
     <n-data-table
       :columns="columns"
       :data="data"

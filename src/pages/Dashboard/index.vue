@@ -1,5 +1,11 @@
 <template>
-  <div class="p-6 bg-gray-150 min-h-[calc(100vh-60px)]">
+  <div class="p-6 min-h-[calc(100vh-60px)]" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e8edf4 100%);">
+    <!-- 页面标题区 -->
+    <div class="mb-6">
+      <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">仪表盘</h1>
+      <p class="text-sm text-gray-500 mt-1">实时监控系统运行状态</p>
+    </div>
+
     <!-- 骨架屏加载 -->
     <template v-if="loading">
       <!-- 统计卡片区 -->
@@ -7,7 +13,7 @@
         <div
           v-for="i in 4"
           :key="i"
-          class="bg-white rounded-xl p-6 shadow-neu-sm animate-pulse"
+          class="bg-white rounded-xl p-5 border border-gray-100 skeleton"
         >
           <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-gray-200"></div>
@@ -20,31 +26,31 @@
       </div>
 
       <!-- 实时监控区 -->
-      <div class="bg-white rounded-xl p-5 mb-4 shadow-neu">
+      <div class="bg-white rounded-xl p-5 mb-5 border border-gray-100">
         <div class="grid grid-cols-3 gap-3">
-          <div v-for="i in 6" :key="i" class="aspect-video bg-gray-300 rounded-lg animate-pulse shadow-neu-sm"></div>
+          <div v-for="i in 6" :key="i" class="aspect-video bg-gray-100 rounded-lg skeleton"></div>
         </div>
       </div>
 
       <!-- 告警列表 + 处置饼图 -->
       <div class="grid grid-cols-[1fr_300px] gap-4">
-        <div class="h-[320px] bg-gray-200 rounded-xl animate-pulse shadow-neu-sm"></div>
-        <div class="h-[320px] bg-gray-200 rounded-xl animate-pulse shadow-neu-sm"></div>
+        <div class="h-[320px] bg-gray-100 rounded-xl skeleton border border-gray-100"></div>
+        <div class="h-[320px] bg-gray-100 rounded-xl skeleton border border-gray-100"></div>
       </div>
     </template>
 
     <!-- 真实内容 -->
     <template v-else>
       <!-- 统计卡片区 -->
-      <div class="grid grid-cols-4 gap-4 mb-4">
+      <div class="grid grid-cols-4 gap-4 mb-5">
         <StatCard
           v-for="(card, index) in statCards"
           :key="card.title"
           :title="card.title"
           :value="card.value"
           :icon-color="card.iconColor"
-          :style="{ animationDelay: `${index * 100}ms` }"
-          class="animate-card-in"
+          :style="{ animationDelay: `${index * 80}ms` }"
+          class="animate-fade-in-up opacity-0"
         >
           <template #icon>
             <component :is="card.icon" />
@@ -53,16 +59,16 @@
       </div>
 
       <!-- 实时监控区 -->
-      <div class="mb-4 animate-card-in" style="animation-delay: 400ms;">
+      <div class="mb-5 animate-fade-in-up opacity-0" style="animation-delay: 320ms;">
         <VideoGrid />
       </div>
 
       <!-- 告警列表 + 处置饼图 -->
       <div class="grid grid-cols-[1fr_300px] gap-4">
-        <div class="h-[320px] animate-card-in" style="animation-delay: 500ms;">
+        <div class="animate-fade-in-up opacity-0" style="animation-delay: 400ms;">
           <AlertList />
         </div>
-        <div class="h-[320px] animate-card-in" style="animation-delay: 600ms;">
+        <div class="animate-fade-in-up opacity-0" style="animation-delay: 480ms;">
           <DisposalChart />
         </div>
       </div>
@@ -173,20 +179,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 卡片进入动画 */
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-card-in {
-  animation: card-in 400ms ease-out forwards;
-  opacity: 0;
-}
+/* 使用全局定义的动画 - 无需额外样式 */
 </style>

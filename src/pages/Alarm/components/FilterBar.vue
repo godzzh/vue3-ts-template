@@ -1,6 +1,6 @@
 <template>
-  <div class="flex gap-4 items-end p-5 bg-white rounded-xl shadow-neu flex-wrap">
-    <div class="flex items-center gap-2">
+  <div class="flex gap-4 items-end p-5 bg-white rounded-xl border border-gray-100 flex-wrap" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
+    <div class="flex items-center gap-3">
       <span class="text-xs font-medium text-gray-500 whitespace-nowrap">告警时间</span>
       <n-date-picker
         v-model:value="filters.dateRange"
@@ -11,7 +11,7 @@
       />
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <span class="text-xs font-medium text-gray-500 whitespace-nowrap">告警名称</span>
       <n-input
         v-model:value="filters.name"
@@ -21,7 +21,7 @@
       />
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <span class="text-xs font-medium text-gray-500 whitespace-nowrap">告警类型</span>
       <n-select
         v-model:value="filters.type"
@@ -32,7 +32,7 @@
       />
     </div>
 
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-3">
       <span class="text-xs font-medium text-gray-500 whitespace-nowrap">告警状态</span>
       <n-select
         v-model:value="filters.status"
@@ -44,8 +44,8 @@
     </div>
 
     <div class="flex gap-2 ml-auto">
-      <n-button type="primary" @click="handleQuery">查询</n-button>
-      <n-button @click="handleReset">重置</n-button>
+      <n-button type="primary" class="bg-gradient-primary hover:opacity-90 transition-opacity" @click="handleQuery">查询</n-button>
+      <n-button @click="handleReset" class="hover:bg-gray-50 transition-colors duration-200">重置</n-button>
     </div>
   </div>
 </template>

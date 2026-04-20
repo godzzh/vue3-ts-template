@@ -1,7 +1,21 @@
 <template>
-  <div class="p-6 bg-gray-150 min-h-[calc(100vh-60px)]">
+  <div class="p-6 min-h-[calc(100vh-60px)]" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e8edf4 100%);">
+    <!-- 页面标题 -->
+    <div class="mb-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-800 tracking-tight">算法中心</h1>
+          <p class="text-sm text-gray-500 mt-1">管理AI算法库和版本</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-medium rounded-full">{{ algorithmList.filter(a => a.status === 'active').length }} 已启用</span>
+          <span class="px-3 py-1 bg-gray-100 text-gray-500 text-xs font-medium rounded-full">{{ algorithmList.length }} 个算法</span>
+        </div>
+      </div>
+    </div>
+
     <!-- 工具栏 -->
-    <div class="bg-white rounded-xl p-4 shadow-neu flex justify-between items-center mb-6">
+    <div class="bg-white rounded-xl p-4 flex justify-between items-center mb-6 border border-gray-100" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);">
       <div class="flex gap-3 items-center">
         <n-input
           v-model:value="searchKeyword"
@@ -17,10 +31,10 @@
             </svg>
           </template>
         </n-input>
-        <n-button type="primary" @click="handleSearch">搜索</n-button>
+        <n-button type="primary" @click="handleSearch" class="bg-gradient-primary hover:opacity-90 transition-opacity">搜索</n-button>
       </div>
       <div class="flex gap-2">
-        <n-button type="primary" @click="handleAdd">
+        <n-button type="primary" @click="handleAdd" class="bg-gradient-primary hover:opacity-90 transition-opacity">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"/>
@@ -37,16 +51,16 @@
       <div
         v-for="i in 6"
         :key="i"
-        class="bg-white rounded-xl p-5 shadow-neu-sm animate-pulse"
+        class="bg-white rounded-xl p-5 border border-gray-100 skeleton"
       >
         <div class="flex items-start">
-          <div class="w-14 h-14 rounded-xl bg-gray-200 mr-4 flex-shrink-0"></div>
+          <div class="w-14 h-14 rounded-xl bg-gray-100 mr-4 flex-shrink-0"></div>
           <div class="flex-1">
-            <div class="h-5 bg-gray-200 rounded w-24 mb-2"></div>
-            <div class="h-4 bg-gray-200 rounded w-full mb-3"></div>
+            <div class="h-5 bg-gray-100 rounded w-24 mb-2"></div>
+            <div class="h-4 bg-gray-100 rounded w-full mb-3"></div>
             <div class="flex gap-2">
-              <div class="h-5 bg-gray-200 rounded w-12"></div>
-              <div class="h-5 bg-gray-200 rounded w-12"></div>
+              <div class="h-5 bg-gray-100 rounded w-12"></div>
+              <div class="h-5 bg-gray-100 rounded w-12"></div>
             </div>
           </div>
         </div>
@@ -60,7 +74,7 @@
         :key="algorithm.id"
         :algorithm="algorithm"
         :style="{ animationDelay: `${index * 50}ms` }"
-        class="animate-card-in"
+        class="animate-fade-in-up opacity-0"
         @click="handleCardClick"
         @view-versions="handleViewVersions"
         @version-manage="handleVersionManage"
@@ -69,7 +83,7 @@
 
     <!-- 空状态 -->
     <div v-if="!loading && filteredList.length === 0" class="flex flex-col items-center justify-center py-16 text-gray-500">
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-300 mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-200 mb-4">
         <polyline points="16 18 22 12 16 6"/>
         <polyline points="8 6 2 12 8 18"/>
       </svg>
@@ -150,20 +164,5 @@ const handleVersionManage = (id: string) => {
 </script>
 
 <style scoped>
-/* 卡片进入动画 */
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.animate-card-in {
-  animation: card-in 300ms ease-out forwards;
-  opacity: 0;
-}
+/* 使用全局定义的动画 */
 </style>

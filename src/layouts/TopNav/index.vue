@@ -1,25 +1,38 @@
 <template>
-  <header class="h-[60px] bg-gray-150 flex items-center sticky top-0 z-50 shadow-neu-sm">
+  <header class="h-[60px] bg-white/95 backdrop-blur-md flex items-center sticky top-0 z-50 border-b border-gray-200/60" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03);">
+    <!-- Logo 区域 -->
     <div class="w-[200px] px-6 flex items-center flex-shrink-0">
-      <span class="text-base font-semibold text-gray-800">AI视频推理平台</span>
+      <span class="text-lg font-semibold gradient-text">AI视频推理平台</span>
     </div>
 
+    <!-- 导航菜单 -->
     <nav class="flex-1 flex items-center h-full">
       <router-link
         v-for="item in menuItems"
         :key="item.path"
         :to="item.path"
-        class="h-full px-5 flex items-center gap-2 text-sm font-medium text-gray-500 no-underline transition-all duration-150 relative"
-        :class="isActive(item.path) ? 'text-primary-500 bg-transparent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary-500' : 'hover:bg-gray-50 hover:text-gray-800'"
+        class="h-full px-5 flex items-center gap-2 text-sm font-medium transition-all duration-200 relative group"
+        :class="isActive(item.path) ? 'text-primary-500' : 'text-gray-500 hover:text-gray-800'"
       >
-        <component :is="item.icon" class="w-5 h-5" />
+        <component :is="item.icon" class="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
         <span>{{ item.label }}</span>
+        <!-- 激活指示器 - 高级感滑块效果 -->
+        <span
+          v-if="isActive(item.path)"
+          class="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-primary rounded-full"
+        ></span>
+        <!-- 悬停下划线 -->
+        <span
+          v-else
+          class="absolute bottom-0 left-3 right-3 h-[2px] bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 rounded-full"
+        ></span>
       </router-link>
     </nav>
 
+    <!-- 右侧操作区 -->
     <div class="flex items-center gap-2 px-6">
       <n-badge :value="notificationCount" :max="99" type="error">
-        <n-button quaternary circle @click="handleNotification">
+        <n-button quaternary circle @click="handleNotification" class="hover:bg-gray-100/80 transition-colors duration-200">
           <template #icon>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
@@ -28,6 +41,8 @@
           </template>
         </n-button>
       </n-badge>
+
+      <div class="w-px h-6 bg-gray-200/60 mx-1"></div>
 
       <UserMenu />
     </div>
