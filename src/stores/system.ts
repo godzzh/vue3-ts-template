@@ -18,7 +18,7 @@ const useSystemStore = defineStore('system', () => {
     }
 
     const sysInfo = ref({
-        title: '后台管理',
+        title: 'AI视频推理平台',
         logo: "static/images/logo.jpg"
     })
 
