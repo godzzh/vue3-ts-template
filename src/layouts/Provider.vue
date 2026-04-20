@@ -8,7 +8,7 @@
         >
             <n-global-style />
             <n-dialog-provider>
-                <n-message-provider>
+                <n-message-provider :duration="1500">
                     <n-notification-provider>
                         <n-loading-bar-provider>
                             <App />
