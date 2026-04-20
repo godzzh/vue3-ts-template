@@ -42,6 +42,9 @@ warning: #D97706
 error: #DC2626
 gray-50 ~ gray-900
 
+// 边框颜色（推荐使用）
+// 项目统一使用 border-[#E2E8F0] 替代 border-gray-100，以获得更精确的浅灰色边框
+
 // 字体
 font-sans: Fira Sans
 font-mono: Fira Code
@@ -54,6 +57,9 @@ rounded-lg: 12px
 // 阴影
 shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05)
 shadow-card-hover: 0 4px 12px rgba(37, 99, 235, 0.1)
+
+// 导航指示器高度
+// 顶部导航激活指示器: h-[3px]
 ```
 
 #### Tailwind 使用示例
