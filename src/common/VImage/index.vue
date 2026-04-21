@@ -12,7 +12,8 @@
                 :style="{ width: $attrs.width + 'px' }"
                 class="v-image-placeholder"
             >
-                <div class="v-image-placeholder-text">图片加载中</div>
+                <div class="v-image-placeholder-text" v-if="$attrs.src">图片加载中</div>
+                <img v-else :src="fallback" alt="图片加载中" />
             </div>
         </template>
     </n-image>
