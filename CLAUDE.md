@@ -2,29 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 项目参考文档
-
-**⚠️ 重要**: 开发前必须阅读并遵循以下设计规范文档：
-
-| 文档 | 路径 | 说明 |
-|------|------|------|
-| AI视频推理平台原型图分析 | `D:\zzh\AI视频推理平台原型图分析.md` | 完整的设计系统规范，包括色彩、字体、间距、组件样式等 |
-
 ### 设计系统要点（详见上方文档）
 
-- **设计风格**: Minimalism & Swiss Style / 浅色简约风格 / Light Theme
-- **主色调**: `#2563EB` (蓝色)
+- **主色调**: `rgba(24, 76, 255, 1)` (蓝色)
 - **字体**: Fira Sans (正文) + Fira Code (代码/数字)
 - **间距系统**: 8px 网格
 - **圆角**: 6-12px
 - **阴影**: 轻量白色阴影
 - **动效时长**: 150-300ms
-
-### 页面开发优先级
-
-1. **高优先级**: 首页、告警中心、任务中心
-2. **中优先级**: 新增任务、算法中心、告警详情
-3. **低优先级**: 设备管理、算法分类、告警处置
 
 ### 样式开发规范
 
@@ -36,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```js
 // 颜色
-primary-500: #2563EB (主色)
+primary-500: rgba(24, 76, 255, 1) (主色)
 success: #059669
 warning: #D97706
 error: #DC2626
@@ -87,6 +72,15 @@ shadow-card-hover: 0 4px 12px rgba(37, 99, 235, 0.1)
 - 页面布局和自定义样式**优先使用 Tailwind CSS**
 - 使用子组件模式开发表单和详情页面（见下方组件使用约定）
 
+#### 日期处理规范
+
+**日期处理统一使用 dayjs**，禁止使用原生 Date API 或其他日期库。
+
+- 通过 `global.$dayjs` 获取 dayjs 实例
+- 常用格式化：`YYYY-MM-DD`、`YYYY-MM-DD HH:mm:ss`
+- 日期比较：`dayjs().isBefore()`、`dayjs().isAfter()`
+- 日期计算：`dayjs().add(1, 'day')`、`dayjs().subtract(1, 'month')`
+
 ## Project Overview
 
 Vue 3 + TypeScript + Vite admin template with Naive UI component library, Tailwind CSS, Pinia state management, and dynamic routing from backend API.
@@ -127,7 +121,6 @@ pnpm preview  # Preview production build
 - Uses `umi-request` with `extend()` for configuration
 - Request interceptor adds `Authorization` header from localStorage token
 - Response interceptor handles errors (notification for API errors, auto-redirect for 401/5000)
-- Dev proxy: `/keer-api` → `http://192.168.0.73`
 
 ### Global Object (app.global)
 
@@ -148,9 +141,6 @@ const global: any = inject("global")
 
 **使用示例：**
 ```ts
-// API 调用
-const res = await global.$api.getUserInfo()
-
 // 工具函数
 const formattedDate = global.$dayjs().format('YYYY-MM-DD')
 
@@ -197,6 +187,23 @@ global.$emitter.emit('refresh-list')
 - 弹窗式新增/编辑表单
 - 抽屉式详情查看
 - 内嵌在列表页的快速编辑
+
+**详情弹框组件（DetailDrawer）**：
+- 详情内容**优先使用 `n-table` 组件**展示键值对数据
+- 使用 `tbody > tr > td` 结构，`td.table-label` 定义标签列
+- 示例结构：
+```vue
+<n-table :single-line="false" class="mb-4">
+<tbody>
+    <tr>
+    <td class="table-label">设备名称</td>
+    <td>{{ data.deviceName || '-' }}</td>
+    <td class="table-label">设备编码</td>
+    <td>{{ data.deviceCode || '-' }}</td>
+    </tr>
+</tbody>
+</n-table>
+  ```
 
 **组件组织**：
 ```
