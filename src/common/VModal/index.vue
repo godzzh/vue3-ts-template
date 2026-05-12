@@ -5,11 +5,13 @@
                 <div class="modal-page-title-tt">{{ title }}</div>
                 <i class="iconfont icon-close" @click="onClose" />
             </div>
-            <div class="modal-page-content">
-                <n-scrollbar style="max-height: calc(100vh - 300px)">
-                    <slot></slot>
+            <div class="modal-page-content" v-loading="loading">
+                <n-scrollbar style="max-height: calc(100vh - 300px);">
+                    <div  class="px-[16px] py-[20px]">
+                        <slot></slot>
+                    </div>
                 </n-scrollbar>
-                <div class="modal-page-footer">
+                <div class="modal-page-footer px-[16px] pb-[12px]">
                     <slot name="footer"></slot>
                 </div>
             </div>
@@ -28,6 +30,10 @@ const props = defineProps({
     title: {
         type: String,
         default: () => '',
+    },
+    loading: {
+        type: Boolean,
+        default: () => false,
     },
 })
 
@@ -68,7 +74,7 @@ const onClose = () => {
     }
     &-content {
         background: var(--bg-color-1);
-        padding: 16px 20px;
+        // padding: 16px 20px;
         border-bottom-left-radius: 2px;
         border-bottom-right-radius: 2px;
         border: 1px solid var(--border-color);
@@ -79,5 +85,13 @@ const onClose = () => {
         justify-content: flex-end;
         gap: 12px 12px;
     }
+}
+.modal-loading {
+    background: var(--bg-color-1);
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
 }
 </style>
