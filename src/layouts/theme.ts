@@ -63,7 +63,7 @@ export const darkStyle = {
     "--border-color": "rgba(224, 224, 230, .2)", //边框颜色
     "--border-color-2": "rgba(224, 224, 230, .3)", //边框颜色
     "--border-color-3": "#444", //边框颜色
-    "--modal-title-bg-color": "#444",
+    "--modal-title-bg-color": "#1e293b",
     "--text-color-base": "rgba(255, 255, 255, 85%)", //文字颜色
     "--text-color-base-2": "rgba(255, 255, 255, 65%)", //非主要文字颜色
     "--box-shadow-color": "rgba(24, 24, 28, 15%)",
@@ -85,7 +85,7 @@ export const lightStyle = {
     "--border-color": "rgba(224, 224, 230, .8)", //边框颜色
     "--border-color-2": "rgba(224, 224, 230, .7)", //边框颜色
     "--border-color-3": "#e8e8e8", //边框颜色
-    "--modal-title-bg-color": "rgba(224, 224, 230, 1)",
+    "--modal-title-bg-color": "#e5e7eb",
     "--text-color-base": "rgba(0, 0, 0, 85%)",
     "--text-color-base-2": "rgba(0, 0, 0, 65%)",
     "--box-shadow-color": "rgba(0, 0, 0, 15%)",

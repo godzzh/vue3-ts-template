@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-### 设计系统要点（详见上方文档）
+### 设计系统要点
 
 - **主色调**: `rgba(24, 76, 255, 1)` (蓝色)
 - **字体**: Fira Sans (正文) + Fira Code (代码/数字)
@@ -194,14 +194,14 @@ global.$emitter.emit('refresh-list')
 - 示例结构：
 ```vue
 <n-table :single-line="false" class="mb-4">
-<tbody>
-    <tr>
-    <td class="table-label">设备名称</td>
-    <td>{{ data.deviceName || '-' }}</td>
-    <td class="table-label">设备编码</td>
-    <td>{{ data.deviceCode || '-' }}</td>
-    </tr>
-</tbody>
+    <n-tbody>
+        <tr>
+            <td class="table-label">设备名称</td>
+            <td>{{ data.deviceName || '-' }}</td>
+            <td class="table-label">设备编码</td>
+            <td>{{ data.deviceCode || '-' }}</td>
+        </tr>
+    </n-tbody>
 </n-table>
   ```
 
