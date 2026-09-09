@@ -7,10 +7,10 @@
     </div>
 </template>
 <script setup>
-import { ref, defineEmits } from "vue";
-import { useIntersectionObserver } from "@vueuse/core";
+import { ref, defineEmits } from 'vue';
+import { useIntersectionObserver } from '@vueuse/core';
 
-const emits = defineEmits(["show"]);
+const emits = defineEmits(['show']);
 const target = ref(null);
 const showSlot = ref(false);
 
@@ -21,7 +21,7 @@ const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
         isFirst = true;
         showSlot.value = true;
     }
-    emits("show", isIntersecting);
+    emits('show', isIntersecting);
 });
 </script>
 <style lang="less" scoped>

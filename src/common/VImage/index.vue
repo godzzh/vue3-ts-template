@@ -8,10 +8,7 @@
         }"
     >
         <template #placeholder>
-            <div
-                :style="{ width: $attrs.width + 'px' }"
-                class="v-image-placeholder"
-            >
+            <div :style="{ width: $attrs.width + 'px' }" class="v-image-placeholder">
                 <div class="v-image-placeholder-text" v-if="$attrs.src">图片加载中</div>
                 <img v-else :src="fallback" alt="图片加载中" />
             </div>
@@ -19,10 +16,10 @@
     </n-image>
 </template>
 <script setup>
-const props = defineProps({
+defineProps({
     fallback: {
         type: String,
-        default: () => "static/images/common/noImg.png",
+        default: () => 'static/images/common/noImg.png',
     },
 });
 </script>
@@ -43,7 +40,7 @@ const props = defineProps({
             // position: absolute;
             // right: 0;
             // transform: translateX(100%);
-            content: ".";
+            content: '.';
             animation: text 3s infinite ease-in-out;
         }
     }
@@ -51,20 +48,20 @@ const props = defineProps({
 
 @keyframes text {
     0% {
-        content: ".";
+        content: '.';
     }
     50% {
-        content: "..";
+        content: '..';
     }
     75% {
-        content: "...";
+        content: '...';
     }
 }
 </style>
 <style lang="less">
 .n-image {
     img {
-        &[data-error="true"] {
+        &[data-error='true'] {
             background: var(--image-error-bg-color);
         }
     }

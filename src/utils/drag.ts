@@ -11,7 +11,7 @@ class Drag {
     private option: DragOption;
 
     constructor(el: HTMLElement, option: DragOption = {}) {
-        el.style.cursor = "move";
+        el.style.cursor = 'move';
         this.el0 = el;
         this.el = el.parentNode as HTMLElement;
         this.option = option;
@@ -56,17 +56,17 @@ class Drag {
         const minDragDomTop = dragDom.offsetTop;
         const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomheight;
 
-        const domLeft = this.getStyle(dragDom, "left");
-        const domTop = this.getStyle(dragDom, "top");
+        const domLeft = this.getStyle(dragDom, 'left');
+        const domTop = this.getStyle(dragDom, 'top');
         let styL = +domLeft;
         let styT = +domTop;
 
-        if (domLeft.includes("%")) {
-            styL = +document.body.clientWidth * (+domLeft.replace(/%/g, "") / 100);
-            styT = +document.body.clientHeight * (+domTop.replace(/%/g, "") / 100);
+        if (domLeft.includes('%')) {
+            styL = +document.body.clientWidth * (+domLeft.replace(/%/g, '') / 100);
+            styT = +document.body.clientHeight * (+domTop.replace(/%/g, '') / 100);
         } else {
-            styL = +domLeft.replace(/px/g, "");
-            styT = +domTop.replace(/px/g, "");
+            styL = +domLeft.replace(/px/g, '');
+            styT = +domTop.replace(/px/g, '');
         }
 
         document.onmousemove = (ev: MouseEvent) => {

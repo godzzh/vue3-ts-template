@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
+coverage
+
+# unplugin-vue-components 自动生成的组件类型声明
+components.d.ts
 
 # Editor directories and files
 .vscode/*

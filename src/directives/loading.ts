@@ -1,40 +1,40 @@
-import { createLoading } from "@/common/Loading/index.js";
+import { isRef, type App, type Directive, type DirectiveBinding, type Ref } from 'vue';
+import { createLoading, type LoadingInstance } from '@/common/Loading';
 
-const loadingDirective = {
-    mounted(el: any, binding: any) {
-        const tip = el.getAttribute("loading-tip");
-        const background = el.getAttribute("loading-background");
-        const size = el.getAttribute("loading-size");
-        const fullscreen = !!binding.modifiers.fullscreen;
-        const instance = createLoading(
+type LoadingElement = HTMLElement & { __loadingInstance?: LoadingInstance };
+type LoadingValue = boolean | Ref<boolean>;
+
+const resolveLoading = (value: LoadingValue | null | undefined) =>
+    Boolean(isRef(value) ? value.value : value);
+
+/** 支持 boolean / Ref<boolean>，添加 fullscreen 修饰符可挂载到 body。 */
+const loadingDirective: Directive<LoadingElement, LoadingValue> = {
+    mounted(el, binding: DirectiveBinding<LoadingValue>) {
+        const fullscreen = Boolean(binding.modifiers.fullscreen);
+        el.__loadingInstance = createLoading(
             {
-                tip: tip,
-                background,
-                size: size || "medium",
-                loading: !!binding.value?.value,
+                tip: el.getAttribute('loading-tip'),
+                background: el.getAttribute('loading-background'),
+                size: el.getAttribute('loading-size') || 'medium',
+                loading: resolveLoading(binding.value),
                 absolute: !fullscreen,
             },
             fullscreen ? document.body : el
         );
-        el.instance = instance;
     },
-
-    updated(el: any, binding: any) {
-        const instance = el.instance;
-        if (!instance) return;
-        // instance.setTip(el.getAttribute("loading-tip"));
-        if (binding.oldValue !== binding.value) {
-            instance.setLoading?.(binding.value);
+    updated(el, binding) {
+        if (resolveLoading(binding.oldValue) !== resolveLoading(binding.value)) {
+            el.__loadingInstance?.setLoading(resolveLoading(binding.value));
         }
     },
-
-    unmounted(el: any) {
-        el?.instance?.close();
+    unmounted(el) {
+        el.__loadingInstance?.close();
+        delete el.__loadingInstance;
     },
 };
 
-export function setupLoadingDirective(app: any) {
-    app.directive("loading", loadingDirective);
+export function setupLoadingDirective(app: App) {
+    app.directive('loading', loadingDirective);
 }
 
 export default loadingDirective;

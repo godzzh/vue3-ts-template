@@ -1,6 +1,6 @@
-import type { RouteRecordRaw } from "vue-router";
+import type { RouteRecordRaw } from 'vue-router';
 
-const routeModules = import.meta.glob("/src/pages/**/*.vue");
+const routeModules = import.meta.glob('/src/pages/**/*.vue');
 
 type ComponentLoader = () => Promise<unknown>;
 
@@ -22,8 +22,8 @@ interface RouteItem {
 }
 
 const pathMatch: RouteRecordRaw = {
-    path: "/:pathMatch(.*)*",
-    redirect: "/404",
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
 };
 
 export const generator = (arr: RouteItem[]): RouteItem[] => {
@@ -34,16 +34,15 @@ export const generator = (arr: RouteItem[]): RouteItem[] => {
             activeName: item.activeName,
         };
         if (item.children && item.children.length) {
-            item.redirect = item.children[0].path;
+            item.redirect = item.children[0]?.path;
         }
-        if (item.component && typeof item.component === "string") {
+        if (item.component && typeof item.component === 'string') {
             const componentPath = `/src${item.component}.vue`;
             if (routeModules[componentPath]) {
                 item.component = routeModules[componentPath] as ComponentLoader;
             } else {
-                item.component = routeModules[
-                    `/src/pages/ErrorPage/err.vue`
-                ] as ComponentLoader;
+                // 找不到页面组件时回退到 404 页（该文件位于 pages 目录下，可被 glob 命中）
+                item.component = routeModules['/src/pages/ErrorPage/index.vue'] as ComponentLoader;
             }
         }
 
@@ -54,35 +53,34 @@ export const generator = (arr: RouteItem[]): RouteItem[] => {
 };
 
 export const setConfig = (key: string, value: unknown): void => {
-    (window as any).___CONFIG = (window as any).___CONFIG || {};
-    ((window as any).___CONFIG as Record<string, unknown>)[key] = value;
+    window.___CONFIG ??= {};
+    window.___CONFIG[key] = value;
 };
 
-export const getConfig = (key: string): unknown => {
-    return ((window as any).___CONFIG as Record<string, unknown>)?.[key];
-};
+export const getConfig = (key: string): unknown => window.___CONFIG?.[key];
 
-export const generatorDynamicRouter = async (
-    data: RouteItem[]
-): Promise<RouteRecordRaw[]> => {
-    const menuNav = data;
-    const _routers = await generator(menuNav);
+/**
+ * 由后端菜单数据生成动态路由。
+ * 注意：当前模板的静态路由中暂未接入该函数（无后端菜单接口），
+ * 接入方式：登录后请求菜单 -> generatorDynamicRouter(menus) -> router.addRoute()。
+ */
+export const generatorDynamicRouter = (data: RouteItem[]): RouteRecordRaw[] => {
+    const _routers = generator(data);
 
-    // Dynamic import for Layout component
-    const LayoutComponent = () => import("@/layouts/BasicLayout/index.vue");
+    const LayoutComponent = () => import('@/layouts/BasicLayout/index.vue');
 
     const rootRouter: RouteRecordRaw = {
-        path: "/BasicLayout",
-        name: "BasicLayout",
+        path: '/BasicLayout',
+        name: 'BasicLayout',
         meta: {
-            title: "主页",
+            title: '主页',
         },
         component: LayoutComponent,
-        redirect: data[0]?.path || "/",
+        redirect: data[0]?.path || '/',
         children: _routers as RouteRecordRaw[],
     };
 
-    setConfig("redirectPath", data[0]?.path);
+    setConfig('redirectPath', data[0]?.path);
 
     return [rootRouter, pathMatch];
 };

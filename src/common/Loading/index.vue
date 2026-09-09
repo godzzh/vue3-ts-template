@@ -10,7 +10,7 @@
     </div>
 </template>
 <script setup>
-import { toRefs, ref, watch } from 'vue'
+import { toRefs, ref, watch } from 'vue';
 const props = defineProps({
     loading: {
         type: Boolean,
@@ -24,21 +24,21 @@ const props = defineProps({
         type: String,
         default: () => 'medium',
     },
-})
+});
 
-const { loading, tip, size } = toRefs(props)
+const { loading, tip, size } = toRefs(props);
 
-const contentRef = ref(null)
+const contentRef = ref(null);
 
 watch(
     () => props.loading,
     (newVal) => {
-        let children = contentRef.value.parentNode.children
+        let children = contentRef.value.parentNode.children;
         for (let i = 0; i < children.length; i++) {
-            children[i].style.opacity = newVal ? 0.48 : 1
+            children[i].style.opacity = newVal ? 0.48 : 1;
         }
-    },
-)
+    }
+);
 </script>
 <style lang="less" scoped>
 .loading-page {

@@ -9,10 +9,10 @@
     </div>
 </template>
 <script setup>
-import { inject } from "vue";
-import { useRouter } from "vue-router";
+import { inject } from 'vue';
+import { useRouter } from 'vue-router';
 
-const global = inject("global");
+const global = inject('global');
 const router = useRouter();
 
 const backHome = () => {
@@ -20,7 +20,7 @@ const backHome = () => {
 };
 
 const goLogin = () => {
-    router.replace("Login");
+    router.replace('Login');
 };
 </script>
 <style lang="less" scoped>

@@ -1,192 +1,158 @@
 <template>
-    <div :id="id" ref="el" class="echarts-container"></div>
+    <div ref="el" class="echarts-container w-full h-full"></div>
 </template>
-<script>
-import { shallowRef, computed, ref } from "vue";
-import { v4 as uuidv4 } from "uuid";
-import * as echarts from "echarts";
-// import { graphic } from "echarts/core"; //颜色渐变
-import { useElementSize } from "@vueuse/core";
+<script setup lang="ts">
+import { shallowRef, ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
+// 按需引入 echarts：只打包用到的图表与组件（较全量引入可减 60%+ 体积）
+import * as echarts from 'echarts/core';
+import { BarChart, LineChart, PieChart, ScatterChart } from 'echarts/charts';
+import {
+    GridComponent,
+    TooltipComponent,
+    LegendComponent,
+    TitleComponent,
+    DatasetComponent,
+    TransformComponent,
+} from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import type { EChartsCoreOption, EChartsType } from 'echarts/core';
+import { useElementSize } from '@vueuse/core';
 
-export default {
-    props: {
-        options: {
-            type: Object,
-            default: () => {},
+echarts.use([
+    BarChart,
+    LineChart,
+    PieChart,
+    ScatterChart,
+    GridComponent,
+    TooltipComponent,
+    LegendComponent,
+    TitleComponent,
+    DatasetComponent,
+    TransformComponent,
+    CanvasRenderer,
+]);
+
+const props = withDefaults(
+    defineProps<{
+        options?: Record<string, any>;
+        autoPlay?: boolean;
+    }>(),
+    {
+        options: () => ({}),
+        autoPlay: false,
+    }
+);
+
+const emit = defineEmits<{
+    (e: 'itemClick', params: unknown): void;
+}>();
+
+const el = ref<HTMLDivElement | null>(null);
+const myChart = shallowRef<EChartsType | null>(null);
+const { width, height } = useElementSize(el);
+
+let playTimer: ReturnType<typeof setInterval> | null = null;
+let currentIndex = 0;
+
+const setOptions = () => {
+    const options = props.options || {};
+    myChart.value?.setOption({
+        color: [
+            '#2563EB',
+            '#FF9671',
+            '#FFC75F',
+            '#00C9A7',
+            '#EE003F',
+            '#BFA975',
+            '#BBCCFF',
+            '#6AFBCF',
+            '#AD3AED',
+            '#829DFF',
+            '#FF586F',
+            '#00A4FF',
+            '#59BAB8',
+            '#C1554D',
+        ],
+        // 全局字体样式
+        textStyle: {
+            fontFamily: 'v-sans',
         },
-        autoPlay: {
-            type: Boolean,
-            default: () => false,
+        animationEasing: 'elasticOut',
+        ...options,
+        tooltip: {
+            className: 'echarts-tooltip',
+            extraCssText: 'z-index: 888;',
+            ...(options.tooltip || {}),
         },
-    },
-    setup(props) {
-        let _id = uuidv4();
-        const el = ref(null);
-        const options = computed({
-            get: () => props.options,
-        });
-        const { width, height } = useElementSize(el);
-        return {
-            el,
-            id: _id,
-            options,
-            width,
-            height,
-            myChart: shallowRef(null),
-            setInt: ref(null)
-        };
-    },
-    watch: {
-        options: {
-            handler() {
-                this.myChart && this.myChart.clear();
-                this.$nextTick(() => this.setOptions());
-            },
-            deep: true,
+        grid: {
+            top: '20px',
+            left: '10px',
+            containLabel: true,
+            bottom: '10px',
+            right: '10px',
+            ...(options.grid || {}),
         },
-        //监听外部容器大小改变
-        width: {
-            handler() {
-                this.myChart && this.myChart.resize();
-            },
-        },
-        //监听外部容器大小改变
-        height: {
-            handler() {
-                this.myChart && this.myChart.resize();
-            },
-        },
-    },
-    unmounted() {
-        const { myChart } = this;
-        myChart && myChart.dispose();
-        window.removeEventListener("resize", () => {});
-    },
-    mounted() {
-        var chartDom = document.getElementById(this.id);
-        var myChart = chartDom && echarts.init(chartDom);
-        this.myChart = myChart;
-        this.$nextTick(() => {
-            this.setOptions();
-        });
-
-        //监听屏幕尺寸变化
-        window.addEventListener("resize", () => {
-            this.myChart && this.myChart.resize();
-        });
-
-        myChart.on("click", this.handleClick);
-
-        if (!this.autoPlay) return
-
-        myChart.on('mouseover', () => {
-            myChart.dispatchAction({
-                type: 'downplay',
-                seriesIndex: 0,
-                dataIndex: this.currentIndex,
-            })
-            this.setInt && clearInterval(this.setInt)
-        })
-
-        myChart.on('mouseout', () => {
-            this.setInt = setInterval(() => {
-                this.autoPlaySelect()
-            }, 4000)
-        })
-
-        this.setInt = setInterval(() => {
-            this.autoPlaySelect()
-        }, 4000)
-    },
-    methods: {
-        handleClick(params) {
-            this.$emit("itemClick", params);
-        },
-
-        setOptions() {
-            const { myChart, options } = this;
-            myChart &&
-                myChart.setOption({
-                    color: [
-                        "#3269FF",
-                        "#FF9671",
-                        "#FFC75F",
-                        "#00C9A7",
-                        "#EE003F",
-                        "#BFA975",
-                        "#BBCCFF",
-                        "#6AFBCF",
-                        "#AD3AED",
-                        "#829DFF",
-                        "#FF586F",
-                        "#00A4FF",
-                        "#59BAB8",
-                        "#C1554D",
-                    ],
-                    //全局字体样式
-                    textStyle: {
-                        fontFamily: "v-sans",
-                    },
-                    animationEasing: "elasticOut",
-                    ...options,
-                    tooltip: {
-                        className: "echarts-tooltip",
-                        extraCssText: "z-index: 888;",
-                        // extraCssText: `border: 1px solid var(--border-color);
-                        //     border-radius: 2px;
-                        //     box-shadow: 0px 0px 3px var(--border-color);
-                        //     min-width: 80px;
-                        //     `,
-                        ...options.tooltip,
-                    },
-                    grid: {
-                        top: "20px",
-                        left: "10px",
-                        containLabel: true,
-                        bottom: "10px",
-                        right: "10px",
-                        ...options.grid,
-                    },
-                });
-        },
-
-        autoPlaySelect() {
-            const { myChart } = this
-            const { series } = this.options
-
-            if (!Array.isArray(series)) return
-            let dataLen = series[0].data.length
-            myChart.dispatchAction({
-                type: 'downplay',
-                seriesIndex: 0,
-                dataIndex: this.currentIndex,
-            })
-            this.currentIndex = (this.currentIndex + 1) % dataLen
-            // 高亮当前图形
-            myChart.dispatchAction({
-                type: 'highlight',
-                seriesIndex: 0,
-                dataIndex: this.currentIndex,
-            })
-            // 显示 tooltip
-            myChart.dispatchAction({
-                type: 'showTip',
-                seriesIndex: 0,
-                dataIndex: this.currentIndex,
-            })
-        },
-    },
-
-    beforeUnmount() {
-        this.myChart &&
-            this.myChart.dispatchAction({
-                type: 'downplay',
-                seriesIndex: 0,
-                dataIndex: this.currentIndex,
-            })
-        this.setInt && clearInterval(this.setInt)
-    },
+    } as EChartsCoreOption);
 };
+
+const stopPlay = () => {
+    if (playTimer) {
+        clearInterval(playTimer);
+        playTimer = null;
+    }
+};
+
+const autoPlaySelect = () => {
+    const chart = myChart.value;
+    const series = props.options?.series;
+    if (!chart || !Array.isArray(series)) return;
+    const dataLen = (series[0]?.data as unknown[] | undefined)?.length ?? 0;
+    if (!dataLen) return;
+    chart.dispatchAction({ type: 'downplay', seriesIndex: 0, dataIndex: currentIndex });
+    currentIndex = (currentIndex + 1) % dataLen;
+    chart.dispatchAction({ type: 'highlight', seriesIndex: 0, dataIndex: currentIndex });
+    chart.dispatchAction({ type: 'showTip', seriesIndex: 0, dataIndex: currentIndex });
+};
+
+watch(
+    () => props.options,
+    () => {
+        myChart.value?.clear();
+        currentIndex = 0;
+        nextTick(() => setOptions());
+    },
+    { deep: true }
+);
+
+// 容器尺寸变化自适应（useElementSize 基于 ResizeObserver，已覆盖窗口缩放场景，无需 window 监听）
+watch([width, height], () => myChart.value?.resize());
+
+onMounted(() => {
+    if (!el.value) return;
+    const chart = echarts.init(el.value);
+    myChart.value = chart;
+
+    chart.on('click', (params) => emit('itemClick', params));
+    nextTick(() => setOptions());
+
+    if (!props.autoPlay) return;
+
+    chart.on('mouseover', () => {
+        chart.dispatchAction({ type: 'downplay', seriesIndex: 0, dataIndex: currentIndex });
+        stopPlay();
+    });
+    chart.on('mouseout', () => {
+        stopPlay();
+        playTimer = setInterval(autoPlaySelect, 4000);
+    });
+    playTimer = setInterval(autoPlaySelect, 4000);
+});
+
+onBeforeUnmount(() => {
+    stopPlay();
+    myChart.value?.dispose();
+    myChart.value = null;
+});
 </script>
 <style lang="less">
 .echarts-tooltip {

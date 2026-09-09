@@ -1,171 +1,137 @@
 <template>
-  <header class="h-[60px] bg-white/95 backdrop-blur-md flex items-center sticky top-0 z-50 border-b border-gray-200/60" style="box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03);">
-    <!-- Logo 区域 -->
-    <div class="w-[220px] px-5 flex items-center flex-shrink-0 gap-3">
-      <!-- AI 图标 -->
-      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-md shadow-primary-500/20">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
-          <circle cx="7.5" cy="14.5" r="1.5"/>
-          <circle cx="16.5" cy="14.5" r="1.5"/>
-        </svg>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-base font-semibold text-slate-800 tracking-tight leading-tight">AI视频推理平台</span>
-        <span class="text-[10px] text-primary-500 font-medium tracking-widest uppercase tracking-wider">AI Video Inference</span>
-      </div>
-    </div>
+    <header
+        class="sticky top-0 z-30 flex h-18 items-center justify-between border-b border-[var(--border-color)] bg-[color-mix(in_srgb,var(--bg-surface)_91%,transparent)] px-6 backdrop-blur-2xl max-[800px]:px-4"
+    >
+        <div class="flex items-center">
+            <button
+                class="mr-2 hidden size-10 place-items-center rounded-md border-0 bg-transparent text-xl text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:grid"
+                type="button"
+                aria-label="打开菜单"
+                @click="emit('open-menu')"
+            >
+                <i class="ri-menu-2-line" aria-hidden="true"></i>
+            </button>
+            <nav class="flex items-center gap-1 text-xs" aria-label="面包屑">
+                <router-link
+                    class="text-[var(--text-color-muted)] no-underline hover:text-[var(--primary-color)]"
+                    to="/dashboard"
+                    >首页</router-link
+                >
+                <i
+                    class="ri-arrow-right-s-line text-base text-[var(--text-color-muted)]"
+                    aria-hidden="true"
+                ></i>
+                <span class="font-semibold text-[var(--text-color)]">{{ pageTitle }}</span>
+            </nav>
+        </div>
 
-    <!-- 导航菜单 -->
-    <nav class="flex-1 flex items-center h-full">
-      <router-link
-        v-for="item in menuItems"
-        :key="item.path"
-        :to="item.path"
-        class="h-full px-5 flex items-center gap-2 text-sm font-medium transition-all duration-200 relative group"
-        :class="isActive(item.path) ? 'text-primary-500' : 'text-gray-500 hover:text-gray-800'"
-      >
-        <component :is="item.icon" class="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
-        <span>{{ item.label }}</span>
-        <!-- 激活指示器 - 高级感滑块效果 -->
-        <span
-          v-if="isActive(item.path)"
-          class="absolute bottom-0 left-3 right-3 h-[3px] bg-gradient-primary rounded-full"
-        ></span>
-        <!-- 悬停下划线 -->
-        <span
-          v-else
-          class="absolute bottom-0 left-3 right-3 h-[3px] bg-primary-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 rounded-full"
-        ></span>
-      </router-link>
-    </nav>
-
-    <!-- 右侧操作区 -->
-    <div class="flex items-center gap-2 px-6">
-      <n-badge :value="notificationCount" :max="99" type="error">
-        <n-button quaternary circle @click="handleNotification" class="hover:bg-gray-100/80 transition-colors duration-200">
-          <template #icon>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
-              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
-            </svg>
-          </template>
-        </n-button>
-      </n-badge>
-
-      <div class="w-px h-6 bg-gray-200/60 mx-1"></div>
-
-      <UserMenu />
-    </div>
-  </header>
+        <div class="flex items-center gap-1">
+            <button
+                class="flex h-[2.4rem] min-w-40 items-center justify-start gap-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-base)] px-2.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
+                type="button"
+                @click="showSearchHint"
+            >
+                <i class="ri-search-line" aria-hidden="true"></i>
+                <span>搜索</span>
+                <kbd
+                    class="ml-auto rounded border border-[var(--border-color)] bg-[var(--bg-surface)] px-1.5 py-0.5 font-mono text-[0.58rem] text-[var(--text-color-muted)]"
+                    >⌘ K</kbd
+                >
+            </button>
+            <button
+                class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
+                type="button"
+                aria-label="帮助中心"
+            >
+                <i class="ri-question-line" aria-hidden="true"></i>
+            </button>
+            <n-badge :value="3" :max="9" type="error">
+                <button
+                    class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
+                    type="button"
+                    aria-label="通知"
+                >
+                    <i class="ri-notification-3-line" aria-hidden="true"></i>
+                </button>
+            </n-badge>
+            <button
+                class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
+                type="button"
+                :aria-label="systemStore.sysTheme ? '切换到浅色模式' : '切换到深色模式'"
+                @click="systemStore.toggleTheme()"
+            >
+                <i
+                    :class="systemStore.sysTheme ? 'ri-sun-line' : 'ri-moon-line'"
+                    aria-hidden="true"
+                ></i>
+            </button>
+            <span
+                class="mx-2 h-6 w-px bg-[var(--border-color)] max-[800px]:hidden"
+                aria-hidden="true"
+            ></span>
+            <n-dropdown :options="userOptions" trigger="click" @select="handleUserAction">
+                <button
+                    class="flex items-center gap-2.5 rounded-md border-0 bg-transparent px-2 py-1.5 text-left text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
+                    type="button"
+                    aria-label="打开用户菜单"
+                >
+                    <span
+                        class="grid size-[2.1rem] place-items-center rounded-[0.6rem] bg-primary-500 text-xs font-semibold text-white shadow-primary"
+                        >周</span
+                    >
+                    <span class="max-[800px]:hidden">
+                        <strong
+                            class="block text-xs font-semibold leading-tight text-[var(--text-color)]"
+                            >周明远</strong
+                        >
+                        <small
+                            class="mt-1 block text-[0.62rem] leading-tight text-[var(--text-color-muted)]"
+                            >系统管理员</small
+                        >
+                    </span>
+                    <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+                </button>
+            </n-dropdown>
+        </div>
+    </header>
 </template>
 
 <script setup lang="ts">
-import { ref, h } from 'vue'
-import { useRoute } from 'vue-router'
-import { NBadge, NButton } from 'naive-ui'
-import UserMenu from './components/UserMenu.vue'
+import { computed, h } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import type { DropdownOption } from 'naive-ui';
+import useAuthStore from '@/stores/auth';
+import useSystemStore from '@/stores/system';
 
-const route = useRoute()
-const notificationCount = ref(5)
+const emit = defineEmits<{ 'open-menu': [] }>();
+const route = useRoute();
+const router = useRouter();
+const authStore = useAuthStore();
+const systemStore = useSystemStore();
+const pageTitle = computed(() =>
+    typeof route.meta.title === 'string' ? route.meta.title : '控制台'
+);
 
-interface MenuItem {
-  path: string
-  label: string
-  icon: any
-}
+const renderIcon = (name: string) => () => h('i', { class: name });
+const userOptions: DropdownOption[] = [
+    { label: '个人中心', key: 'profile', icon: renderIcon('ri-user-3-line') },
+    { label: '账户设置', key: 'settings', icon: renderIcon('ri-settings-3-line') },
+    { type: 'divider', key: 'divider' },
+    { label: '退出登录', key: 'logout', icon: renderIcon('ri-logout-box-r-line') },
+];
 
-const HomeIcon = () => h('svg', {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: '20',
-  height: '20',
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  'stroke-width': '2',
-  'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
-}, [
-  h('path', { d: 'm3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' }),
-  h('polyline', { points: '9 22 9 12 15 12 15 22' })
-])
-
-const AlarmIcon = () => h('svg', {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: '20',
-  height: '20',
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  'stroke-width': '2',
-  'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
-}, [
-  h('path', { d: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z' }),
-  h('line', { x1: '12', y1: '9', x2: '12', y2: '13' }),
-  h('line', { x1: '12', y1: '17', x2: '12.01', y2: '17' })
-])
-
-const TaskIcon = () => h('svg', {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: '20',
-  height: '20',
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  'stroke-width': '2',
-  'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
-}, [
-  h('path', { d: 'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2' }),
-  h('rect', { x: '8', y: '2', width: '8', height: '4', rx: '1', ry: '1' })
-])
-
-const AlgorithmIcon = () => h('svg', {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: '20',
-  height: '20',
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  'stroke-width': '2',
-  'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
-}, [
-  h('polyline', { points: '16 18 22 12 16 6' }),
-  h('polyline', { points: '8 6 2 12 8 18' })
-])
-
-const DeviceIcon = () => h('svg', {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: '20',
-  height: '20',
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  'stroke-width': '2',
-  'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
-}, [
-  h('rect', { x: '2', y: '2', width: '20', height: '8', rx: '2', ry: '2' }),
-  h('rect', { x: '2', y: '14', width: '20', height: '8', rx: '2', ry: '2' }),
-  h('line', { x1: '6', y1: '6', x2: '6.01', y2: '6' }),
-  h('line', { x1: '6', y1: '18', x2: '6.01', y2: '18' })
-])
-
-const menuItems: MenuItem[] = [
-  { path: '/dashboard', label: '首页', icon: HomeIcon },
-  { path: '/alarm', label: '告警中心', icon: AlarmIcon },
-  { path: '/task', label: '任务中心', icon: TaskIcon },
-  { path: '/algorithm', label: '算法中心', icon: AlgorithmIcon },
-  { path: '/device', label: '设备中心', icon: DeviceIcon }
-]
-
-const isActive = (path: string) => {
-  return route.path === path || (path === '/dashboard' && route.path === '/')
-}
-
-const handleNotification = () => {
-  console.log('打开通知中心')
-}
+const showSearchHint = () => window.$message?.info('全局搜索入口已预留');
+const handleUserAction = async (key: string | number) => {
+    if (key === 'logout') {
+        authStore.logout();
+        window.$message?.success('已安全退出');
+        await router.replace('/login');
+        return;
+    }
+    const messages: Record<string, string> = {
+        profile: '个人中心入口已预留',
+        settings: '账户设置入口已预留',
+    };
+    window.$message?.info(messages[String(key)] ?? '功能入口已预留');
+};
 </script>

@@ -1,4 +1,4 @@
-import mitt, { Emitter } from "mitt";
+import mitt, { type Emitter } from 'mitt';
 
 const emitter: Emitter<Record<string, unknown>> = mitt();
 

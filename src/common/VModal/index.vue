@@ -6,8 +6,8 @@
                 <i class="iconfont icon-close" @click="onClose" />
             </div>
             <div class="modal-page-content" v-loading="loading">
-                <n-scrollbar style="max-height: calc(100vh - 300px);">
-                    <div  class="px-[16px] py-[20px]">
+                <n-scrollbar style="max-height: calc(100vh - 300px)">
+                    <div class="px-[16px] py-[20px]">
                         <slot></slot>
                     </div>
                 </n-scrollbar>
@@ -19,9 +19,9 @@
     </n-modal>
 </template>
 <script setup>
-import { ref, toRefs } from 'vue'
+import { ref, toRefs } from 'vue';
 
-const emits = defineEmits(['update:show', 'close'])
+const emits = defineEmits(['update:show', 'close']);
 const props = defineProps({
     show: {
         type: Boolean,
@@ -35,14 +35,14 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
-})
+});
 
-const { show } = toRefs(props)
+const { show } = toRefs(props);
 
 const onClose = () => {
-    emits('close')
-    emits('update:show', false)
-}
+    emits('close');
+    emits('update:show', false);
+};
 </script>
 <style lang="less" scoped>
 .modal-page {

@@ -20,12 +20,12 @@
     </div>
 </template>
 <script setup>
-import { computed, toRefs } from "vue";
+import { computed, toRefs } from 'vue';
 
 const props = defineProps({
     text: {
         type: String,
-        default: () => "全部",
+        default: () => '全部',
     },
     options: {
         type: Array,
@@ -37,7 +37,7 @@ const props = defineProps({
     },
     size: {
         type: String,
-        default: () => "medium",
+        default: () => 'medium',
     },
     vertical: {
         type: Boolean,
@@ -47,7 +47,7 @@ const props = defineProps({
 
 const { value, size } = toRefs(props);
 
-const emits = defineEmits(["update:value"]);
+const emits = defineEmits(['update:value']);
 
 //是否部分选中
 const checkIndeterminate = computed(() => {
@@ -73,7 +73,7 @@ const onChecked = (checked, val) => {
     let _list = props.value;
     if (checked) _list.push(val);
     else _list = _list.filter((v) => v !== val);
-    emits("update:value", _list);
+    emits('update:value', _list);
 };
 
 //点击全部
@@ -85,9 +85,9 @@ const onChange = (checked) => {
         if (v.disabled) _list2.push(v.value);
     });
     if (checked) {
-        emits("update:value", _list);
+        emits('update:value', _list);
     } else {
-        emits("update:value", _list2);
+        emits('update:value', _list2);
     }
 };
 </script>

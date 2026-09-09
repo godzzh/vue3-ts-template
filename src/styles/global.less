@@ -1,22 +1,28 @@
 @import '/static/iconfont/iconfont.css';
 
+/*
+ * 特殊字体仅在明确需要的元素上引用，不再通过 `* { font-family !important }` 全局强推：
+ * 1. 全局 !important 会让 main.ts 引入的 vfonts（Inter/FiraCode）全部失效（白下载）
+ * 2. 全局强制 CJK 大字体文件（OTF 数 MB）将阻塞首屏渲染
+ */
 @font-face {
     font-family: 'REGULAR';
     font-style: normal;
-    src: url('/static/fonts/SOURCEHANSANSCN-REGULAR.OTF') format('truetype');
+    src: url('/static/fonts/SOURCEHANSANSCN-REGULAR.OTF') format('opentype');
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'BAHNSCHRIFT';
     font-style: normal;
     src: url('/static/fonts/BAHNSCHRIFT.TTF') format('truetype');
+    font-display: swap;
 }
 
 *,
 body {
     font-family: REGULAR !important;
 }
-
 
 .n-empty {
     .n-empty__icon {

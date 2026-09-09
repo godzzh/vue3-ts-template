@@ -1,48 +1,27 @@
 /// <reference types="vite/client" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
-  const component: DefineComponent<Record<string, unknown>, Record<string, unknown>, unknown>
-  export default component
+import type { DialogApi, LoadingBarApi, MessageApi, NotificationApi } from 'naive-ui';
+
+interface ImportMetaEnv {
+    readonly VITE_APP_TITLE?: string;
+    readonly VITE_API_BASE_URL?: string;
+    readonly VITE_PROXY_TARGET?: string;
+    readonly VITE_PORT?: string;
+    readonly VITE_BUILD_SOURCEMAP?: string;
 }
 
-declare module '@/common/VModal/index.vue' {
-  import type { DefineComponent } from 'vue'
-  interface VModalProps {
-    show: boolean
-    title?: string
-  }
-  interface VModalEmits {
-    (e: 'update:show', value: boolean): void
-    (e: 'close'): void
-  }
-  const VModal: DefineComponent<VModalProps> & VModalEmits
-  export default VModal
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
 }
 
-declare module '@/common/VImage/index.vue' {
-  import type { DefineComponent } from 'vue'
-  interface VImageProps {
-    src?: string
-    fallback?: string
-    width?: string | number
-    height?: string | number
-    'object-fit'?: string
-    alt?: string
-  }
-  const VImage: DefineComponent<VImageProps>
-  export default VImage
+declare global {
+    interface Window {
+        $message?: MessageApi;
+        $dialog?: DialogApi;
+        $notification?: NotificationApi;
+        $loadingBar?: LoadingBarApi;
+        ___CONFIG?: Record<string, unknown>;
+    }
 }
 
-declare module '@/common/VEcharts/index.vue' {
-  import type { DefineComponent } from 'vue'
-  interface VEchartsProps {
-    options?: Record<string, unknown>
-    autoPlay?: boolean
-  }
-  interface VEchartsEmits {
-    (e: 'itemClick', params: unknown): void
-  }
-  const VEcharts: DefineComponent<VEchartsProps> & VEchartsEmits
-  export default VEcharts
-}
+export {};

@@ -1,5 +1,5 @@
-import system from './system'
+import system from './system';
 
 export default {
-    system
-}
+    system,
+};

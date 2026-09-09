@@ -1,6 +1,6 @@
 // 去除谷歌浏览器的scroll、wheel等事件警告
 (function () {
-    if (typeof EventTarget !== "undefined") {
+    if (typeof EventTarget !== 'undefined') {
         const func = EventTarget.prototype.addEventListener;
         EventTarget.prototype.addEventListener = function (
             type: string,
@@ -8,7 +8,7 @@
             capture: boolean | AddEventListenerOptions
         ) {
             (this as any).func = func;
-            if (typeof capture !== "boolean") {
+            if (typeof capture !== 'boolean') {
                 capture = capture || {};
                 (capture as AddEventListenerOptions).passive = false;
             }

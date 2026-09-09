@@ -2,10 +2,10 @@
     <router-view></router-view>
 </template>
 <script setup lang="ts">
-import { useMessage, useDialog, useNotification, useLoadingBar } from 'naive-ui'
+import { useMessage, useDialog, useNotification, useLoadingBar } from 'naive-ui';
 
-window.$message = useMessage()
-window.$dialog = useDialog()
-window.$notification = useNotification()
-window.$loadingBar = useLoadingBar()
+window.$message = useMessage();
+window.$dialog = useDialog();
+window.$notification = useNotification();
+window.$loadingBar = useLoadingBar();
 </script>

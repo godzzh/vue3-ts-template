@@ -1,16 +1,32 @@
-// import { useUserStore } from "@/store/user";
+/**
+ * v-auth 按钮权限指令
+ * - v-auth="'btn:add'" 或 v-auth="['btn:add', 'btn:edit']"（任一命中即通过）
+ * - 权限列表由登录后调用 setAuthList() 注入（来自用户信息接口）
+ */
 
-function isAuth(el: HTMLElement, binding: any) {
-    // const { authList } = useUserStore();
+let authList: string[] = [];
 
-    // const value = binding.value;
-    // if (!value) return;
-    // if (!authList.includes(value)) {
-    //     el.parentNode?.removeChild(el);
-    // }
+/** 注入权限码列表（通常在获取用户信息后调用） */
+export function setAuthList(list: string[]) {
+    authList = list;
 }
 
-const mounted = (el: HTMLElement, binding: any) => {
+/** 获取当前权限码列表 */
+export function getAuthList(): string[] {
+    return authList;
+}
+
+function isAuth(el: HTMLElement, binding: { value?: string | string[] }) {
+    const value = binding.value;
+    if (!value) return;
+    const required = Array.isArray(value) ? value : [value];
+    const hasAuth = required.some((code) => authList.includes(code));
+    if (!hasAuth) {
+        el.parentNode?.removeChild(el);
+    }
+}
+
+const mounted = (el: HTMLElement, binding: { value?: string | string[] }) => {
     isAuth(el, binding);
 };
 
@@ -19,7 +35,7 @@ const authDirective = {
 };
 
 export function setupPermissionDirective(app: any) {
-    app.directive("auth", authDirective);
+    app.directive('auth', authDirective);
 }
 
 export default authDirective;

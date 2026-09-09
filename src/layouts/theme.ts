@@ -1,97 +1,151 @@
-const primaryColor = "rgba(50, 105, 255, 1)"; //主题色
-const primaryColor1 = "rgba(50, 105, 255, 0.3)";
-const errorColor = "#f5222d";
-const successColor = "#08b871";
-const itemActiveColor = "rgba(50, 105, 255, 0.1)";
-const warningColor = "#faad14";
-const borderRadius = "2px";
+/**
+ * 设计令牌唯一来源（与 tailwind.config.ts / styles/main.css 的 :root 保持同值派生）。
+ * 主色：rgba(24, 76, 255, 1) / #184CFF，来源于根目录 CLAUDE.md。
+ */
+const primaryColor = '#184CFF';
+const primaryColor1 = 'rgba(24, 76, 255, 0.3)';
+const errorColor = '#DC2626';
+const successColor = '#059669';
+const warningColor = '#D97706';
+const borderRadius = '6px';
 
 const baseCommon = {
-    primaryColor: primaryColor,
-    primaryColorHover: primaryColor,
-    primaryColorPressed: primaryColor,
+    primaryColor,
+    primaryColorHover: '#4770FF',
+    primaryColorPressed: '#1038D6',
     primaryColorSuppl: primaryColor,
     borderRadius,
-    heightSmall: "26px",
-    heightMedium: "32px",
+    heightSmall: '26px',
+    heightMedium: '32px',
 };
 
-//明亮主题
-export const lightThemeColor = {
-    common: {
-        ...baseCommon,
-    },
-};
+export const lightThemeColor = { common: { ...baseCommon } };
 
-//暗黑主题
 export const darkThemeColor = {
-    common: {
-        ...baseCommon,
-    },
+    common: { ...baseCommon },
     Button: {
-        textColorPrimary: "#fff",
-        textColorHoverPrimary: "#fff",
-        textColorPressedPrimary: "#fff",
-        textColorFocusPrimary: "#fff",
+        textColorPrimary: '#fff',
+        textColorHoverPrimary: '#fff',
+        textColorPressedPrimary: '#fff',
+        textColorFocusPrimary: '#fff',
     },
-    Checkbox: {
-        checkMarkColor: "#fff",
-    },
+    Checkbox: { checkMarkColor: '#fff' },
 };
 
-//主题色、辅助色、文字颜色、辅助文字颜色、标题颜色、边框颜色、警告颜色、错误颜色、圆角大小、获焦颜色、成功颜色、阴影颜色
-
-//其它的一些公用样式
-const otherStyle = {
-    "--primary-color": primaryColor, //主题色
-    "--primary-color-1": primaryColor1, //辅助色
-    "--border-radius": borderRadius,
-    "--success-color": successColor,
-    "--warning-color": warningColor,
-    "--error-color": errorColor, //错误颜色
-    "--primary-color-rgb": "50, 105, 255", //主题色
+const otherStyle: Record<string, string> = {
+    '--primary-color': primaryColor,
+    '--primary-color-1': primaryColor1,
+    '--border-radius': borderRadius,
+    '--success-color': successColor,
+    '--warning-color': warningColor,
+    '--error-color': errorColor,
+    '--primary-color-rgb': '24, 76, 255',
 };
 
-//暗黑主题变量
-export const darkStyle = {
-    "--item-active-color": "rgba(50, 105, 255, 0.15)",
-    "--bg-color-1": "rgb(24, 24, 28)", //背景色1
-    "--bg-color-2": "rgba(224, 224, 230, .05)", //背景色1
-    "--bg-color-3": "#222",
-    "--bg-color-4": "rgb(40, 40, 50)",
-    "--bg-color-5": "rgb(24, 24, 28, 0.7)",
-    "--border-color": "rgba(224, 224, 230, .2)", //边框颜色
-    "--border-color-2": "rgba(224, 224, 230, .3)", //边框颜色
-    "--border-color-3": "#444", //边框颜色
-    "--modal-title-bg-color": "#1e293b",
-    "--text-color-base": "rgba(255, 255, 255, 85%)", //文字颜色
-    "--text-color-base-2": "rgba(255, 255, 255, 65%)", //非主要文字颜色
-    "--box-shadow-color": "rgba(24, 24, 28, 15%)",
-    "--placeholder-color": "rgba(255, 255, 255, 0.55)",
-    "--loading-bg-color": "rgba(24, 24, 28, 0.38)", //loading组件背景色
-    "--image-error-bg-color": "rgba(255, 255, 255, 0.05)",
-    "--page-bg-color": "#111",
+export const lightStyle: Record<string, string> = {
+    '--item-active-color': 'rgba(24, 76, 255, 0.08)',
+    '--bg-color-1': '#FFFFFF',
+    '--bg-color-2': 'rgba(15, 23, 42, 0.04)',
+    '--bg-color-3': '#FFFFFF',
+    '--bg-color-4': '#FFFFFF',
+    '--bg-color-5': 'rgba(255, 255, 255, 0.88)',
+    '--border-color-2': 'rgba(226, 232, 240, 0.8)',
+    '--border-color-3': '#E2E8F0',
+    '--modal-title-bg-color': '#F1F5F9',
+    '--text-color-base': 'rgba(15, 23, 42, 0.88)',
+    '--text-color-base-2': 'rgba(71, 85, 105, 0.88)',
+    '--box-shadow-color': 'rgba(15, 23, 42, 0.12)',
+    '--placeholder-color': '#94A3B8',
+    '--loading-bg-color': 'rgba(15, 23, 42, 0.36)',
+    '--image-error-bg-color': 'rgba(15, 23, 42, 0.03)',
+    '--page-bg-color': '#F5F7FA',
+    '--sider-bg': '#FFFFFF',
+    '--sider-border': '#E5EAF3',
+    '--sider-text': '#4E5969',
+    '--sider-text-muted': '#86909C',
+    '--sider-title': '#1F2329',
+    '--sider-hover': 'rgba(24, 76, 255, 0.06)',
+    '--sider-parent-active': 'rgba(24, 76, 255, 0.08)',
+    '--sider-tree-line': 'rgba(78, 89, 105, 0.18)',
+    '--sider-status-bg': '#F7F9FC',
+    '--sider-brand-glow': 'rgba(24, 76, 255, 0.18)',
+    '--sider-shadow': 'rgba(15, 23, 42, 0.06)',
+    '--login-bg': '#F5F7FA',
+    '--login-surface': 'rgba(255, 255, 255, 0.9)',
+    '--login-surface-soft': 'rgba(255, 255, 255, 0.7)',
+    '--login-border': 'rgba(255, 255, 255, 0.8)',
+    '--login-border-soft': '#E2E8F0',
+    '--login-title': '#0F172A',
+    '--login-text': '#475569',
+    '--login-muted': '#94A3B8',
+    '--login-hint-bg': '#EFF6FF',
+    '--login-hint-border': '#DBEAFE',
+    '--login-grid': 'rgba(24, 76, 255, 0.035)',
+    '--login-orb': 'rgba(147, 197, 253, 0.2)',
+    '--login-shadow': '0 24px 80px rgba(15, 23, 42, 0.12)',
     ...otherStyle,
 };
 
-//明亮主题变量
-export const lightStyle = {
-    "--item-active-color": "rgba(50, 105, 255, 0.1)",
-    "--bg-color-1": "#fff", //背景色1
-    "--bg-color-2": "rgba(0, 0, 0, .05)", //背景色1
-    "--bg-color-3": "#fff",
-    "--bg-color-4": "#fff",
-    "--bg-color-5": "rgb(255, 255, 255, 0.7)",
-    "--border-color": "rgba(224, 224, 230, .8)", //边框颜色
-    "--border-color-2": "rgba(224, 224, 230, .7)", //边框颜色
-    "--border-color-3": "#e8e8e8", //边框颜色
-    "--modal-title-bg-color": "#e5e7eb",
-    "--text-color-base": "rgba(0, 0, 0, 85%)",
-    "--text-color-base-2": "rgba(0, 0, 0, 65%)",
-    "--box-shadow-color": "rgba(0, 0, 0, 15%)",
-    "--placeholder-color": "rgba(194, 194, 194, 1)",
-    "--loading-bg-color": "rgba(24, 24, 28, 0.38)",
-    "--image-error-bg-color": "rgba(0, 0, 0, 0.03)",
-    "--page-bg-color": "rgba(0, 0, 0, 0.03)",
+export const darkStyle: Record<string, string> = {
+    // Ant Design dark algorithm 的中性石墨层级：布局 < 容器 < 浮层
+    '--bg-base': '#0A0A0B',
+    '--bg-surface': '#141414',
+    '--bg-elevated': '#1F1F1F',
+    '--bg-gradient': 'linear-gradient(180deg, #101114 0%, #0A0A0B 34%, #0A0A0B 100%)',
+    '--bg-gradient-subtle': 'linear-gradient(180deg, #1A1A1B 0%, #141414 100%)',
+    '--border-color': '#303030',
+    '--border-color-light': '#262626',
+    '--border-color-hover': '#424242',
+    '--text-color': 'rgba(255, 255, 255, 0.88)',
+    '--text-color-secondary': 'rgba(255, 255, 255, 0.65)',
+    '--text-color-muted': 'rgba(255, 255, 255, 0.45)',
+    '--item-active-color': 'rgba(24, 76, 255, 0.2)',
+    '--hover-overlay': 'rgba(255, 255, 255, 0.06)',
+    '--glass-bg': 'rgba(20, 20, 20, 0.9)',
+    '--glass-border': '#303030',
+    '--panel-shadow': '0 1px 2px rgba(0, 0, 0, 0.32)',
+    '--track-bg': '#2A2A2A',
+    '--success-soft': 'rgba(5, 150, 105, 0.16)',
+    '--warning-soft': 'rgba(217, 119, 6, 0.16)',
+    '--neutral-soft': 'rgba(255, 255, 255, 0.08)',
+    '--bg-color-1': '#141414',
+    '--bg-color-2': 'rgba(255, 255, 255, 0.06)',
+    '--bg-color-3': '#1F1F1F',
+    '--bg-color-4': '#262626',
+    '--bg-color-5': 'rgba(20, 20, 20, 0.9)',
+    '--border-color-2': '#303030',
+    '--border-color-3': '#424242',
+    '--modal-title-bg-color': '#1F1F1F',
+    '--text-color-base': 'rgba(255, 255, 255, 0.88)',
+    '--text-color-base-2': 'rgba(255, 255, 255, 0.65)',
+    '--box-shadow-color': 'rgba(0, 0, 0, 0.45)',
+    '--placeholder-color': 'rgba(255, 255, 255, 0.3)',
+    '--loading-bg-color': 'rgba(0, 0, 0, 0.58)',
+    '--image-error-bg-color': 'rgba(255, 255, 255, 0.06)',
+    '--page-bg-color': '#0A0A0B',
+    '--sider-bg': '#111214',
+    '--sider-border': '#292A2E',
+    '--sider-text': 'rgba(255, 255, 255, 0.65)',
+    '--sider-text-muted': 'rgba(255, 255, 255, 0.45)',
+    '--sider-title': 'rgba(255, 255, 255, 0.88)',
+    '--sider-hover': 'rgba(255, 255, 255, 0.06)',
+    '--sider-parent-active': 'rgba(24, 76, 255, 0.18)',
+    '--sider-tree-line': 'rgba(255, 255, 255, 0.12)',
+    '--sider-status-bg': 'rgba(255, 255, 255, 0.04)',
+    '--sider-brand-glow': 'rgba(24, 76, 255, 0.14)',
+    '--sider-shadow': 'rgba(0, 0, 0, 0.28)',
+    '--login-bg': '#090B10',
+    '--login-surface': 'rgba(20, 22, 28, 0.92)',
+    '--login-surface-soft': 'rgba(24, 27, 35, 0.76)',
+    '--login-border': 'rgba(255, 255, 255, 0.1)',
+    '--login-border-soft': '#30333B',
+    '--login-title': 'rgba(255, 255, 255, 0.92)',
+    '--login-text': 'rgba(255, 255, 255, 0.65)',
+    '--login-muted': 'rgba(255, 255, 255, 0.42)',
+    '--login-hint-bg': 'rgba(24, 76, 255, 0.1)',
+    '--login-hint-border': 'rgba(71, 112, 255, 0.25)',
+    '--login-grid': 'rgba(94, 132, 255, 0.055)',
+    '--login-orb': 'rgba(24, 76, 255, 0.16)',
+    '--login-shadow': '0 28px 90px rgba(0, 0, 0, 0.46)',
     ...otherStyle,
 };

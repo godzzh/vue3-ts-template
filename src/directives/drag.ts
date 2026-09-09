@@ -1,4 +1,4 @@
-import Drag from "@/utils/drag.js";
+import Drag from '@/utils/drag';
 
 const dragDirective = {
     mounted(el: HTMLElement, binding: any) {
@@ -7,7 +7,7 @@ const dragDirective = {
 };
 
 export function setupDragDirective(app: any) {
-    app.directive("drag", dragDirective);
+    app.directive('drag', dragDirective);
 }
 
 export default setupDragDirective;

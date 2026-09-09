@@ -1,4 +1,4 @@
-import tab from "./tab";
+import tab from './tab';
 
 export default function installPlugins(app) {
     // 页签操作
