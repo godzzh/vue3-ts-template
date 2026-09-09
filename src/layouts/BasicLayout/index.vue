@@ -31,12 +31,6 @@
                     </transition>
                 </router-view>
             </main>
-            <footer
-                class="mx-auto mb-0 mt-auto flex w-full max-w-[1600px] items-center justify-between px-6 py-4 text-[12px] text-[var(--text-color-muted)]"
-            >
-                <span>Vue Forge Admin</span>
-                <span>Vue 3 · TypeScript · Naive UI</span>
-            </footer>
         </div>
     </div>
 </template>

@@ -1,9 +1,17 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(git add:*)",
-      "Bash(git commit -m ':*)",
-      "Bash(git push:*)"
-    ]
-  }
+    "permissions": {
+        "allow": [
+            "Bash(git add:*)",
+            "Bash(git commit -m ':*)",
+            "Bash(git push:*)",
+            "Bash(pnpm build *)",
+            "Bash(pnpm dev *)",
+            "Bash(dsh --help)",
+            "Bash(dsh web *)",
+            "Bash(pnpm --version)",
+            "Bash(dsh plugin *)",
+            "Bash(pnpm install *)",
+            "Bash(tasklist)"
+        ]
+    }
 }
