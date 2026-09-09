@@ -18,26 +18,16 @@
         </div>
     </n-modal>
 </template>
-<script setup>
-import { ref, toRefs } from 'vue';
-
-const emits = defineEmits(['update:show', 'close']);
-const props = defineProps({
-    show: {
-        type: Boolean,
-        default: () => false,
-    },
-    title: {
-        type: String,
-        default: () => '',
-    },
-    loading: {
-        type: Boolean,
-        default: () => false,
-    },
-});
-
-const { show } = toRefs(props);
+<script setup lang="ts">
+const emits = defineEmits<{
+    'update:show': [value: boolean];
+    close: [];
+}>();
+defineProps<{
+    show?: boolean;
+    title?: string;
+    loading?: boolean;
+}>();
 
 const onClose = () => {
     emits('close');

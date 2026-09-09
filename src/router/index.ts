@@ -40,7 +40,7 @@ export const routes: RouteRecordRaw[] = [
                 path: 'reports',
                 name: 'Reports',
                 meta: { title: '数据报表', icon: 'ri-bar-chart-box-line' },
-                component: () => import('@/pages/Placeholder/index.vue'),
+                component: () => import('@/pages/Reports/index.vue'),
             },
             {
                 path: 'settings',
