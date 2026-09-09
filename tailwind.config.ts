@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+﻿/** @type {import('tailwindcss').Config} */
 export default {
     content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
     theme: {
@@ -79,8 +79,8 @@ export default {
                 'neu-sm': '0 1px 2px rgba(15, 23, 42, 0.04)',
             },
             spacing: {
-                '18': '4.5rem',
-                '22': '5.5rem',
+                '18': '72px',
+                '22': '88px',
             },
             transitionDuration: {
                 '150': '150ms',

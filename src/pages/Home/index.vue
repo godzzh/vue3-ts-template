@@ -4,9 +4,9 @@
             class="flex items-end justify-between gap-6 max-[600px]:flex-col max-[600px]:items-start"
         >
             <div>
-                <p class="mb-1 text-[0.68rem] text-[var(--text-color-muted)]">欢迎回来，周明远</p>
+                <p class="mb-1 text-[12px] text-[var(--text-color-muted)]">欢迎回来，周明远</p>
                 <h1
-                    class="m-0 text-[1.75rem] font-semibold tracking-[-0.04em] text-[var(--text-color)]"
+                    class="m-0 text-[28px] font-semibold tracking-[-0.04em] text-[var(--text-color)]"
                 >
                     分析页
                 </h1>
@@ -16,12 +16,12 @@
             </div>
             <div class="flex gap-2 max-[600px]:w-full">
                 <button
-                    class="h-[2.35rem] rounded-[0.45rem] border border-[var(--border-color)] bg-[var(--bg-surface)] px-3.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:-translate-y-px hover:shadow-card max-[600px]:flex-1"
+                    class="h-[37.6px] rounded-[7.2px] border border-[var(--border-color)] bg-[var(--bg-surface)] px-3.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:-translate-y-px hover:shadow-card max-[600px]:flex-1"
                 >
                     <i class="ri-download-cloud-2-line mr-1.5"></i>导出报告
                 </button>
                 <button
-                    class="h-[2.35rem] rounded-[0.45rem] border border-primary-500 bg-primary-500 px-3.5 text-xs text-white shadow-primary transition duration-150 hover:-translate-y-px max-[600px]:flex-1"
+                    class="h-[37.6px] rounded-[7.2px] border border-primary-500 bg-primary-500 px-3.5 text-xs text-white shadow-primary transition duration-150 hover:-translate-y-px max-[600px]:flex-1"
                 >
                     <i class="ri-add-line mr-1.5"></i>新建任务
                 </button>
@@ -35,10 +35,10 @@
             <article
                 v-for="item in metrics"
                 :key="item.label"
-                class="rounded-[0.65rem] border border-[var(--border-color)] bg-[var(--bg-surface)] p-[1.1rem] shadow-[var(--panel-shadow)]"
+                class="rounded-[10.4px] border border-[var(--border-color)] bg-[var(--bg-surface)] p-[17.6px] shadow-[var(--panel-shadow)]"
             >
                 <div
-                    class="flex items-center justify-between text-[0.7rem] text-[var(--text-color-muted)]"
+                    class="flex items-center justify-between text-[12px] text-[var(--text-color-muted)]"
                 >
                     <span>{{ item.label }}</span>
                     <i
@@ -46,11 +46,11 @@
                         class="grid size-8 place-items-center rounded-md bg-[color-mix(in_srgb,var(--primary-color)_9%,transparent)] text-base text-[var(--primary-color)]"
                     ></i>
                 </div>
-                <strong class="mt-2.5 block font-mono text-[1.4rem] text-[var(--text-color)]">{{
+                <strong class="mt-2.5 block font-mono text-[22px] text-[var(--text-color)]">{{
                     item.value
                 }}</strong>
                 <p
-                    class="mb-0 mt-2 text-[0.64rem]"
+                    class="mb-0 mt-2 text-[12px]"
                     :class="item.trend > 0 ? 'text-emerald-600' : 'text-red-600'"
                 >
                     <i :class="item.trend > 0 ? 'ri-arrow-up-line' : 'ri-arrow-down-line'"></i
@@ -61,17 +61,17 @@
         </section>
 
         <section
-            class="grid grid-cols-[minmax(0,1.8fr)_minmax(17rem,0.75fr)] gap-4 max-[1100px]:grid-cols-1"
+            class="grid grid-cols-[minmax(0,1.8fr)_minmax(272px,0.75fr)] gap-4 max-[1100px]:grid-cols-1"
         >
             <article
-                class="min-w-0 overflow-hidden rounded-[0.65rem] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
+                class="min-w-0 overflow-hidden rounded-[10.4px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
             >
                 <header
                     class="flex min-h-16 items-center justify-between border-b border-[var(--border-color)] px-4 py-3.5"
                 >
                     <div>
                         <h2 class="m-0 text-sm font-semibold text-[var(--text-color)]">访问趋势</h2>
-                        <p class="mb-0 mt-1 text-[0.68rem] text-[var(--text-color-muted)]">
+                        <p class="mb-0 mt-1 text-[12px] text-[var(--text-color-muted)]">
                             近 7 天访问量与转化趋势
                         </p>
                     </div>
@@ -81,14 +81,14 @@
             </article>
 
             <article
-                class="min-w-0 overflow-hidden rounded-[0.65rem] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
+                class="min-w-0 overflow-hidden rounded-[10.4px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
             >
                 <header
                     class="flex min-h-16 items-center justify-between border-b border-[var(--border-color)] px-4 py-3.5"
                 >
                     <div>
                         <h2 class="m-0 text-sm font-semibold text-[var(--text-color)]">渠道占比</h2>
-                        <p class="mb-0 mt-1 text-[0.68rem] text-[var(--text-color-muted)]">
+                        <p class="mb-0 mt-1 text-[12px] text-[var(--text-color-muted)]">
                             本月新增访问来源
                         </p>
                     </div>
@@ -98,16 +98,16 @@
                     <VEcharts :options="pieOptions" /><span
                         class="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 text-center"
                         ><strong class="font-mono text-[var(--text-color)]">24.8k</strong
-                        ><small class="text-[0.58rem] text-[var(--text-color-muted)]"
+                        ><small class="text-[12px] text-[var(--text-color-muted)]"
                             >总访问</small
                         ></span
                     >
                 </div>
-                <ul class="mb-4 grid list-none gap-2.5 px-[1.1rem]">
+                <ul class="mb-4 grid list-none gap-2.5 px-[17.6px]">
                     <li
                         v-for="item in channels"
                         :key="item.name"
-                        class="flex items-center justify-between text-[0.68rem] text-[var(--text-color-secondary)]"
+                        class="flex items-center justify-between text-[12px] text-[var(--text-color-secondary)]"
                     >
                         <span class="flex items-center gap-1.5"
                             ><i class="size-1.5" :style="{ background: item.color }"></i
@@ -120,25 +120,25 @@
             </article>
 
             <article
-                class="col-start-1 min-w-0 overflow-hidden rounded-[0.65rem] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)] max-[1100px]:col-auto"
+                class="col-start-1 min-w-0 overflow-hidden rounded-[10.4px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)] max-[1100px]:col-auto"
             >
                 <header
                     class="flex min-h-16 items-center justify-between border-b border-[var(--border-color)] px-4 py-3.5"
                 >
                     <div>
                         <h2 class="m-0 text-sm font-semibold text-[var(--text-color)]">近期任务</h2>
-                        <p class="mb-0 mt-1 text-[0.68rem] text-[var(--text-color-muted)]">
+                        <p class="mb-0 mt-1 text-[12px] text-[var(--text-color-muted)]">
                             团队正在推进的工作
                         </p>
                     </div>
                     <router-link
-                        class="text-[0.7rem] text-[var(--primary-color)] no-underline"
+                        class="text-[12px] text-[var(--primary-color)] no-underline"
                         to="/workspace"
                         >查看全部</router-link
                     >
                 </header>
                 <div class="overflow-auto">
-                    <table class="w-full border-collapse text-[0.68rem]">
+                    <table class="w-full border-collapse text-[12px]">
                         <thead>
                             <tr>
                                 <th
@@ -170,7 +170,7 @@
                                     class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3"
                                 >
                                     <span
-                                        class="rounded-[0.3rem] px-1.5 py-1"
+                                        class="rounded-[4.8px] px-1.5 py-1"
                                         :class="statusClasses[task.type]"
                                         >{{ task.status }}</span
                                     >
@@ -179,7 +179,7 @@
                                     class="flex items-center gap-2 whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
                                 >
                                     <span
-                                        class="h-1 w-[4.2rem] overflow-hidden rounded-full bg-[var(--track-bg)]"
+                                        class="h-1 w-[67.2px] overflow-hidden rounded-full bg-[var(--track-bg)]"
                                         ><i
                                             class="block h-full bg-[var(--primary-color)]"
                                             :style="{ width: `${task.progress}%` }"
@@ -198,14 +198,14 @@
             </article>
 
             <aside
-                class="col-start-2 row-start-2 min-w-0 overflow-hidden rounded-[0.65rem] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)] max-[1100px]:col-auto max-[1100px]:row-auto"
+                class="col-start-2 row-start-2 min-w-0 overflow-hidden rounded-[10.4px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)] max-[1100px]:col-auto max-[1100px]:row-auto"
             >
                 <header
                     class="flex min-h-16 items-center border-b border-[var(--border-color)] px-4 py-3.5"
                 >
                     <div>
                         <h2 class="m-0 text-sm font-semibold text-[var(--text-color)]">动态</h2>
-                        <p class="mb-0 mt-1 text-[0.68rem] text-[var(--text-color-muted)]">
+                        <p class="mb-0 mt-1 text-[12px] text-[var(--text-color-muted)]">
                             最近的系统操作
                         </p>
                     </div>
@@ -221,12 +221,10 @@
                             class="grid size-8 place-items-center rounded-md bg-[color-mix(in_srgb,var(--primary-color)_8%,transparent)] text-[var(--primary-color)]"
                         ></i>
                         <div>
-                            <p
-                                class="mb-0 mt-0.5 text-[0.68rem] text-[var(--text-color-secondary)]"
-                            >
+                            <p class="mb-0 mt-0.5 text-[12px] text-[var(--text-color-secondary)]">
                                 <b>{{ item.user }}</b> {{ item.title }}
                             </p>
-                            <time class="text-[0.58rem] text-[var(--text-color-muted)]">{{
+                            <time class="text-[12px] text-[var(--text-color-muted)]">{{
                                 item.time
                             }}</time>
                         </div>

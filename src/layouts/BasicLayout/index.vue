@@ -1,7 +1,7 @@
-<template>
+﻿<template>
     <div
-        class="min-h-dvh bg-[var(--bg-base)] pl-[15.5rem] transition-[padding-left] duration-200 ease-in-out motion-reduce:transition-none max-[800px]:pl-0"
-        :class="{ 'pl-[4.75rem] max-[800px]:pl-0': systemStore.sidebarCollapsed }"
+        class="min-h-dvh bg-[var(--bg-base)] pl-[248px] transition-[padding-left] duration-200 ease-in-out motion-reduce:transition-none max-[800px]:pl-0"
+        :class="{ 'pl-[76px] max-[800px]:pl-0': systemStore.sidebarCollapsed }"
     >
         <a
             class="fixed left-3 top-3 z-[100] -translate-y-[160%] rounded-sm bg-[var(--primary-color)] px-4 py-2.5 text-white transition-transform duration-150 focus:translate-y-0"
@@ -22,7 +22,7 @@
             <TopNav @open-menu="mobileMenuOpen = true" />
             <main
                 id="main-content"
-                class="mx-auto min-h-[calc(100dvh-7.5rem)] w-full max-w-[100rem] p-6 outline-none max-[800px]:p-4"
+                class="mx-auto min-h-[calc(100dvh-120px)] w-full max-w-[1600px] p-6 outline-none max-[800px]:p-4"
                 tabindex="-1"
             >
                 <router-view v-slot="{ Component, route }">
@@ -32,7 +32,7 @@
                 </router-view>
             </main>
             <footer
-                class="mx-auto mb-0 mt-auto flex w-full max-w-[100rem] items-center justify-between px-6 py-4 text-[0.66rem] text-[var(--text-color-muted)]"
+                class="mx-auto mb-0 mt-auto flex w-full max-w-[1600px] items-center justify-between px-6 py-4 text-[12px] text-[var(--text-color-muted)]"
             >
                 <span>Vue Forge Admin</span>
                 <span>Vue 3 · TypeScript · Naive UI</span>
@@ -61,12 +61,12 @@ const mobileMenuOpen = ref(false);
 
 .fade-slide-enter-from {
     opacity: 0;
-    transform: translateY(0.4rem);
+    transform: translateY(6.4px);
 }
 
 .fade-slide-leave-to {
     opacity: 0;
-    transform: translateY(-0.2rem);
+    transform: translateY(-3.2px);
 }
 
 @media (prefers-reduced-motion: reduce) {

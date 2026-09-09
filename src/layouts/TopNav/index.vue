@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <header
         class="sticky top-0 z-30 flex h-18 items-center justify-between border-b border-[var(--border-color)] bg-[color-mix(in_srgb,var(--bg-surface)_91%,transparent)] px-6 backdrop-blur-2xl max-[800px]:px-4"
     >
@@ -27,19 +27,19 @@
 
         <div class="flex items-center gap-1">
             <button
-                class="flex h-[2.4rem] min-w-40 items-center justify-start gap-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-base)] px-2.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
+                class="flex h-[38.4px] min-w-40 items-center justify-start gap-2 rounded-md border border-[var(--border-color)] bg-[var(--bg-base)] px-2.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
                 type="button"
                 @click="showSearchHint"
             >
                 <i class="ri-search-line" aria-hidden="true"></i>
                 <span>搜索</span>
                 <kbd
-                    class="ml-auto rounded border border-[var(--border-color)] bg-[var(--bg-surface)] px-1.5 py-0.5 font-mono text-[0.58rem] text-[var(--text-color-muted)]"
+                    class="ml-auto rounded border border-[var(--border-color)] bg-[var(--bg-surface)] px-1.5 py-0.5 font-mono text-[12px] text-[var(--text-color-muted)]"
                     >⌘ K</kbd
                 >
             </button>
             <button
-                class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
+                class="grid size-[38.4px] place-items-center rounded-md border-0 bg-transparent text-[17px] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97] max-[800px]:hidden"
                 type="button"
                 aria-label="帮助中心"
             >
@@ -47,7 +47,7 @@
             </button>
             <n-badge :value="3" :max="9" type="error">
                 <button
-                    class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
+                    class="grid size-[38.4px] place-items-center rounded-md border-0 bg-transparent text-[17px] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
                     type="button"
                     aria-label="通知"
                 >
@@ -55,7 +55,7 @@
                 </button>
             </n-badge>
             <button
-                class="grid size-[2.4rem] place-items-center rounded-md border-0 bg-transparent text-[1.08rem] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
+                class="grid size-[38.4px] place-items-center rounded-md border-0 bg-transparent text-[17px] text-[var(--text-color-secondary)] transition duration-150 hover:bg-[var(--hover-overlay)] hover:text-[var(--text-color)] active:scale-[0.97]"
                 type="button"
                 :aria-label="systemStore.sysTheme ? '切换到浅色模式' : '切换到深色模式'"
                 @click="systemStore.toggleTheme()"
@@ -76,7 +76,7 @@
                     aria-label="打开用户菜单"
                 >
                     <span
-                        class="grid size-[2.1rem] place-items-center rounded-[0.6rem] bg-primary-500 text-xs font-semibold text-white shadow-primary"
+                        class="grid size-[33.6px] place-items-center rounded-[9.6px] bg-primary-500 text-xs font-semibold text-white shadow-primary"
                         >周</span
                     >
                     <span class="max-[800px]:hidden">
@@ -85,7 +85,7 @@
                             >周明远</strong
                         >
                         <small
-                            class="mt-1 block text-[0.62rem] leading-tight text-[var(--text-color-muted)]"
+                            class="mt-1 block text-[12px] leading-tight text-[var(--text-color-muted)]"
                             >系统管理员</small
                         >
                     </span>

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div
         ref="tablistRef"
         class="tabs"
@@ -101,12 +101,12 @@ const handleKeydown = (event: KeyboardEvent) => {
 <style scoped>
 .tabs {
     display: flex;
-    gap: 0.25rem;
+    gap: 4px;
     max-width: 100%;
-    padding: 0.25rem;
+    padding: 4px;
     overflow-x: auto;
     border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
-    border-radius: 0.55rem;
+    border-radius: 8.8px;
     background: color-mix(in srgb, currentColor 5%, transparent);
     scrollbar-width: none;
 }
@@ -117,15 +117,15 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 .tabs__item {
     flex: 0 0 auto;
-    min-height: 2.2rem;
-    padding: 0.45rem 0.8rem;
+    min-height: 35.2px;
+    padding: 7.2px 12.8px;
     border: 0;
-    border-radius: 0.4rem;
+    border-radius: 6.4px;
     color: inherit;
     background: transparent;
     cursor: pointer;
     font: inherit;
-    font-size: 0.76rem;
+    font-size: 12px;
     opacity: 0.6;
     transition:
         opacity var(--transition-fast),

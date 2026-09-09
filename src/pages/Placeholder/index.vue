@@ -1,6 +1,6 @@
-<template>
+﻿<template>
     <section
-        class="grid min-h-[calc(100dvh-10rem)] place-content-center justify-items-center text-center text-[var(--text-color-secondary)]"
+        class="grid min-h-[calc(100dvh-160px)] place-content-center justify-items-center text-center text-[var(--text-color-secondary)]"
     >
         <div
             class="grid size-18 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--primary-color)_10%,var(--bg-surface))] text-3xl text-[var(--primary-color)]"
@@ -9,7 +9,7 @@
             <i :class="icon"></i>
         </div>
         <p
-            class="mb-1.5 mt-6 font-mono text-[0.68rem] uppercase tracking-[0.1em] text-[var(--text-color-muted)]"
+            class="mb-1.5 mt-6 font-mono text-[12px] uppercase tracking-[0.1em] text-[var(--text-color-muted)]"
         >
             Module scaffold
         </p>

@@ -1,8 +1,8 @@
-<template>
+﻿<template>
     <aside
-        class="sider fixed inset-y-0 left-0 z-50 flex w-[15.5rem] flex-col overflow-hidden border-r border-[var(--sider-border)] bg-[var(--sider-bg)] text-[var(--sider-text)] shadow-[0.75rem_0_2.5rem_var(--sider-shadow)] transition-[width,transform,color,background-color,border-color] duration-200 ease-in-out max-[800px]:w-[min(17rem,82vw)] max-[800px]:-translate-x-[105%]"
+        class="sider fixed inset-y-0 left-0 z-50 flex w-[248px] flex-col overflow-hidden border-r border-[var(--sider-border)] bg-[var(--sider-bg)] text-[var(--sider-text)] shadow-[0.75rem_0_2.5rem_var(--sider-shadow)] transition-[width,transform,color,background-color,border-color] duration-200 ease-in-out max-[800px]:w-[min(272px,82vw)] max-[800px]:-translate-x-[105%]"
         :class="{
-            'w-[4.75rem] max-[800px]:w-[min(17rem,82vw)]': systemStore.sidebarCollapsed,
+            'w-[76px] max-[800px]:w-[min(272px,82vw)]': systemStore.sidebarCollapsed,
             'max-[800px]:translate-x-0': mobileOpen,
         }"
     >
@@ -16,7 +16,7 @@
             aria-label="返回分析页"
         >
             <span
-                class="grid size-[2.65rem] shrink-0 place-items-center rounded-[0.625rem] bg-[var(--primary-color)] text-xl text-white shadow-[0_0.5rem_1.5rem_rgba(24,76,255,0.28)]"
+                class="grid size-[42.4px] shrink-0 place-items-center rounded-[10px] bg-[var(--primary-color)] text-xl text-white shadow-[0_0.5rem_1.5rem_rgba(24,76,255,0.28)]"
             >
                 <i class="ri-flashlight-fill" aria-hidden="true"></i>
             </span>
@@ -28,7 +28,7 @@
                     {{ systemStore.sysInfo.title }}
                 </strong>
                 <small
-                    class="mt-0.5 block font-mono text-[0.56rem] uppercase tracking-[0.08em] text-[var(--sider-text-muted)]"
+                    class="mt-0.5 block font-mono text-[12px] uppercase tracking-[0.08em] text-[var(--sider-text-muted)]"
                 >
                     Admin Console
                 </small>
@@ -53,16 +53,16 @@
             />
         </nav>
 
-        <div class="relative border-t border-[var(--sider-border)] p-[0.7rem] max-[800px]:hidden">
+        <div class="relative border-t border-[var(--sider-border)] p-[11.2px] max-[800px]:hidden">
             <button
-                class="mx-auto flex h-[2.6rem] w-full items-center justify-center rounded-md border-0 bg-transparent p-0 text-[var(--sider-text-muted)] transition duration-200 hover:bg-[var(--sider-hover)] hover:text-[var(--primary-color)] active:scale-[0.985]"
-                :class="{ 'w-[2.7rem]': systemStore.sidebarCollapsed }"
+                class="mx-auto flex h-[41.6px] w-full items-center justify-center rounded-md border-0 bg-transparent p-0 text-[var(--sider-text-muted)] transition duration-200 hover:bg-[var(--sider-hover)] hover:text-[var(--primary-color)] active:scale-[0.985]"
+                :class="{ 'w-[43.2px]': systemStore.sidebarCollapsed }"
                 type="button"
                 :aria-label="systemStore.sidebarCollapsed ? '展开侧边栏' : '收起侧边栏'"
                 @click="systemStore.toggleSidebar()"
             >
                 <i
-                    class="block w-[1.35rem] text-center text-[1.05rem] leading-none"
+                    class="block w-[21.6px] text-center text-[17px] leading-none"
                     :class="
                         systemStore.sidebarCollapsed
                             ? 'ri-menu-fold-2-line'
@@ -169,7 +169,7 @@ const handleExpandedKeys = (keys: string[]) => {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at 25% 0, var(--sider-brand-glow), transparent 18rem);
+    background: radial-gradient(circle at 25% 0, var(--sider-brand-glow), transparent 288px);
     content: '';
 }
 
@@ -192,7 +192,7 @@ const handleExpandedKeys = (keys: string[]) => {
 }
 
 :deep(.n-menu-item-content) {
-    margin-inline: 0.7rem;
+    margin-inline: 11.2px;
 }
 
 :deep(.n-menu-item-content::before) {
@@ -201,7 +201,7 @@ const handleExpandedKeys = (keys: string[]) => {
 }
 
 :deep(.n-menu-item-content__icon) {
-    font-size: 1.05rem;
+    font-size: 17px;
 }
 
 :deep(.n-menu--collapsed .n-menu-item-content) {
@@ -213,20 +213,20 @@ const handleExpandedKeys = (keys: string[]) => {
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: 12px;
 }
 
 :deep(.menu-label-with-badge em) {
     display: grid;
-    min-width: 1.2rem;
-    height: 1.2rem;
-    padding-inline: 0.3rem;
+    min-width: 19.2px;
+    height: 19.2px;
+    padding-inline: 4.8px;
     place-items: center;
-    border-radius: 0.25rem;
+    border-radius: 4px;
     color: var(--primary-color);
     background: var(--sider-parent-active);
     font-family: 'Fira Code', monospace;
-    font-size: 0.58rem;
+    font-size: 12px;
     font-style: normal;
 }
 </style>

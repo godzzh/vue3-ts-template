@@ -1,13 +1,13 @@
-<template>
+﻿<template>
     <main
         class="relative min-h-dvh overflow-hidden bg-[var(--login-bg)] text-[var(--login-title)] transition-colors duration-300"
     >
         <div class="pointer-events-none absolute inset-0">
             <div
-                class="absolute -left-32 -top-32 size-[32rem] rounded-full bg-primary-500/[0.08] blur-3xl"
+                class="absolute -left-32 -top-32 size-[512px] rounded-full bg-primary-500/[0.08] blur-3xl"
             ></div>
             <div
-                class="absolute -bottom-48 right-[-8rem] size-[38rem] rounded-full bg-[var(--login-orb)] blur-3xl"
+                class="absolute -bottom-48 right-[-128px] size-[608px] rounded-full bg-[var(--login-orb)] blur-3xl"
             ></div>
             <div class="login-grid absolute inset-0 opacity-50"></div>
         </div>
@@ -27,7 +27,7 @@
                         systemStore.sysInfo.title
                     }}</strong
                     ><small
-                        class="block font-mono text-[0.58rem] uppercase tracking-[0.12em] text-[var(--login-muted)]"
+                        class="block font-mono text-[12px] uppercase tracking-[0.12em] text-[var(--login-muted)]"
                         >Enterprise Console</small
                     ></span
                 >
@@ -46,15 +46,15 @@
         </header>
 
         <div
-            class="relative z-10 mx-auto grid min-h-[calc(100dvh-5rem)] max-w-[90rem] grid-cols-[minmax(0,1.15fr)_minmax(25rem,0.72fr)] items-center gap-20 px-12 pb-20 max-[960px]:grid-cols-1 max-[960px]:place-items-center max-[960px]:px-5"
+            class="relative z-10 mx-auto grid min-h-[calc(100dvh-80px)] max-w-[1440px] grid-cols-[minmax(0,1.15fr)_minmax(400px,0.72fr)] items-center gap-20 px-12 pb-20 max-[960px]:grid-cols-1 max-[960px]:place-items-center max-[960px]:px-5"
         >
             <section class="max-w-2xl max-[960px]:hidden">
                 <span
-                    class="inline-flex items-center gap-2 rounded-full border border-[var(--login-border)] bg-[var(--login-surface-soft)] px-3 py-1.5 font-mono text-[0.65rem] text-primary-500 shadow-sm backdrop-blur"
+                    class="inline-flex items-center gap-2 rounded-full border border-[var(--login-border)] bg-[var(--login-surface-soft)] px-3 py-1.5 font-mono text-[12px] text-primary-500 shadow-sm backdrop-blur"
                     ><i class="ri-shield-check-line text-sm"></i>Vue 3 Enterprise Scaffold</span
                 >
                 <h1
-                    class="mt-8 text-[clamp(2.8rem,5vw,5.2rem)] font-semibold leading-[1.02] tracking-[-0.055em] text-[var(--login-title)]"
+                    class="mt-8 text-[clamp(44.8px,5vw,83.2px)] font-semibold leading-[1.02] tracking-[-0.055em] text-[var(--login-title)]"
                 >
                     专注业务，<br /><span class="text-primary-500">构建可靠系统。</span>
                 </h1>
@@ -71,7 +71,7 @@
                         ><strong
                             class="mt-3 block text-xs font-semibold text-[var(--login-title)]"
                             >{{ feature.label }}</strong
-                        ><small class="mt-1 block text-[0.65rem] text-[var(--login-muted)]">{{
+                        ><small class="mt-1 block text-[12px] text-[var(--login-muted)]">{{
                             feature.note
                         }}</small>
                     </div>
@@ -79,11 +79,11 @@
             </section>
 
             <section
-                class="w-full max-w-[28rem] rounded-xl border border-[var(--login-border)] bg-[var(--login-surface)] p-9 shadow-[var(--login-shadow)] backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 max-[480px]:p-6"
+                class="w-full max-w-[448px] rounded-xl border border-[var(--login-border)] bg-[var(--login-surface)] p-9 shadow-[var(--login-shadow)] backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 max-[480px]:p-6"
             >
                 <div>
                     <p
-                        class="m-0 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-primary-500"
+                        class="m-0 font-mono text-[12px] uppercase tracking-[0.14em] text-primary-500"
                     >
                         Welcome back
                     </p>
@@ -140,7 +140,7 @@
                 </form>
 
                 <div
-                    class="mt-6 flex items-start gap-2 rounded-md border border-[var(--login-hint-border)] bg-[var(--login-hint-bg)] px-3 py-2.5 text-[0.68rem] leading-5 text-[var(--login-text)]"
+                    class="mt-6 flex items-start gap-2 rounded-md border border-[var(--login-hint-border)] bg-[var(--login-hint-bg)] px-3 py-2.5 text-[12px] leading-5 text-[var(--login-text)]"
                 >
                     <i class="ri-information-line mt-0.5 text-primary-500"></i
                     ><span
@@ -152,7 +152,7 @@
         </div>
 
         <footer
-            class="absolute bottom-5 left-0 right-0 z-10 text-center text-[0.65rem] text-[var(--login-muted)]"
+            class="absolute bottom-5 left-0 right-0 z-10 text-center text-[12px] text-[var(--login-muted)]"
         >
             Vue Forge Admin · Security by design
         </footer>

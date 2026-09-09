@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -182,7 +182,7 @@ a {
 
 .page-container {
     background: var(--bg-gradient);
-    min-height: calc(100dvh - 4.5rem);
+    min-height: calc(100dvh - 72px);
 }
 
 /* ========================================
