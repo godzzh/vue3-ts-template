@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div
         ref="tablistRef"
         class="tabs"
@@ -100,14 +100,15 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 <style scoped>
 .tabs {
-    display: flex;
-    gap: 4px;
+    display: inline-flex;
+    gap: 2px;
     max-width: 100%;
-    padding: 4px;
+    padding: 3px;
     overflow-x: auto;
-    border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
-    border-radius: 8.8px;
-    background: color-mix(in srgb, currentColor 5%, transparent);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-base);
+    box-shadow: inset 0 1px 2px color-mix(in srgb, var(--text-color) 4%, transparent);
     scrollbar-width: none;
 }
 
@@ -116,38 +117,57 @@ const handleKeydown = (event: KeyboardEvent) => {
 }
 
 .tabs__item {
+    position: relative;
     flex: 0 0 auto;
-    min-height: 35.2px;
-    padding: 7.2px 12.8px;
+    min-width: 58px;
+    min-height: 30px;
+    padding: 5px 12px;
     border: 0;
-    border-radius: 6.4px;
-    color: inherit;
+    border-radius: 5px;
+    color: var(--text-color-muted);
     background: transparent;
     cursor: pointer;
     font: inherit;
     font-size: 12px;
-    opacity: 0.6;
+    font-weight: 500;
+    line-height: 20px;
     transition:
-        opacity var(--transition-fast),
-        background var(--transition-fast),
+        color var(--transition-fast),
+        background-color var(--transition-fast),
+        box-shadow var(--transition-fast),
         transform var(--transition-fast);
 }
 
-.tabs__item:hover:not(:disabled) {
-    opacity: 0.9;
+.tabs__item:hover:not(:disabled):not(.tabs__item--active) {
+    color: var(--text-color-secondary);
+    background: var(--hover-overlay);
 }
 
 .tabs__item--active {
-    background: color-mix(in srgb, currentColor 14%, transparent);
-    opacity: 1;
+    color: var(--primary-color);
+    background: var(--bg-surface);
+    box-shadow:
+        0 1px 3px color-mix(in srgb, var(--text-color) 10%, transparent),
+        inset 0 0 0 1px color-mix(in srgb, var(--primary-color) 12%, transparent);
+}
+
+.tabs__item:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--primary-color) 45%, transparent);
+    outline-offset: 1px;
 }
 
 .tabs__item:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 .tabs__item:disabled {
     cursor: not-allowed;
-    opacity: 0.3;
+    opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tabs__item {
+        transition: none;
+    }
 }
 </style>

@@ -155,10 +155,14 @@ onBeforeUnmount(() => {
 });
 </script>
 <style lang="less">
-.echarts-tooltip {
+.echarts-tooltip:empty:not([style]) {
+    display: none;
+}
+
+.echarts-tooltip[style] {
     border: 1px solid var(--border-color) !important;
     border-radius: 2px !important;
-    box-shadow: 0px 0px 3px var(--border-color) !important;
+    box-shadow: 0 0 3px var(--border-color) !important;
     min-width: 80px !important;
 }
 </style>
