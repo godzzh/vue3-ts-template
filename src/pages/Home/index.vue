@@ -163,18 +163,20 @@
                         <tbody>
                             <tr v-for="task in tasks" :key="task.name">
                                 <td
-                                    class="flex items-center gap-2 whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
+                                    class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
                                 >
-                                    <span
-                                        class="grid size-7 place-items-center bg-[color-mix(in_srgb,var(--primary-color)_8%,transparent)] text-[var(--primary-color)]"
-                                    >
-                                        <component
-                                            :is="task.icon"
-                                            class="size-4"
-                                            aria-hidden="true"
-                                        />
-                                    </span>
-                                    <b>{{ task.name }}</b>
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="grid size-7 place-items-center bg-[color-mix(in_srgb,var(--primary-color)_8%,transparent)] text-[var(--primary-color)]"
+                                        >
+                                            <component
+                                                :is="task.icon"
+                                                class="size-4"
+                                                aria-hidden="true"
+                                            />
+                                        </span>
+                                        <b>{{ task.name }}</b>
+                                    </div>
                                 </td>
                                 <td
                                     class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
@@ -191,15 +193,17 @@
                                     >
                                 </td>
                                 <td
-                                    class="flex items-center gap-2 whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
+                                    class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
                                 >
-                                    <span
-                                        class="h-1 w-[67.2px] overflow-hidden rounded-full bg-[var(--track-bg)]"
-                                        ><i
-                                            class="block h-full bg-[var(--primary-color)]"
-                                            :style="{ width: `${task.progress}%` }"
-                                        ></i></span
-                                    >{{ task.progress }}%
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="h-1 w-[67.2px] overflow-hidden rounded-full bg-[var(--track-bg)]"
+                                            ><i
+                                                class="block h-full bg-[var(--primary-color)]"
+                                                :style="{ width: `${task.progress}%` }"
+                                            ></i></span
+                                        >{{ task.progress }}%
+                                    </div>
                                 </td>
                                 <td
                                     class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
