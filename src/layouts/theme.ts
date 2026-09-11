@@ -7,7 +7,7 @@ const primaryColor1 = 'rgba(24, 76, 255, 0.3)';
 const errorColor = '#DC2626';
 const successColor = '#059669';
 const warningColor = '#D97706';
-const borderRadius = '6px';
+const borderRadius = '4px';
 
 const baseCommon = {
     primaryColor,
@@ -83,6 +83,9 @@ export const lightStyle: Record<string, string> = {
     '--login-grid': 'rgba(24, 76, 255, 0.035)',
     '--login-orb': 'rgba(147, 197, 253, 0.2)',
     '--login-shadow': '0 24px 80px rgba(15, 23, 42, 0.12)',
+    '--table-header-bg': '#F7F9FC',
+    '--table-header-text': '#64748B',
+    '--table-body-bg': '#FFFFFF',
     ...otherStyle,
 };
 
@@ -147,5 +150,8 @@ export const darkStyle: Record<string, string> = {
     '--login-grid': 'rgba(94, 132, 255, 0.055)',
     '--login-orb': 'rgba(24, 76, 255, 0.16)',
     '--login-shadow': '0 28px 90px rgba(0, 0, 0, 0.46)',
+    '--table-header-bg': '#1A1A1B',
+    '--table-header-text': 'rgba(255, 255, 255, 0.65)',
+    '--table-body-bg': '#141414',
     ...otherStyle,
 };

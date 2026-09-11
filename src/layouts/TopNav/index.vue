@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <header
         class="sticky top-0 z-30 flex h-18 items-center justify-between border-b border-[var(--border-color)] bg-[color-mix(in_srgb,var(--bg-surface)_91%,transparent)] px-6 backdrop-blur-2xl max-[800px]:px-4"
     >
@@ -123,9 +123,13 @@ const userOptions: DropdownOption[] = [
 const showSearchHint = () => window.$message?.info('全局搜索入口已预留');
 const handleUserAction = async (key: string | number) => {
     if (key === 'logout') {
+        const redirect = route.fullPath;
         authStore.logout();
         window.$message?.success('已安全退出');
-        await router.replace('/login');
+        await router.replace({
+            path: '/login',
+            query: redirect === '/' ? undefined : { redirect },
+        });
         return;
     }
     const messages: Record<string, string> = {

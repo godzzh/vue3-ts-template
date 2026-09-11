@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -107,6 +107,11 @@
     --success-soft: #ecfdf5;
     --warning-soft: #fffbeb;
     --neutral-soft: #eef0ef;
+
+    /* 数据表格 */
+    --table-header-bg: #f7f9fc;
+    --table-header-text: #64748b;
+    --table-body-bg: #ffffff;
 
     /* 动效 */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -294,75 +299,13 @@ a {
 }
 
 /* ========================================
-   高级按钮样式
-   ======================================== */
-
-.btn-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    transition: all var(--transition-fast);
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-primary);
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
-/* ========================================
    表格样式覆盖
    （全局样式表中不能使用 :deep()，此处为普通全局选择器）
    ======================================== */
 
-.n-data-table {
-    --n-border-radius: var(--radius-lg);
-}
-
-.n-data-table-th {
-    background-color: var(--gray-50) !important;
-    color: var(--gray-500) !important;
-    font-weight: 600 !important;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.n-data-table-td {
-    border-color: var(--border-color) !important;
-}
-
-.n-data-table-tr:hover td {
-    background-color: var(--hover-overlay) !important;
-}
-
-/* ========================================
-   表单输入框样式
-   ======================================== */
-
-.n-input {
-    --n-border: 1px solid var(--border-color);
-    --n-border-hover: 1px solid var(--primary-color);
-    --n-border-focus: 1px solid var(--primary-color);
-    --n-box-shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-}
-
-.n-input:focus {
-    box-shadow: var(--shadow-primary) !important;
-}
-
-.n-select .n-base-selection {
-    border-color: var(--border-color);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-}
-
-.n-select:hover .n-base-selection {
-    border-color: var(--primary-color);
+.n-data-table-th,
+.n-data-table-td, .n-data-table-wrapper {
+    transition: none !important;
 }
 
 /* ========================================

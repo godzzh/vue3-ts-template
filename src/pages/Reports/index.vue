@@ -26,13 +26,14 @@
         >
             <n-form :model="filters" label-placement="left" :show-feedback="false">
                 <div
-                    class="grid grid-cols-[minmax(220px,1.5fr)_minmax(160px,0.7fr)_minmax(160px,0.7fr)_auto] items-end gap-3 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1"
+                    class="flex items-center gap-4 flex-wrap"
                 >
                     <n-form-item label="搜索报表">
                         <n-input
                             v-model:value="filters.keyword"
                             clearable
                             placeholder="输入报表名称或负责人"
+                            class="max-w-[200px]"
                         >
                             <template #prefix
                                 ><i class="ri-search-line" aria-hidden="true"></i
@@ -40,10 +41,10 @@
                         </n-input>
                     </n-form-item>
                     <n-form-item label="报表类型">
-                        <n-select v-model:value="filters.type" :options="typeFilterOptions" />
+                        <n-select v-model:value="filters.type" :options="typeFilterOptions" class="w-[160px]" />
                     </n-form-item>
                     <n-form-item label="生成状态">
-                        <n-select v-model:value="filters.status" :options="statusFilterOptions" />
+                        <n-select v-model:value="filters.status" :options="statusFilterOptions" class="w-[160px]"/>
                     </n-form-item>
                     <div class="flex h-[34px] items-center gap-2 max-[600px]:w-full">
                         <n-button class="max-[600px]:flex-1" type="primary" @click="applyFilters">
