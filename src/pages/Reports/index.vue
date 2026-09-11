@@ -1,5 +1,7 @@
 <template>
-    <div class="grid gap-4">
+    <div
+        class="grid h-[calc(100dvh-120px)] min-h-0 grid-rows-[auto_auto_minmax(0,1fr)] gap-4 overflow-hidden max-[800px]:h-auto max-[800px]:overflow-visible"
+    >
         <header class="flex items-end justify-between gap-6 max-[720px]:items-start">
             <div>
                 <p class="mb-1 mt-0 text-[12px] text-[var(--text-color-muted)]">数据中心</p>
@@ -25,9 +27,7 @@
             aria-label="报表筛选"
         >
             <n-form :model="filters" label-placement="left" :show-feedback="false">
-                <div
-                    class="flex items-center gap-4 flex-wrap"
-                >
+                <div class="flex items-center gap-4 flex-wrap">
                     <n-form-item label="搜索报表">
                         <n-input
                             v-model:value="filters.keyword"
@@ -41,10 +41,18 @@
                         </n-input>
                     </n-form-item>
                     <n-form-item label="报表类型">
-                        <n-select v-model:value="filters.type" :options="typeFilterOptions" class="w-[160px]" />
+                        <n-select
+                            v-model:value="filters.type"
+                            :options="typeFilterOptions"
+                            class="w-[160px]"
+                        />
                     </n-form-item>
                     <n-form-item label="生成状态">
-                        <n-select v-model:value="filters.status" :options="statusFilterOptions" class="w-[160px]"/>
+                        <n-select
+                            v-model:value="filters.status"
+                            :options="statusFilterOptions"
+                            class="w-[160px]"
+                        />
                     </n-form-item>
                     <div class="flex h-[34px] items-center gap-2 max-[600px]:w-full">
                         <n-button class="max-[600px]:flex-1" type="primary" @click="applyFilters">
@@ -57,7 +65,7 @@
         </section>
 
         <section
-            class="overflow-hidden rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
+            class="flex min-h-0 flex-col overflow-hidden rounded-[10px] border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-[var(--panel-shadow)]"
             aria-label="报表列表"
         >
             <div class="flex items-center justify-between px-4 py-3">
@@ -74,17 +82,18 @@
                     刷新
                 </n-button>
             </div>
-            <div class="px-4 pb-4">
+            <div class="min-h-0 flex-1 px-4 pb-4">
                 <n-data-table
                     :columns="columns"
                     :data="filteredReports"
                     :pagination="pagination"
                     :row-key="rowKey"
                     :scroll-x="900"
+                    flex-height
                     :bordered="true"
-                    class="reports-table"
+                    class="reports-table h-full min-h-0"
                 >
-                    <template #empty>
+                    <!-- <template #empty>
                         <div class="grid min-h-[220px] place-items-center px-4 py-10 text-center">
                             <div>
                                 <i
@@ -103,7 +112,7 @@
                                 </button>
                             </div>
                         </div>
-                    </template>
+                    </template> -->
                 </n-data-table>
             </div>
         </section>
@@ -201,7 +210,7 @@ type Report = {
     icon: string;
 };
 
-const sourceReports = ref<Report[]>([
+const initialReports: Report[] = [
     {
         id: 1,
         name: '全渠道经营分析月报',
@@ -279,7 +288,85 @@ const sourceReports = ref<Report[]>([
         updatedAt: '2025-06-16 14:05',
         icon: 'ri-funds-line',
     },
-]);
+];
+
+const reportNames = [
+    '门店经营健康度月报',
+    '核心商品毛利分析',
+    '新客首购转化周报',
+    '渠道投放效果复盘',
+    '区域库存周转分析',
+    '会员复购趋势月报',
+    '售后服务响应日报',
+    '订单履约质量周报',
+    '重点客户贡献分析',
+    '门店客流转化日报',
+    '供应链交付准时率',
+    '优惠券核销效果分析',
+    '品类销售结构月报',
+    '沉睡会员唤醒周报',
+    '客服工单趋势分析',
+    '营销预算执行月报',
+    '区域目标达成周报',
+    '商品价格竞争力分析',
+    '移动端访问质量日报',
+    '用户生命周期月报',
+    '门店人效分析周报',
+    '异常退款监控日报',
+    '内容渠道引流分析',
+    '客户满意度月报',
+    '新品上市表现周报',
+    '购物车流失原因分析',
+    '高价值会员经营月报',
+    '仓储作业效率日报',
+    '直播渠道成交复盘',
+    '区域服务质量排名',
+    '搜索关键词转化周报',
+    '供应商履约表现月报',
+    '订单取消原因分析',
+    '门店坪效趋势月报',
+    '用户反馈主题分析',
+    '跨渠道会员识别周报',
+    '商品缺货监控日报',
+    '营销触达转化月报',
+    '客户流失预警分析',
+    '节假日销售复盘',
+    '渠道获客成本周报',
+    '区域经营风险月报',
+    '重点商品库存日报',
+] as const;
+const reportTypes = ['经营分析', '销售业绩', '用户分析', '商品分析', '服务质量'] as const;
+const reportOwners = ['孟书言', '林清越', '乔以宁', '陈砚秋', '顾知遥', '周明远'] as const;
+const reportStatuses: ReportStatus[] = ['已生成', '生成中', '待生成'];
+const reportIcons = [
+    'ri-line-chart-line',
+    'ri-bar-chart-grouped-line',
+    'ri-user-follow-line',
+    'ri-shopping-bag-3-line',
+    'ri-customer-service-2-line',
+] as const;
+const generatedReports: Report[] = reportNames.map((name, index) => {
+    const id = initialReports.length + index + 1;
+    const dayOffset = Math.floor(index / 3);
+    const day = Math.max(1, 16 - dayOffset);
+    const hour = 8 + ((index * 3) % 10);
+    const minute = (index * 7) % 60;
+    return {
+        id,
+        name,
+        code: `RPT-2025-${String(611 - index).padStart(4, '0')}`,
+        type: reportTypes[index % reportTypes.length] ?? '经营分析',
+        period:
+            index % 3 === 0
+                ? `2025-W${24 - (index % 4)}`
+                : `2025-${String(5 - (index % 4)).padStart(2, '0')}`,
+        owner: reportOwners[index % reportOwners.length] ?? '周明远',
+        status: reportStatuses[index % reportStatuses.length] ?? '已生成',
+        updatedAt: `2025-06-${String(day).padStart(2, '0')} ${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
+        icon: reportIcons[index % reportIcons.length] ?? 'ri-file-chart-line',
+    };
+});
+const sourceReports = ref<Report[]>([...initialReports, ...generatedReports]);
 
 const typeCreateOptions: SelectOption[] = [
     '经营分析',
@@ -309,7 +396,7 @@ const statusIcons: Record<ReportStatus, string> = {
 const filters = reactive({ keyword: '', type: 'all', status: 'all' });
 const activeFilters = reactive({ keyword: '', type: 'all', status: 'all' });
 const page = ref(1);
-const pageSize = 5;
+const pageSize = ref(10);
 const filteredReports = computed(() => {
     const keyword = activeFilters.keyword.trim().toLowerCase();
     return sourceReports.value.filter((report) => {
@@ -325,11 +412,17 @@ const filteredReports = computed(() => {
 });
 const pagination = computed<PaginationProps>(() => ({
     page: page.value,
-    pageSize,
+    pageSize: pageSize.value,
     itemCount: filteredReports.value.length,
-    showSizePicker: false,
+    pageSizes: [10, 20, 50],
+    showSizePicker: true,
+    prefix: ({ itemCount }) => `共 ${itemCount ?? 0} 条`,
     onChange: (nextPage: number) => {
         page.value = nextPage;
+    },
+    onUpdatePageSize: (nextPageSize: number) => {
+        pageSize.value = nextPageSize;
+        page.value = 1;
     },
 }));
 const rowKey = (row: Report): DataTableRowKey => row.id;

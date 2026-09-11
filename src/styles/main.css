@@ -176,10 +176,10 @@ a {
     outline-offset: 3px;
 }
 
-::selection {
+/* ::selection {
     color: #f7f3e9;
     background: #496f61;
-}
+} */
 
 /* ========================================
    页面容器
