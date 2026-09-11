@@ -9,7 +9,7 @@
                 aria-label="打开菜单"
                 @click="emit('open-menu')"
             >
-                <i class="ri-menu-2-line" aria-hidden="true"></i>
+                <RiMenu2Line class="size-5" aria-hidden="true" />
             </button>
             <nav class="flex items-center gap-1 text-xs" aria-label="面包屑">
                 <router-link
@@ -17,10 +17,10 @@
                     to="/dashboard"
                     >首页</router-link
                 >
-                <i
-                    class="ri-arrow-right-s-line text-base text-[var(--text-color-muted)]"
+                <RiArrowRightSLine
+                    class="size-4 text-[var(--text-color-muted)]"
                     aria-hidden="true"
-                ></i>
+                />
                 <span class="font-semibold text-[var(--text-color)]">{{ pageTitle }}</span>
             </nav>
         </div>
@@ -31,7 +31,7 @@
                 type="button"
                 @click="showSearchHint"
             >
-                <i class="ri-search-line" aria-hidden="true"></i>
+                <RiSearchLine class="size-4" aria-hidden="true" />
                 <span>搜索</span>
                 <kbd
                     class="ml-auto rounded border border-[var(--border-color)] bg-[var(--bg-surface)] px-1.5 py-0.5 font-mono text-[12px] text-[var(--text-color-muted)]"
@@ -43,7 +43,7 @@
                 type="button"
                 aria-label="帮助中心"
             >
-                <i class="ri-question-line" aria-hidden="true"></i>
+                <RiQuestionLine class="size-[17px]" aria-hidden="true" />
             </button>
             <n-badge :value="3" :max="9" type="error">
                 <button
@@ -51,7 +51,7 @@
                     type="button"
                     aria-label="通知"
                 >
-                    <i class="ri-notification-3-line" aria-hidden="true"></i>
+                    <RiNotification3Line class="size-[17px]" aria-hidden="true" />
                 </button>
             </n-badge>
             <button
@@ -60,10 +60,11 @@
                 :aria-label="systemStore.sysTheme ? '切换到浅色模式' : '切换到深色模式'"
                 @click="systemStore.toggleTheme()"
             >
-                <i
-                    :class="systemStore.sysTheme ? 'ri-sun-line' : 'ri-moon-line'"
+                <component
+                    :is="systemStore.sysTheme ? RiSunLine : RiMoonLine"
+                    class="size-[17px]"
                     aria-hidden="true"
-                ></i>
+                />
             </button>
             <span
                 class="mx-2 h-6 w-px bg-[var(--border-color)] max-[800px]:hidden"
@@ -89,7 +90,7 @@
                             >系统管理员</small
                         >
                     </span>
-                    <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+                    <RiArrowDownSLine class="size-4" aria-hidden="true" />
                 </button>
             </n-dropdown>
         </div>
@@ -97,9 +98,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h } from 'vue';
+import { computed, h, type Component } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { DropdownOption } from 'naive-ui';
+import {
+    RiArrowDownSLine,
+    RiArrowRightSLine,
+    RiLogoutBoxRLine,
+    RiMenu2Line,
+    RiMoonLine,
+    RiNotification3Line,
+    RiQuestionLine,
+    RiSearchLine,
+    RiSettings3Line,
+    RiSunLine,
+    RiUser3Line,
+} from '@remixicon/vue';
 import useAuthStore from '@/stores/auth';
 import useSystemStore from '@/stores/system';
 
@@ -112,12 +126,12 @@ const pageTitle = computed(() =>
     typeof route.meta.title === 'string' ? route.meta.title : '控制台'
 );
 
-const renderIcon = (name: string) => () => h('i', { class: name });
+const renderIcon = (icon: Component) => () => h(icon, { class: 'size-4', 'aria-hidden': 'true' });
 const userOptions: DropdownOption[] = [
-    { label: '个人中心', key: 'profile', icon: renderIcon('ri-user-3-line') },
-    { label: '账户设置', key: 'settings', icon: renderIcon('ri-settings-3-line') },
+    { label: '个人中心', key: 'profile', icon: renderIcon(RiUser3Line) },
+    { label: '账户设置', key: 'settings', icon: renderIcon(RiSettings3Line) },
     { type: 'divider', key: 'divider' },
-    { label: '退出登录', key: 'logout', icon: renderIcon('ri-logout-box-r-line') },
+    { label: '退出登录', key: 'logout', icon: renderIcon(RiLogoutBoxRLine) },
 ];
 
 const showSearchHint = () => window.$message?.info('全局搜索入口已预留');

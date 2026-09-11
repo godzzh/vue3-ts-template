@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <div class="grid gap-5">
         <section
             class="flex items-end justify-between gap-6 max-[600px]:flex-col max-[600px]:items-start"
@@ -18,12 +18,18 @@
                 <button
                     class="h-[37.6px] rounded-[7.2px] border border-[var(--border-color)] bg-[var(--bg-surface)] px-3.5 text-xs text-[var(--text-color-secondary)] transition duration-150 hover:-translate-y-px hover:shadow-card max-[600px]:flex-1"
                 >
-                    <i class="ri-download-cloud-2-line mr-1.5"></i>导出报告
+                    <RiDownloadCloud2Line
+                        class="mr-1.5 inline-block size-3 align-middle"
+                        aria-hidden="true"
+                    />导出报告
                 </button>
                 <button
                     class="h-[37.6px] rounded-[7.2px] border border-primary-500 bg-primary-500 px-3.5 text-xs text-white shadow-primary transition duration-150 hover:-translate-y-px max-[600px]:flex-1"
                 >
-                    <i class="ri-add-line mr-1.5"></i>新建任务
+                    <RiAddLine
+                        class="mr-1.5 inline-block size-3 align-middle"
+                        aria-hidden="true"
+                    />新建任务
                 </button>
             </div>
         </section>
@@ -41,10 +47,11 @@
                     class="flex items-center justify-between text-[12px] text-[var(--text-color-muted)]"
                 >
                     <span>{{ item.label }}</span>
-                    <i
-                        :class="item.icon"
-                        class="grid size-8 place-items-center rounded-md bg-[color-mix(in_srgb,var(--primary-color)_9%,transparent)] text-base text-[var(--primary-color)]"
-                    ></i>
+                    <span
+                        class="grid size-8 place-items-center rounded-md bg-[color-mix(in_srgb,var(--primary-color)_9%,transparent)] text-[var(--primary-color)]"
+                    >
+                        <component :is="item.icon" class="size-4" aria-hidden="true" />
+                    </span>
                 </div>
                 <strong class="mt-2.5 block font-mono text-[22px] text-[var(--text-color)]">{{
                     item.value
@@ -53,8 +60,11 @@
                     class="mb-0 mt-2 text-[12px]"
                     :class="item.trend > 0 ? 'text-emerald-600' : 'text-red-600'"
                 >
-                    <i :class="item.trend > 0 ? 'ri-arrow-up-line' : 'ri-arrow-down-line'"></i
-                    >{{ Math.abs(item.trend) }}%
+                    <component
+                        :is="item.trend > 0 ? RiArrowUpLine : RiArrowDownLine"
+                        class="inline-block size-3 align-middle"
+                        aria-hidden="true"
+                    />{{ Math.abs(item.trend) }}%
                     <small class="text-[var(--text-color-muted)]">较上个周期</small>
                 </p>
             </article>
@@ -92,7 +102,7 @@
                             本月新增访问来源
                         </p>
                     </div>
-                    <i class="ri-more-2-fill text-[var(--text-color-muted)]"></i>
+                    <RiMore2Fill class="size-4 text-[var(--text-color-muted)]" aria-hidden="true" />
                 </header>
                 <div class="relative h-44">
                     <VEcharts :options="pieOptions" /><span
@@ -155,11 +165,16 @@
                                 <td
                                     class="flex items-center gap-2 whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
                                 >
-                                    <i
-                                        :class="task.icon"
+                                    <span
                                         class="grid size-7 place-items-center bg-[color-mix(in_srgb,var(--primary-color)_8%,transparent)] text-[var(--primary-color)]"
-                                    ></i
-                                    ><b>{{ task.name }}</b>
+                                    >
+                                        <component
+                                            :is="task.icon"
+                                            class="size-4"
+                                            aria-hidden="true"
+                                        />
+                                    </span>
+                                    <b>{{ task.name }}</b>
                                 </td>
                                 <td
                                     class="whitespace-nowrap border-t border-[var(--border-color-light)] px-3.5 py-3 text-[var(--text-color-secondary)]"
@@ -216,10 +231,11 @@
                         :key="item.time"
                         class="grid grid-cols-[2rem_1fr] gap-2.5 py-2.5"
                     >
-                        <i
-                            :class="item.icon"
+                        <span
                             class="grid size-8 place-items-center rounded-md bg-[color-mix(in_srgb,var(--primary-color)_8%,transparent)] text-[var(--primary-color)]"
-                        ></i>
+                        >
+                            <component :is="item.icon" class="size-4" aria-hidden="true" />
+                        </span>
                         <div>
                             <p class="mb-0 mt-0.5 text-[12px] text-[var(--text-color-secondary)]">
                                 <b>{{ item.user }}</b> {{ item.title }}
@@ -236,6 +252,25 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import {
+    RiAddBoxLine,
+    RiAddLine,
+    RiArrowDownLine,
+    RiArrowUpLine,
+    RiCheckboxCircleLine,
+    RiDownloadCloud2Line,
+    RiFileChartLine,
+    RiFileUploadLine,
+    RiLineChartLine,
+    RiMore2Fill,
+    RiPencilLine,
+    RiShoppingBag3Line,
+    RiSmartphoneLine,
+    RiSpeedUpLine,
+    RiUserHeartLine,
+    RiVipCrownLine,
+    RiWallet3Line,
+} from '@remixicon/vue';
 import Tabs from '@/components/Tabs/index.vue';
 import VEcharts from '@/common/VEcharts/index.vue';
 
@@ -246,10 +281,10 @@ const statusClasses: Record<string, string> = {
     done: 'bg-[var(--neutral-soft)] text-[var(--text-color-secondary)]',
 };
 const metrics = [
-    { label: '总访问量', value: '82,451', trend: 12.6, icon: 'ri-line-chart-line' },
-    { label: '活跃用户', value: '6,238', trend: 8.2, icon: 'ri-user-heart-line' },
-    { label: '转化订单', value: '1,429', trend: -2.4, icon: 'ri-shopping-bag-3-line' },
-    { label: '本月收入', value: '¥386,720', trend: 16.8, icon: 'ri-wallet-3-line' },
+    { label: '总访问量', value: '82,451', trend: 12.6, icon: RiLineChartLine },
+    { label: '活跃用户', value: '6,238', trend: 8.2, icon: RiUserHeartLine },
+    { label: '转化订单', value: '1,429', trend: -2.4, icon: RiShoppingBag3Line },
+    { label: '本月收入', value: '¥386,720', trend: 16.8, icon: RiWallet3Line },
 ];
 const period = ref<string | number>('week');
 const periods = [
@@ -321,7 +356,7 @@ const tasks = [
         type: 'active',
         progress: 72,
         deadline: '06-28',
-        icon: 'ri-smartphone-line',
+        icon: RiSmartphoneLine,
     },
     {
         name: '季度数据复盘',
@@ -330,7 +365,7 @@ const tasks = [
         type: 'review',
         progress: 91,
         deadline: '06-24',
-        icon: 'ri-file-chart-line',
+        icon: RiFileChartLine,
     },
     {
         name: '会员体系改版',
@@ -339,7 +374,7 @@ const tasks = [
         type: 'active',
         progress: 48,
         deadline: '07-05',
-        icon: 'ri-vip-crown-line',
+        icon: RiVipCrownLine,
     },
     {
         name: '接口性能治理',
@@ -348,18 +383,23 @@ const tasks = [
         type: 'done',
         progress: 100,
         deadline: '06-19',
-        icon: 'ri-speed-up-line',
+        icon: RiSpeedUpLine,
     },
 ];
 const activities = [
-    { user: '林清越', title: '更新了移动端体验优化', time: '8 分钟前', icon: 'ri-pencil-line' },
-    { user: '孟书言', title: '提交季度报告审核', time: '36 分钟前', icon: 'ri-file-upload-line' },
-    { user: '乔以宁', title: '创建会员体系迭代', time: '2 小时前', icon: 'ri-add-box-line' },
+    { user: '林清越', title: '更新了移动端体验优化', time: '8 分钟前', icon: RiPencilLine },
+    {
+        user: '孟书言',
+        title: '提交季度报告审核',
+        time: '36 分钟前',
+        icon: RiFileUploadLine,
+    },
+    { user: '乔以宁', title: '创建会员体系迭代', time: '2 小时前', icon: RiAddBoxLine },
     {
         user: '陈砚秋',
         title: '完成接口性能治理',
         time: '昨天 18:42',
-        icon: 'ri-checkbox-circle-line',
+        icon: RiCheckboxCircleLine,
     },
 ];
 </script>

@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <main
         class="relative min-h-dvh overflow-hidden bg-[var(--login-bg)] text-[var(--login-title)] transition-colors duration-300"
     >
@@ -20,7 +20,7 @@
                 <span
                     class="grid size-10 place-items-center rounded-lg bg-primary-500 text-xl text-white shadow-primary"
                 >
-                    <i class="ri-flashlight-fill" aria-hidden="true"></i>
+                    <RiFlashlightFill class="size-5" aria-hidden="true" />
                 </span>
                 <span
                     ><strong class="block text-sm font-semibold">{{
@@ -38,10 +38,11 @@
                 :aria-label="systemStore.sysTheme ? '切换到浅色模式' : '切换到深色模式'"
                 @click="systemStore.toggleTheme()"
             >
-                <i
-                    :class="systemStore.sysTheme ? 'ri-sun-line' : 'ri-moon-line'"
+                <component
+                    :is="systemStore.sysTheme ? RiSunLine : RiMoonLine"
+                    class="size-[18px]"
                     aria-hidden="true"
-                ></i>
+                />
             </button>
         </header>
 
@@ -51,7 +52,8 @@
             <section class="max-w-2xl max-[960px]:hidden">
                 <span
                     class="inline-flex items-center gap-2 rounded-full border border-[var(--login-border)] bg-[var(--login-surface-soft)] px-3 py-1.5 font-mono text-[12px] text-primary-500 shadow-sm backdrop-blur"
-                    ><i class="ri-shield-check-line text-sm"></i>Vue 3 Enterprise Scaffold</span
+                    ><RiShieldCheckLine class="size-[14px]" aria-hidden="true" />Vue 3 Enterprise
+                    Scaffold</span
                 >
                 <h1
                     class="mt-8 text-[clamp(44.8px,5vw,83.2px)] font-semibold leading-[1.02] tracking-[-0.055em] text-[var(--login-title)]"
@@ -67,7 +69,11 @@
                         :key="feature.label"
                         class="border-l border-[var(--login-border-soft)] pl-4"
                     >
-                        <i :class="feature.icon" class="text-xl text-primary-500"></i
+                        <component
+                            :is="feature.icon"
+                            class="size-5 text-primary-500"
+                            aria-hidden="true"
+                        />
                         ><strong
                             class="mt-3 block text-xs font-semibold text-[var(--login-title)]"
                             >{{ feature.label }}</strong
@@ -105,7 +111,9 @@
                             autocomplete="username"
                             clearable
                             ><template #prefix
-                                ><i class="ri-user-3-line text-[var(--login-muted)]"></i></template
+                                ><RiUser3Line
+                                    class="size-4 text-[var(--login-muted)]"
+                                    aria-hidden="true" /></template
                         ></n-input>
                     </n-form-item>
                     <n-form-item path="password" label="密码">
@@ -116,7 +124,9 @@
                             autocomplete="current-password"
                             placeholder="请输入密码"
                             ><template #prefix
-                                ><i class="ri-lock-2-line text-[var(--login-muted)]"></i></template
+                                ><RiLock2Line
+                                    class="size-4 text-[var(--login-muted)]"
+                                    aria-hidden="true" /></template
                         ></n-input>
                     </n-form-item>
                     <div class="mb-6 flex items-center justify-between text-xs">
@@ -134,16 +144,28 @@
                         type="submit"
                         :disabled="submitting"
                     >
-                        <i v-if="submitting" class="ri-loader-4-line mr-1 animate-spin"></i>
-                        登录 <i v-if="!submitting" class="ri-arrow-right-line ml-1"></i>
+                        <RiLoader4Line
+                            v-if="submitting"
+                            class="mr-1 size-4 animate-spin"
+                            aria-hidden="true"
+                        />
+                        登录
+                        <RiArrowRightLine
+                            v-if="!submitting"
+                            class="ml-1 size-4"
+                            aria-hidden="true"
+                        />
                     </button>
                 </form>
 
                 <div
                     class="mt-6 flex items-start gap-2 rounded-md border border-[var(--login-hint-border)] bg-[var(--login-hint-bg)] px-3 py-2.5 text-[12px] leading-5 text-[var(--login-text)]"
                 >
-                    <i class="ri-information-line mt-0.5 text-primary-500"></i
-                    ><span
+                    <RiInformationLine
+                        class="mt-0.5 size-4 shrink-0 text-primary-500"
+                        aria-hidden="true"
+                    />
+                    <span
                         >模板演示账号：<b class="font-mono text-[var(--login-title)]">admin</b
                         >，密码：<b class="font-mono text-[var(--login-title)]">123456</b></span
                     >
@@ -162,6 +184,20 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import {
+    RiArrowRightLine,
+    RiCodeBoxLine,
+    RiFlashlightFill,
+    RiInformationLine,
+    RiLoader4Line,
+    RiLock2Line,
+    RiMoonLine,
+    RiPaletteLine,
+    RiRouteLine,
+    RiShieldCheckLine,
+    RiSunLine,
+    RiUser3Line,
+} from '@remixicon/vue';
 import useAuthStore from '@/stores/auth';
 import useSystemStore from '@/stores/system';
 
@@ -173,9 +209,9 @@ const submitting = ref(false);
 const rememberedUsername = localStorage.getItem('rememberedUsername') ?? 'admin';
 const form = reactive({ username: rememberedUsername, password: '123456', remember: true });
 const features = [
-    { icon: 'ri-route-line', label: '权限路由', note: 'Route Ready' },
-    { icon: 'ri-palette-line', label: '双主题', note: 'Theme System' },
-    { icon: 'ri-code-box-line', label: '类型安全', note: 'Strict TypeScript' },
+    { icon: RiRouteLine, label: '权限路由', note: 'Route Ready' },
+    { icon: RiPaletteLine, label: '双主题', note: 'Theme System' },
+    { icon: RiCodeBoxLine, label: '类型安全', note: 'Strict TypeScript' },
 ];
 
 const showDemoHint = () => window.$message?.info('演示环境请使用页面提供的账号密码');

@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@remixicon/vue':
+        specifier: ^4.9.0
+        version: 4.9.0(vue@3.5.26(typescript@5.9.3))
       '@vueuse/core':
         specifier: ^14.1.0
         version: 14.1.0(vue@3.5.26(typescript@5.9.3))
@@ -29,9 +32,6 @@ importers:
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
-      remixicon:
-        specifier: ^4.9.1
-        version: 4.9.1
       umi-request:
         specifier: ^1.4.0
         version: 1.4.0
@@ -398,6 +398,11 @@ packages:
 
   '@oxc-project/types@0.97.0':
     resolution: {integrity: sha512-lxmZK4xFrdvU0yZiDwgVQTCvh2gHWBJCBk5ALsrtsBWhs0uDIi+FTOnXRQeQfs304imdvTdaakT/lqwQ8hkOXQ==}
+
+  '@remixicon/vue@4.9.0':
+    resolution: {integrity: sha512-4P0MY5ScL+MRLnHu1iT3xHAsliBwOGDIgSgHCZhSj2wkLa5NzqiQ4SGD/04VoHM+BRr8+xjmF7ZemkOUlMDJ3A==}
+    peerDependencies:
+      vue: '>= 3'
 
   '@rolldown/binding-android-arm64@1.0.0-beta.50':
     resolution: {integrity: sha512-XlEkrOIHLyGT3avOgzfTFSjG+f+dZMw+/qd+Y3HLN86wlndrB/gSimrJCk4gOhr1XtRtEKfszpadI3Md4Z4/Ag==}
@@ -1755,9 +1760,6 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
-  remixicon@4.9.1:
-    resolution: {integrity: sha512-36gLSoujkabnCFZFDyP17VNh9piuBA/rsXUb4auSJWLGsHVXtmxLj/EM5FjaEAGnk8oIAj1Azob/DZ2N+90lAQ==}
-
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -2601,6 +2603,10 @@ snapshots:
   '@oxc-project/runtime@0.97.0': {}
 
   '@oxc-project/types@0.97.0': {}
+
+  '@remixicon/vue@4.9.0(vue@3.5.26(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.26(typescript@5.9.3)
 
   '@rolldown/binding-android-arm64@1.0.0-beta.50':
     optional: true
@@ -3982,8 +3988,6 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
-
-  remixicon@4.9.1: {}
 
   resolve-from@4.0.0: {}
 

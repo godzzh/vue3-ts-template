@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 
 import 'vfonts/FiraSans.css';
 import 'vfonts/FiraCode.css';
-import 'remixicon/fonts/remixicon.css';
 import '@/styles/global.less';
 import '@/styles/main.css';
 

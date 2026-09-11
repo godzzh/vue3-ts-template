@@ -1,4 +1,4 @@
-﻿<template>
+<template>
     <aside
         class="sider fixed inset-y-0 left-0 z-50 flex w-[248px] flex-col overflow-hidden border-r border-[var(--sider-border)] bg-[var(--sider-bg)] text-[var(--sider-text)] shadow-[0.75rem_0_2.5rem_var(--sider-shadow)] transition-[width,transform,color,background-color,border-color] duration-200 ease-in-out max-[800px]:w-[min(272px,82vw)] max-[800px]:-translate-x-[105%]"
         :class="{
@@ -18,7 +18,7 @@
             <span
                 class="grid size-[42.4px] shrink-0 place-items-center rounded-[10px] bg-[var(--primary-color)] text-xl text-white shadow-[0_0.5rem_1.5rem_rgba(24,76,255,0.28)]"
             >
-                <i class="ri-flashlight-fill" aria-hidden="true"></i>
+                <RiFlashlightFill class="size-5" aria-hidden="true" />
             </span>
             <span
                 class="min-w-0 whitespace-nowrap"
@@ -61,24 +61,34 @@
                 :aria-label="systemStore.sidebarCollapsed ? '展开侧边栏' : '收起侧边栏'"
                 @click="systemStore.toggleSidebar()"
             >
-                <i
-                    class="block w-[21.6px] text-center text-[17px] leading-none"
-                    :class="
-                        systemStore.sidebarCollapsed
-                            ? 'ri-menu-fold-2-line'
-                            : 'ri-menu-unfold-2-line'
-                    "
+                <component
+                    :is="systemStore.sidebarCollapsed ? RiMenuFold2Line : RiMenuUnfold2Line"
+                    class="size-[18px]"
                     aria-hidden="true"
-                ></i>
+                />
             </button>
         </div>
     </aside>
 </template>
 
 <script setup lang="ts">
-import { h, ref, watch } from 'vue';
+import { h, ref, watch, type Component } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import type { MenuOption } from 'naive-ui';
+import {
+    RiBarChartBoxLine,
+    RiDashboard3Line,
+    RiDatabase2Line,
+    RiFlashlightFill,
+    RiLayoutGridLine,
+    RiLineChartLine,
+    RiMenuFold2Line,
+    RiMenuUnfold2Line,
+    RiSettings3Line,
+    RiShieldKeyholeLine,
+    RiTeamLine,
+    RiToolsLine,
+} from '@remixicon/vue';
 import useSystemStore from '@/stores/system';
 
 defineProps<{ mobileOpen: boolean }>();
@@ -88,7 +98,8 @@ const route = useRoute();
 const router = useRouter();
 const systemStore = useSystemStore();
 
-const renderIcon = (icon: string) => () => h('i', { class: icon, 'aria-hidden': 'true' });
+const renderIcon = (icon: Component) => () =>
+    h(icon, { class: 'size-[17px]', 'aria-hidden': 'true' });
 const renderLabel = (label: string, badge?: number) =>
     badge === undefined
         ? label
@@ -102,36 +113,34 @@ const menuOptions: MenuOption[] = [
     {
         label: '概览中心',
         key: 'overview',
-        icon: renderIcon('ri-dashboard-3-line'),
+        icon: renderIcon(RiDashboard3Line),
         children: [
-            { label: '分析页', key: '/dashboard', icon: renderIcon('ri-line-chart-line') },
+            { label: '分析页', key: '/dashboard', icon: renderIcon(RiLineChartLine) },
             {
                 label: renderLabel('工作台', 6),
                 key: '/workspace',
-                icon: renderIcon('ri-layout-grid-line'),
+                icon: renderIcon(RiLayoutGridLine),
             },
         ],
     },
     {
         label: '数据中心',
         key: 'data',
-        icon: renderIcon('ri-database-2-line'),
-        children: [
-            { label: '数据报表', key: '/reports', icon: renderIcon('ri-bar-chart-box-line') },
-        ],
+        icon: renderIcon(RiDatabase2Line),
+        children: [{ label: '数据报表', key: '/reports', icon: renderIcon(RiBarChartBoxLine) }],
     },
     {
         label: '系统管理',
         key: 'system',
-        icon: renderIcon('ri-settings-3-line'),
+        icon: renderIcon(RiSettings3Line),
         children: [
-            { label: '用户管理', key: '/users', icon: renderIcon('ri-team-line') },
+            { label: '用户管理', key: '/users', icon: renderIcon(RiTeamLine) },
             {
                 label: '权限配置',
                 key: '/permissions',
-                icon: renderIcon('ri-shield-keyhole-line'),
+                icon: renderIcon(RiShieldKeyholeLine),
             },
-            { label: '系统设置', key: '/settings', icon: renderIcon('ri-tools-line') },
+            { label: '系统设置', key: '/settings', icon: renderIcon(RiToolsLine) },
         ],
     },
 ];

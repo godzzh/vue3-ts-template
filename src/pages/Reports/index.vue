@@ -16,7 +16,7 @@
             </div>
             <n-button type="primary" @click="openCreateModal">
                 <template #icon>
-                    <i class="ri-add-line" aria-hidden="true"></i>
+                    <RiAddLine aria-hidden="true" />
                 </template>
                 新增报表</n-button
             >
@@ -33,11 +33,9 @@
                             v-model:value="filters.keyword"
                             clearable
                             placeholder="输入报表名称或负责人"
-                            class="max-w-[200px]"
+                            class="max-w-[220px]"
                         >
-                            <template #prefix
-                                ><i class="ri-search-line" aria-hidden="true"></i
-                            ></template>
+                            <template #prefix><RiSearchLine aria-hidden="true" class="size-[16px]" /></template>
                         </n-input>
                     </n-form-item>
                     <n-form-item label="报表类型">
@@ -78,7 +76,7 @@
                     </span>
                 </div>
                 <n-button text @click="refreshReports">
-                    <template #icon><i class="ri-refresh-line" aria-hidden="true"></i></template>
+                    <template #icon><RiRefreshLine aria-hidden="true" /></template>
                     刷新
                 </n-button>
             </div>
@@ -92,28 +90,7 @@
                     flex-height
                     :bordered="true"
                     class="reports-table h-full min-h-0"
-                >
-                    <!-- <template #empty>
-                        <div class="grid min-h-[220px] place-items-center px-4 py-10 text-center">
-                            <div>
-                                <i
-                                    class="ri-file-search-line text-[32px] text-[var(--text-color-muted)]"
-                                    aria-hidden="true"
-                                ></i>
-                                <p class="mb-0 mt-3 text-[14px] text-[var(--text-color-secondary)]">
-                                    未找到匹配的报表
-                                </p>
-                                <button
-                                    class="mt-2 border-0 bg-transparent text-[13px] text-[var(--primary-color)]"
-                                    type="button"
-                                    @click="resetFilters"
-                                >
-                                    清空筛选条件
-                                </button>
-                            </div>
-                        </div>
-                    </template> -->
-                </n-data-table>
+                />
             </div>
         </section>
 
@@ -186,6 +163,24 @@
 
 <script setup lang="ts">
 import { computed, h, reactive, ref } from 'vue';
+import type { Component } from 'vue';
+import {
+    RiAddLine,
+    RiBarChartGroupedLine,
+    RiCheckboxCircleLine,
+    RiCustomerService2Line,
+    RiEyeLine,
+    RiFileChartLine,
+    RiFilter3Line,
+    RiFundsLine,
+    RiLineChartLine,
+    RiLoader4Line,
+    RiRefreshLine,
+    RiSearchLine,
+    RiShoppingBag3Line,
+    RiTimeLine,
+    RiUserFollowLine,
+} from '@remixicon/vue';
 import { NButton } from 'naive-ui';
 import type {
     DataTableColumns,
@@ -207,7 +202,7 @@ type Report = {
     owner: string;
     status: ReportStatus;
     updatedAt: string;
-    icon: string;
+    icon: Component;
 };
 
 const initialReports: Report[] = [
@@ -220,7 +215,7 @@ const initialReports: Report[] = [
         owner: '孟书言',
         status: '已生成',
         updatedAt: '2025-06-18 09:42',
-        icon: 'ri-line-chart-line',
+        icon: RiLineChartLine,
     },
     {
         id: 2,
@@ -231,7 +226,7 @@ const initialReports: Report[] = [
         owner: '林清越',
         status: '生成中',
         updatedAt: '2025-06-18 09:16',
-        icon: 'ri-bar-chart-grouped-line',
+        icon: RiBarChartGroupedLine,
     },
     {
         id: 3,
@@ -242,7 +237,7 @@ const initialReports: Report[] = [
         owner: '乔以宁',
         status: '已生成',
         updatedAt: '2025-06-17 17:30',
-        icon: 'ri-user-follow-line',
+        icon: RiUserFollowLine,
     },
     {
         id: 4,
@@ -253,7 +248,7 @@ const initialReports: Report[] = [
         owner: '陈砚秋',
         status: '待生成',
         updatedAt: '2025-06-17 16:08',
-        icon: 'ri-filter-3-line',
+        icon: RiFilter3Line,
     },
     {
         id: 5,
@@ -264,7 +259,7 @@ const initialReports: Report[] = [
         owner: '顾知遥',
         status: '已生成',
         updatedAt: '2025-06-17 11:24',
-        icon: 'ri-shopping-bag-3-line',
+        icon: RiShoppingBag3Line,
     },
     {
         id: 6,
@@ -275,7 +270,7 @@ const initialReports: Report[] = [
         owner: '周明远',
         status: '已生成',
         updatedAt: '2025-06-16 18:50',
-        icon: 'ri-customer-service-2-line',
+        icon: RiCustomerService2Line,
     },
     {
         id: 7,
@@ -286,7 +281,7 @@ const initialReports: Report[] = [
         owner: '林清越',
         status: '待生成',
         updatedAt: '2025-06-16 14:05',
-        icon: 'ri-funds-line',
+        icon: RiFundsLine,
     },
 ];
 
@@ -338,13 +333,13 @@ const reportNames = [
 const reportTypes = ['经营分析', '销售业绩', '用户分析', '商品分析', '服务质量'] as const;
 const reportOwners = ['孟书言', '林清越', '乔以宁', '陈砚秋', '顾知遥', '周明远'] as const;
 const reportStatuses: ReportStatus[] = ['已生成', '生成中', '待生成'];
-const reportIcons = [
-    'ri-line-chart-line',
-    'ri-bar-chart-grouped-line',
-    'ri-user-follow-line',
-    'ri-shopping-bag-3-line',
-    'ri-customer-service-2-line',
-] as const;
+const reportIcons: Component[] = [
+    RiLineChartLine,
+    RiBarChartGroupedLine,
+    RiUserFollowLine,
+    RiShoppingBag3Line,
+    RiCustomerService2Line,
+];
 const generatedReports: Report[] = reportNames.map((name, index) => {
     const id = initialReports.length + index + 1;
     const dayOffset = Math.floor(index / 3);
@@ -363,7 +358,7 @@ const generatedReports: Report[] = reportNames.map((name, index) => {
         owner: reportOwners[index % reportOwners.length] ?? '周明远',
         status: reportStatuses[index % reportStatuses.length] ?? '已生成',
         updatedAt: `2025-06-${String(day).padStart(2, '0')} ${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
-        icon: reportIcons[index % reportIcons.length] ?? 'ri-file-chart-line',
+        icon: reportIcons[index % reportIcons.length] ?? RiFileChartLine,
     };
 });
 const sourceReports = ref<Report[]>([...initialReports, ...generatedReports]);
@@ -387,10 +382,10 @@ const statusClasses: Record<ReportStatus, string> = {
     生成中: 'bg-[var(--item-active-color)] text-[var(--primary-color)]',
     待生成: 'bg-[var(--warning-soft)] text-amber-700',
 };
-const statusIcons: Record<ReportStatus, string> = {
-    已生成: 'ri-checkbox-circle-line',
-    生成中: 'ri-loader-4-line animate-spin',
-    待生成: 'ri-time-line',
+const statusIcons: Record<ReportStatus, Component> = {
+    已生成: RiCheckboxCircleLine,
+    生成中: RiLoader4Line,
+    待生成: RiTimeLine,
 };
 
 const filters = reactive({ keyword: '', type: 'all', status: 'all' });
@@ -449,7 +444,7 @@ const columns: DataTableColumns<Report> = [
                     {
                         class: 'grid size-9 shrink-0 place-items-center rounded-[8px] bg-[color-mix(in_srgb,var(--primary-color)_9%,transparent)] text-[17px] text-[var(--primary-color)]',
                     },
-                    [h('i', { class: report.icon, 'aria-hidden': 'true' })]
+                    [h(report.icon, { 'aria-hidden': 'true' })],
                 ),
                 h('div', null, [
                     h(
@@ -484,7 +479,10 @@ const columns: DataTableColumns<Report> = [
                     class: `inline-flex items-center gap-1.5 rounded-[5px] px-2 py-1 text-[12px] font-medium ${statusClasses[report.status]}`,
                 },
                 [
-                    h('i', { class: statusIcons[report.status], 'aria-hidden': 'true' }),
+                    h(statusIcons[report.status], {
+                        class: report.status === '生成中' ? 'animate-spin size-[16px]' : 'size-[16px]',
+                        'aria-hidden': 'true',
+                    }),
                     report.status,
                 ]
             ),
@@ -517,7 +515,7 @@ const columns: DataTableColumns<Report> = [
                     onClick: () => viewReport(report),
                 },
                 {
-                    icon: () => h('i', { class: 'ri-eye-line text-[17px]', 'aria-hidden': 'true' }),
+                    icon: () => h(RiEyeLine, { class: 'w-[16px] h-[16px]', 'aria-hidden': 'true' }),
                 }
             ),
     },
@@ -565,7 +563,7 @@ const submitReport = async () => {
             owner: createForm.owner.trim(),
             status: '待生成',
             updatedAt: now.toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-'),
-            icon: 'ri-file-chart-line',
+            icon: RiFileChartLine,
         });
         resetFilters();
         createVisible.value = false;

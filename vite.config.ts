@@ -7,6 +7,25 @@ import viteCompression from 'vite-plugin-compression';
 import Components from 'unplugin-vue-components/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
+const remixIconTreeShake = () => ({
+    name: 'remixicon-vue-tree-shake',
+    enforce: 'pre' as const,
+    transform(code: string, id: string) {
+        if (!id.replace(/\\/g, '/').includes('/@remixicon/vue/index.mjs')) return;
+
+        // @remixicon/vue 将所有组件放在同一条 const 声明中，Rolldown 无法逐项消除。
+        // 拆成独立声明后，仍可使用官方命名导入，同时仅保留实际使用的 SVG 组件。
+        const declaration = code.indexOf('const ');
+        const exports = code.lastIndexOf('export{');
+        if (declaration === -1 || exports === -1) return;
+
+        return `${code.slice(0, declaration)}${code
+            .slice(declaration, exports)
+            .replace(/,([A-Za-z_$][\w$]*)=e\(\{/g, ';const $1=/*#__PURE__*/e({')
+            .replace('const a=e({', 'const a=/*#__PURE__*/e({')}${code.slice(exports)}`;
+    },
+});
+
 export default defineConfig(({ mode }) => {
     // 环境变量从 .env.[mode] 文件读取（代理地址不再硬编码）
     const env = loadEnv(mode, process.cwd());
@@ -50,6 +69,11 @@ export default defineConfig(({ mode }) => {
                         if (/node_modules\/echarts\//.test(id)) {
                             return 'echarts';
                         }
+                        // Remix Icon 的 Vue 包是单文件导出桶，强制放入 vendor 会让
+                        // Rolldown 保留全部图标；交给打包器按实际导入执行 tree shaking。
+                        if (/node_modules\/@remixicon\/vue\//.test(id)) {
+                            return;
+                        }
                         // 其余三方库合并为一个 vendor，
                         // 避免逐包拆分产生大量小 chunk（HTTP 请求数反而劣化）
                         return 'vendor';
@@ -70,6 +94,7 @@ export default defineConfig(({ mode }) => {
             },
         },
         plugins: [
+            remixIconTreeShake(),
             vue(),
             vueJsx(),
             // 模板中 n-xxx 组件自动按需引入（配合移除 main.ts 的全量 app.use(naive)）
