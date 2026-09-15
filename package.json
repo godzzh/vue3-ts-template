@@ -9,8 +9,8 @@
         "pnpm": ">=9.0.0"
     },
     "scripts": {
-        "dev": "vite",
-        "build": "pnpm typecheck && vite build",
+        "dev": "patch-package && vite",
+        "build": "patch-package && vue-tsc -b && vite build",
         "preview": "vite preview",
         "typecheck": "vue-tsc --noEmit",
         "lint": "eslint . --fix",
